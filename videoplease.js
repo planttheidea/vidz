@@ -25,17 +25,13 @@
 			
 			return div.firstChild;
 		},
-		// check type of object
-		getType = function(obj){
-			return Object.prototype.toString.call(obj).replace(/^\[object (.+)\]$/, "$1").toLowerCase();
-		},
 		// quick test if array
 		isArray = function(item){
-			return (getType(item) === 'array');
+			return ($.type(item) === 'array');
 		},
 		// quick test if undefined
 		isUndefined = function(item){
-			return (getType(item) === 'undefined');
+			return ($.type(item) === 'undefined');
 		},
 		// check if old IE
 		isMSIE = /*@cc_on!@*/false,
@@ -70,6 +66,7 @@
 		defaultAttributes = {
 			preload:'auto',
 			controls:'controls',
+			autoplay:false,
 			flashFallback:true
 		},
 		// revert replaced node to original node
@@ -93,14 +90,14 @@
 		// either adds or removes based on action requested
 		activity = function(index,replace){
 			if(index){
-				switch(getType(index)){
+				switch($.type(index)){
 					case 'number':
 						replace ? add.call(this,index) : remove.call(this,index);
 						
 						break;
 					case 'array':
 						for(var i = index.length; i--;){
-							if(getType(i) === 'number'){
+							if($.type(i) === 'number'){
 								replace ? add.call(this,i) : remove.call(this,i);
 							} else {
 								throw new Error('Value passed in is not of valid type, must be an array of indexes.');
@@ -125,7 +122,7 @@
 		},
 		// return a node or array of nodes, either players or elements (based on method used)
 		retrieve = function(id,els){
-			switch(getType(id)){
+			switch($.type(id)){
 				case 'number':
 					return (els ? this.elements[id] : this.players[id]);
 					
@@ -165,7 +162,7 @@
 		},
 		// return a node or array of nodes, either players or elements (based on method used)
 		isActive = function(id){
-			switch(getType(id)){
+			switch($.type(id)){
 				case 'number':
 					return this.isActive[id];
 					
@@ -217,7 +214,7 @@
 			}
 		};
 	
-	function VideoPlease(selector,options){
+	function VideoPlease(elements,options){
 			// coalesce options passed into empty object, for easy key checking
 		var passed = (options || {}),
 			// create each node instance possibly used in any video
@@ -231,9 +228,7 @@
 				scriptAccessParam:defaultNodes.param.cloneNode(false),
 				flashVarsParam:defaultNodes.param.cloneNode(false),
 				movieParam:defaultNodes.param.cloneNode(false)
-			},
-			// get all elements based on selector
-			elements = document.querySelectorAll(selector);
+			};
 		
 		// give node a style for IE8
 		if(!videoNodes.video.canPlayType){
@@ -274,6 +269,13 @@
 					target:tempVid,
 					name:'preload',
 					value:passed.preload,
+					index:i
+				});
+				
+				setAttribute({
+					target:tempVid,
+					name:'autoplay',
+					value:passed.autoplay,
 					index:i
 				});
 				
@@ -470,5 +472,15 @@
 		}
 	};
 	
-	window.VideoPlease = VideoPlease;		
+	$.fn.extend({
+		videoPlease:function(options){
+			var els = [];
+			
+			for(var i = 0; i < this.length; i++){
+				els.push(this[i]);
+			}
+			
+			return new VideoPlease(els,options);
+		}
+	});		
 })(window,document);
