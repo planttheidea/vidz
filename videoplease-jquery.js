@@ -3,7 +3,7 @@
  * Copyright 2014 Tony Quetano under the terms of the MIT
  * license found at https://github.com/planttheidea/bolster/MIT_License.txt
  *
- * videoplease-jquery.js - jQuery application of the plugin to generate bulletproof video that works back to IE8
+ * videoplease.js - A plugin to generate bulletproof video that works back to IE8
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -66,6 +66,7 @@
 		defaultAttributes = {
 			preload:'auto',
 			controls:'controls',
+			autoplay:false,
 			flashFallback:true
 		},
 		// revert replaced node to original node
@@ -268,6 +269,13 @@
 					target:tempVid,
 					name:'preload',
 					value:passed.preload,
+					index:i
+				});
+				
+				setAttribute({
+					target:tempVid,
+					name:'autoplay',
+					value:passed.autoplay,
 					index:i
 				});
 				
