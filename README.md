@@ -9,9 +9,9 @@ To introduce a simple, straightforward method to dynamically add well-formatted 
 
 ### Size
 
-+ Uncompressed: 11.7KB
-+ Minified: 4.7KB
-+ Minified and gzipped: 1.52KB
++ Uncompressed: 11.33KB (11.21KB for jQuery)
++ Minified: 4.77KB (4.76KB for jQuery)
++ Minified and gzipped: 1.54KB (1.49KB for jQuery)
 
 ### Start
 
