@@ -25,6 +25,26 @@
 		},
 		// check if old IE
 		isMSIE = /*@cc_on!@*/false,
+		// set attribute method
+		setAttribute = function(attrObj){
+			var addMe = true;
+			
+			if(!isUndefined(attrObj.value)){
+				if(isArray(attrObj.value)){
+					if(!isUndefined(attrObj.value[attrObj.index])){
+						attrObj.target.setAttribute(attrObj.name,((attrObj.prefix || '') + attrObj.value[attrObj.index]));
+					} else {
+						addMe = false;
+					}
+				} else {
+					attrObj.target.setAttribute(attrObj.name,attrObj.value);
+				}
+			} else {
+				addMe = false;
+			}
+			
+			return addMe;
+		},
 		// default nodes used for all video creation
 		defaultNodes = {
 			video:newNode('video'),
@@ -199,19 +219,17 @@
 				movieParam:defaultNodes.param.cloneNode(false)
 			},
 			// get all elements based on selector
-			elements = document.querySelectorAll(selector),
-			// placeholder for fallback
-			fallback;
+			elements = document.querySelectorAll(selector);
 		
+		// give node a style for IE8
 		if(!videoNodes.video.canPlayType){
 			videoNodes.video.style.display = 'block';
 		}
 		
-		videoNodes.video.setAttribute('preload',(passed.preload || defaultAttributes.preload));
-		videoNodes.video.setAttribute('controls',(passed.controls || defaultAttributes.controls));
-		
+		// all videos will have the class of VideoPlease
 		videoNodes.video.className = 'VideoPlease';
 		
+		// set initial class values
 		this.length = 0;
 		this.elements = [];
 		this.players = [];
@@ -224,45 +242,47 @@
 				tempWebm = videoNodes.webmSource.cloneNode(false),
 				tempOgg = videoNodes.oggSource.cloneNode(false),
 				tempObj = videoNodes.object.cloneNode(false),
-				tempFSParam = videoNodes.fullscreenParam.cloneNode(false);
-				tempSAParam = videoNodes.scriptAccessParam.cloneNode(false);
-				tempFVParam = videoNodes.flashVarsParam.cloneNode(false);
+				tempFSParam = videoNodes.fullscreenParam.cloneNode(false),
+				tempSAParam = videoNodes.scriptAccessParam.cloneNode(false),
+				tempFVParam = videoNodes.flashVarsParam.cloneNode(false),
+				fallback;
 				
 			if(options){
 				// set index and class to denote unique instance
 				tempVid.setAttribute('data-index',i);
 				tempVid.className += (' VideoPlease' + i);
 				
-				// video container attributes			
-				if(passed.id){
-					if(isArray(passed.id)){
-						if(!isUndefined(passed.id[i])){
-							tempVid.setAttribute('id',passed.id[i]);
-						}
-					} else {
-						tempVid.setAttribute('id',passed.id);
-					}
-				}
+				tempVid.setAttribute('preload',(passed.preload || defaultAttributes.preload));
+				tempVid.setAttribute('controls',(passed.controls || defaultAttributes.controls));
 				
-				if(passed.width){
-					if(isArray(passed.width)){
-						if(!isUndefined(passed.width[i])){
-							tempVid.setAttribute('width',passed.width[i]);
-						}
-					} else {
-						tempVid.setAttribute('width',passed.width);
-					}
-				}
+				// video container attributes
+				setAttribute({
+					target:tempVid,
+					name:'preload',
+					value:passed.preload,
+					index:i
+				});
 				
-				if(passed.height){
-					if(isArray(passed.height)){
-						if(!isUndefined(passed.height[i])){
-							tempVid.setAttribute('height',passed.height[i]);
-						}
-					} else {
-						tempVid.setAttribute('height',passed.height);
-					}
-				}
+				setAttribute({
+					target:tempVid,
+					name:'id',
+					value:passed.id,
+					index:i
+				});
+				
+				setAttribute({
+					target:tempVid,
+					name:'width',
+					value:passed.width,
+					index:i
+				});
+				
+				setAttribute({
+					target:tempVid,
+					name:'height',
+					value:passed.height,
+					index:i
+				});
 				
 				if(passed.className){
 					if(isArray(passed.className)){
@@ -274,72 +294,42 @@
 					}
 				}
 				
-				if(passed.poster){
-					if(isArray(passed.poster)){
-						if(!isUndefined(passed.poster[i])){
-							tempVid.setAttribute('poster',passed.poster[i]);
-						}
-					} else {
-						tempVid.setAttribute('poster',passed.poster);
-					}
-				}
+				setAttribute({
+					target:tempVid,
+					name:'poster',
+					value:passed.poster,
+					index:i
+				});
 			
 				// source attributes
-				if(passed.mp4){
-					var addMp4 = true;
-					
-					if(isArray(passed.mp4)){
-						if(!isUndefined(passed.mp4[i])){
-							tempMp4.setAttribute('src',passed.mp4[i]);
-						} else {
-							addMp4 = false;
-						}
-					} else {
-						tempMp4.setAttribute('src',passed.mp4);
-					}
-					
-					if(addMp4){
-						tempMp4.type = 'video/mp4';
-						tempVid.appendChild(tempMp4);
-					}
+				if(setAttribute({
+					target:tempMp4,
+					name:'src',
+					value:passed.mp4,
+					index:i
+				})){
+					tempMp4.type = 'video/mp4';
+					tempVid.appendChild(tempMp4);
 				}
 				
-				if(passed.webm){
-					var addWebm = true;
-					
-					if(isArray(passed.webm)){
-						if(!isUndefined(passed.webm[i])){
-							tempWebm.setAttribute('src',passed.webm[i]);
-						} else {
-							addWebm = false;
-						}
-					} else {
-						tempWebm.setAttribute('src',passed.webm);
-					}
-					
-					if(addWebm){
-						tempWebm.type = 'video/webm';
-						tempVid.appendChild(tempWebm);
-					}
+				if(setAttribute({
+					target:tempWebm,
+					name:'src',
+					value:passed.webm,
+					index:i
+				})){
+					tempWebm.type = 'video/webm';
+					tempVid.appendChild(tempWebm);
 				}
 				
-				if(passed.ogg){
-					var addOgg = true;
-					
-					if(isArray(passed.ogg)){
-						if(!isUndefined(passed.ogg[i])){
-							tempWebm.setAttribute('src',passed.ogg[i]);
-						} else {
-							addOgg = false;
-						}
-					} else {
-						tempWebm.setAttribute('src',passed.ogg);
-					}
-					
-					if(addOgg){
-						tempVid.appendChild(tempOgg);
-						tempOgg.type = 'video/ogg';
-					}
+				if(setAttribute({
+					target:tempOgg,
+					name:'src',
+					value:passed.ogg,
+					index:i
+				})){
+					tempOgg.type = 'video/ogg';
+					tempVid.appendChild(tempOgg);
 				}
 				
 				// detect fallback for item
@@ -358,8 +348,6 @@
 				}
 				
 				if(fallback){
-					var addFV = true;
-					
 					// set fullscreen param names and values
 					tempFSParam.setAttribute('name','allowfullscreen');
 					tempFSParam.setAttribute('value',true);
@@ -371,24 +359,10 @@
 					// set flashvars param names and values
 					tempFVParam.setAttribute('name','flashvars');
 					
-					if(passed.mp4){
-						if(isArray(passed.mp4)){
-							if(!isUndefined(passed.mp4[i])){
-								tempFVParam.setAttribute('value',('file=' + passed.mp4[i]));
-							} else {
-								addFV = false;
-							}
-						} else {
-							tempFVParam.setAttribute('value',('file=' + passed.mp4));
-						}
-					}
-					
-					if(passed.swf){
-						var swfArray = isArray(passed.swf);
-						
+					if(!isUndefined(passed.swf)){
 						// add movie param if old IE
 						if(isMSIE){
-							if(swfArray){
+							if(isArray(passed.swf)){
 								if(!isUndefined(passed.swf[i])){
 									tempObj = ieObject(passed.swf[i]);
 								}
@@ -396,31 +370,28 @@
 								tempObj = ieObject(passed.swf);
 							}
 						} else {
-							if(swfArray){
-								if(!isUndefined(passed.swf[i])){
-									tempObj.setAttribute('data',passed.swf[i]);
-								}
-							} else {
-								tempObj.setAttribute('data',passed.swf);
-							}
-						}
-					}
-				
-					if(passed.width){
-						if(getType(passed.width) === 'array'){
-							tempObj.setAttribute('width',passed.width[i]);
-						} else {
-							tempObj.setAttribute('width',passed.width);
+							setAttribute({
+								target:tempObj,
+								name:'data',
+								value:passed.swf,
+								index:i
+							});
 						}
 					}
 					
-					if(passed.height){
-						if(getType(passed.height) === 'array'){
-							tempObj.setAttribute('height',passed.height[i]);
-						} else {
-							tempObj.setAttribute('height',passed.height);
-						}
-					}
+					setAttribute({
+						target:tempObj,
+						name:'width',
+						value:passed.width,
+						index:i
+					});
+					
+					setAttribute({
+						target:tempObj,
+						name:'height',
+						value:passed.height,
+						index:i
+					});
 					
 					// add <object> to <video>
 					tempVid.appendChild(tempObj);
@@ -432,7 +403,13 @@
 					tempObj.appendChild(tempFSParam);
 					tempObj.appendChild(tempSAParam);
 					
-					if(addFV){
+					if(setAttribute({
+						target:tempFVParam,
+						name:'value',
+						value:passed.mp4,
+						prefix:'file=',
+						index:i
+					})){
 						tempObj.appendChild(tempFVParam);
 					}
 				}
