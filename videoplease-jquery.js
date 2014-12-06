@@ -1,3 +1,17 @@
+/*
+ *
+ * Copyright 2014 Tony Quetano under the terms of the MIT
+ * license found at https://github.com/planttheidea/bolster/MIT_License.txt
+ *
+ * videoplease-jquery.js - jQuery application of the plugin to generate bulletproof video that works back to IE8
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+*/
 (function(window,document){
 		// create nodes with ease
 	var newNode = function(nodeName){
@@ -199,7 +213,7 @@
 			}
 		};
 	
-	function VideoPlease(selector,options){
+	function VideoPlease(elements,options){
 			// coalesce options passed into empty object, for easy key checking
 		var passed = (options || {}),
 			// create each node instance possibly used in any video
@@ -213,9 +227,7 @@
 				scriptAccessParam:defaultNodes.param.cloneNode(false),
 				flashVarsParam:defaultNodes.param.cloneNode(false),
 				movieParam:defaultNodes.param.cloneNode(false)
-			},
-			// get all elements based on selector
-			elements = (isArray(selector) ? selector : document.querySelectorAll(selector));
+			};
 		
 		// give node a style for IE8
 		if(!videoNodes.video.canPlayType){
