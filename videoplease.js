@@ -25,13 +25,17 @@
 			
 			return div.firstChild;
 		},
+		// check type of object
+		getType = function(obj){
+			return Object.prototype.toString.call(obj).replace(/^\[object (.+)\]$/, "$1").toLowerCase();
+		},
 		// quick test if array
 		isArray = function(item){
-			return ($.type(item) === 'array');
+			return (getType(item) === 'array');
 		},
 		// quick test if undefined
 		isUndefined = function(item){
-			return ($.type(item) === 'undefined');
+			return (getType(item) === 'undefined');
 		},
 		// check if old IE
 		isMSIE = /*@cc_on!@*/false,
@@ -39,7 +43,7 @@
 		setAttribute = function(attrObj){
 			var addMe = true;
 			
-			if(!isUndefined(attrObj.value)){
+			if(!isUndefined(attrObj.value) && !(attrObj.value === false)){
 				if(isArray(attrObj.value)){
 					if(!isUndefined(attrObj.value[attrObj.index])){
 						attrObj.target.setAttribute(attrObj.name,((attrObj.prefix || '') + attrObj.value[attrObj.index]));
@@ -90,14 +94,14 @@
 		// either adds or removes based on action requested
 		activity = function(index,replace){
 			if(index){
-				switch($.type(index)){
+				switch(getType(index)){
 					case 'number':
 						replace ? add.call(this,index) : remove.call(this,index);
 						
 						break;
 					case 'array':
 						for(var i = index.length; i--;){
-							if($.type(i) === 'number'){
+							if(getType(i) === 'number'){
 								replace ? add.call(this,i) : remove.call(this,i);
 							} else {
 								throw new Error('Value passed in is not of valid type, must be an array of indexes.');
@@ -122,7 +126,7 @@
 		},
 		// return a node or array of nodes, either players or elements (based on method used)
 		retrieve = function(id,els){
-			switch($.type(id)){
+			switch(getType(id)){
 				case 'number':
 					return (els ? this.elements[id] : this.players[id]);
 					
@@ -162,7 +166,7 @@
 		},
 		// return a node or array of nodes, either players or elements (based on method used)
 		isActive = function(id){
-			switch($.type(id)){
+			switch(getType(id)){
 				case 'number':
 					return this.isActive[id];
 					
@@ -214,7 +218,7 @@
 			}
 		};
 	
-	function VideoPlease(elements,options){
+	function VideoPlease(selector,options){
 			// coalesce options passed into empty object, for easy key checking
 		var passed = (options || {}),
 			// create each node instance possibly used in any video
@@ -228,7 +232,9 @@
 				scriptAccessParam:defaultNodes.param.cloneNode(false),
 				flashVarsParam:defaultNodes.param.cloneNode(false),
 				movieParam:defaultNodes.param.cloneNode(false)
-			};
+			},
+			// get all elements based on selector
+			elements = document.querySelectorAll(selector);
 		
 		// give node a style for IE8
 		if(!videoNodes.video.canPlayType){
@@ -472,15 +478,5 @@
 		}
 	};
 	
-	$.fn.extend({
-		videoPlease:function(options){
-			var els = [];
-			
-			for(var i = 0; i < this.length; i++){
-				els.push(this[i]);
-			}
-			
-			return new VideoPlease(els,options);
-		}
-	});		
+	window.VideoPlease = VideoPlease;		
 })(window,document);
