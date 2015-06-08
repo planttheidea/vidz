@@ -37,7 +37,7 @@ var config = {
 			'__VIDEO1__.ogv',
 			'__VIDEO2__.ogv'
 		],
-		swf:'http://dev.planttheidea.com/backstagestudios/video/player.swf',
+		swf:'/video/player.swf',
 		poster:[
 		  '__POSTER1__.jpg',
 		  '__POSTER2__.jpg'
