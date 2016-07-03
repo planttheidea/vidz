@@ -471,6 +471,15 @@ class Vidz {
   }
 
   /**
+   * return the <object> flash fallback
+   * 
+   * @return {HTMLElement}
+   */
+  getFlashObject() {
+    return this.player.querySelector(ELEMENT_TYPES.OBJECT);
+  }
+
+  /**
    * return the playback rate for the video (1 is standard speed)
    *
    * @return {number}

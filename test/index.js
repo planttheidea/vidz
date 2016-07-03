@@ -132,6 +132,7 @@ test('Vidz prototypical methods', (t) => {
 
   t.is(div.innerHTML, instanceHtml);
   t.is(instance.getCurrentTime(), 0);
+  t.is(instance.getFlashObject(), instance.player.querySelector('object'));
   t.is(instance.getPlaybackRate(), 1);
   t.is(instance.getPlayer(), instance.player);
   t.deepEqual(instance.getPlayerDimensions(), {
