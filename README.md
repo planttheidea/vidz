@@ -72,7 +72,7 @@ Available options in the config object:
     * Function fires when the `error` event is fired
 * onLoad `{function}` *defaults to null*
     * Function fires when the `load` event is fired
-* onLoaded `{function}` *defaults to null*
+* onLoadedData `{function}` *defaults to null*
     * Function fires when the `loadeddata` event is fired
 * onLoadedMetadata `{function}` *defaults to null*
     * Function fires when the `loadingmetadata` event is fired
