@@ -39,7 +39,7 @@ class App extends Component {
     this.vidzInstance = vidz($div, {
       mp4: 'http://www.html5rocks.com/en/tutorials/video/basics/devstories.mp4',
       muted: true,
-      onProgress() {
+      onTimeUpdate() {
         console.log(this.currentTime);
         console.log(this.duration);
       },
