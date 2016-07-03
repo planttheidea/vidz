@@ -138,6 +138,11 @@ test('Vidz prototypical methods', (t) => {
     height: 400,
     width: 600
   });
+  t.deepEqual(instance.getSource(), {
+    mp4: 'test.mp4',
+    ogg: 'test.ogv',
+    webm: null
+  });
   t.is(instance.getVolume(), 1);
 
   // dimensions are 0 because the file doesn't exist

@@ -9,9 +9,9 @@ To introduce a simple, straightforward method to dynamically add well-formatted 
 
 #### Size
 
-+ Uncompressed: 55.8KB (mainly for the sourcemap)
-+ Minified: 8.44KB
-+ Minified and gzipped: 3.1KB
++ Uncompressed: 57.4KB (mainly for the sourcemap)
++ Minified: 8.53KB
++ Minified and gzipped: 3.2KB
 
 #### Installation
 
@@ -22,6 +22,15 @@ $ npm i vidz --save
 #### Usage
 
 ```javascript
+// ES2015
+import vidz from 'vidz';
+
+// CommonJS
+const vidz = require('vidz').default;
+
+// script
+const vidz = window.vidz;
+
 const vidzInstance = vidz('#video-container', {
     mp4: './videos/test.mp4',
     ogg: './videos/test.ogg'
@@ -52,11 +61,11 @@ Available options in the config object:
 * loop `{boolean}` *defaults to false*
     * Whether the video should play on a loop
 * mp4 `{string}` *defaults to null*
-    * The source of the mp4 file on your server
+    * The location of the mp4 file on your server relative to the page
 * muted `{boolean}` *defaults to false*
     * Whether the video should be muted on load
 * ogg `{string}` *defaults to null*
-    * The source of the ogg/ogv file on your server
+    * The location of the ogg/ogv file on your server relative to the page
 * onCanPlayThrough `{function}` *defaults to null*
     * Function called when the `canPlayThrough` event is fired
 * onEnded `{function}` *defaults to null*
@@ -79,8 +88,10 @@ Available options in the config object:
     * The source of the image used as a poster for the video
 * preload `{string}` *defaults to "auto"*
     * The value for the `preload` attribute applied to the `<video>` tag
+* swf `{string}` *defaults to null*
+    * The location of the swf file on your server relative to the page
 * webm `{string}` *defaults to null*
-    * The source of the webm file on your server
+    * The location of the webm file on your server relative to the page
 * width `{number}` *defaults to 600*
     * Width in pixels the video container will be
 
@@ -100,6 +111,9 @@ Returns the `playbackRate` of the video player (standard `playbackRate` is 1, va
 
 **getPlayer()**
 Returns the `<video>` element of the player
+
+**getSource()**
+Returns an object of `{mp4: string, ogg: string, webm: string}` with the source values for the player
 
 **getVideoDimensions**
 Returns an object of `{height: number, width: number}` which reflects the height and width of the video (not the `<video>` element
@@ -131,7 +145,7 @@ Jumps the `currentTime` to the value provided
 **setPlaybackRate(value: number)** *defaults to 1*
 Sets the `playbackRate` to the value provided
 
-**setSource(value: string)**
+**setSource({mp4: string, ogg: string, web: string})**
 Sets the players `src` attribute to the value provided
 
 **setVolume(value: number)** *defaults to 1*

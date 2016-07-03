@@ -501,6 +501,19 @@ class Vidz {
   }
 
   /**
+   * get the source file locations for each type
+   * 
+   * @return {{mp4: string, ogg: string, webm: string}}
+   */
+  getSource() {
+    return {
+      mp4: this.mp4,
+      ogg: this.ogg,
+      webm: this.webm
+    };
+  }
+
+  /**
    * get the actual dimensions of the video (not the player)
    *
    * @return {{height: number, width: number}}
