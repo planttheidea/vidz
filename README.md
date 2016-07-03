@@ -1,185 +1,159 @@
-VideoPlease
+vidz
 ===========
 
-Tiny library to provide a bulletproof HTML5 video, with fallback.
+Tiny library to provide a no-muss, no-fuss HTML5 video element
 
-### Purpose
+#### Purpose
 
-To introduce a simple, straightforward method to dynamically add well-formatted HTML5 video to pages, with a properly structured fallback to Flash when not supported. VideoPlease is not library-dependent, however there is a tweaked version to work with jQuery as well.
+To introduce a simple, straightforward method to dynamically add well-formatted HTML5 video to the DOM. `vidz` has no dependencies, and is based off of the native DOM elements and selectors, however if you are using jQuery it will also work with elements in jQuery objects.
 
-### Size
+#### Size
 
-+ Uncompressed: 11.33KB (11.21KB for jQuery)
-+ Minified: 4.77KB (4.76KB for jQuery)
-+ Minified and gzipped: 1.54KB (1.49KB for jQuery)
++ Uncompressed: 55.8KB (mainly for the sourcemap)
++ Minified: 8.44KB
++ Minified and gzipped: 3.1KB
 
-### Start
+#### Installation
 
-Before you can use any of the methods, you must first instantiate a new VideoPlease object. In terms of usage, this is the only area of difference between the standard and jQuery versions. To make things a bit more concise detailing the two versions, I will set my options in a variable:
-
-```html
-var config = {
-		id:[
-			'player1',
-			'player2'
-		],
-		height:300,
-		width:500,
-		mp4:[
-			'__VIDEO1__.mp4',
-			'__VIDEO2__.mp4'
-		],
-		webm:[
-			'__VIDEO1__.webm',
-			'__VIDEO2__.webm'
-		],
-		ogg:[
-			'__VIDEO1__.ogv',
-			'__VIDEO2__.ogv'
-		],
-		swf:'/video/player.swf',
-		poster:[
-		  '__POSTER1__.jpg',
-		  '__POSTER2__.jpg'
-		]
-  };
+```
+$ npm i vidz --save
 ```
 
-A couple of things to point out:
-+ when multiple videos are to be created, an array can be provided for each of the values
-  + if your selector returns 3 DOM nodes, you can have an array that has different values for each of the 3 nodes for each option passed
-  + if your selector returns 3 DOM nodes, but you only pass in a string, it will use that value for all 3
-  + if your selector returns 3 DOM nodes, but you pass in an array with only two values, only the first two nodes will receive those values
-+ every config option is optional, however if nothing is passed, nothing will get created (duh)
-+ there are a few defaults which can be overridden, but exist without passing them:
-  + preload (set to "auto")
-  + controls (set to "controls", so they appear)
-  + autoplay (set to false, to not autoplay)
-  + flashFallback (set to true, so fallback is created)
+#### Usage
 
-Let's create the object now!
-
-**Standard**
-```html
-var vp = new VideoPlease('.Selector',config);
+```javascript
+const vidzInstance = vidz('#video-container', {
+    mp4: './videos/test.mp4',
+    ogg: './videos/test.ogg'
+});
 ```
 
-**jQuery**
-```html
-var vp = $('.Selector').videoplease(config);
+This will instantiate a new `vidz` instance, appending a generated `<video>` element to the selector provided. You can also provide the DOM element itself, or a jQuery object if you wish.
+
+#### Advanced usage
+
+**vidz(selector: string|HTMLElement|jQueryObject, config: object)**
+
+```javascript
+const standardSelector = vidz('#video-container', config);
+const domElement = vidz(document.querySelector('#video-container'), config);
+const jqueryObject = vidz($('#video-container'), config);
 ```
 
-Now that you have a new VideoPlease object created, you can use some of the methods.
+Available options in the config object:
+* attributes `{object}` *defaults to {}*
+    * Additional attributes that you want to pass to the `<video>` element
+* autoplay `{boolean}` *defaults to false*
+    * Whether the video should start playing immediately on load
+* controls `{boolean}` *defaults to true*
+    * Whether the video should have the native controls provided
+* height `{number}` *defaults to 400*
+    * Height in pixels the video container will be
+* loop `{boolean}` *defaults to false*
+    * Whether the video should play on a loop
+* mp4 `{string}` *defaults to null*
+    * The source of the mp4 file on your server
+* muted `{boolean}` *defaults to false*
+    * Whether the video should be muted on load
+* ogg `{string}` *defaults to null*
+    * The source of the ogg/ogv file on your server
+* onCanPlayThrough `{function}` *defaults to null*
+    * Function called when the `canPlayThrough` event is fired
+* onEnded `{function}` *defaults to null*
+    * Function fired when the `ended` event is fired
+* onError `{function}` *defaults to null*
+    * Function fires when an error occurs with the video
+* onLoad `{function}` *defaults to null*
+    * Function fires when the video finishes loading
+* onLoadedMetadata `{function}` *defaults to null*
+    * Function fires when the `loadingmetadata` event is fired
+* onPlay `{function}` *defaults to null*
+    * Function fires when the `playing` event is fired
+* onPause `{function}` *defaults to null*
+    * Function fires when the `pause` event is fired
+* onProgress `{function}` *defaults to null*
+    * Function fires when the `progress` event is fired
+* onWaiting `{function}` *defaults to null*
+    * Function fires when the `waiting` event is fired
+* poster `{string}` *defaults to null*
+    * The source of the image used as a poster for the video
+* preload `{string}` *defaults to "auto"*
+    * The value for the `preload` attribute applied to the `<video>` tag
+* webm `{string}` *defaults to null*
+    * The source of the webm file on your server
+* width `{number}` *defaults to 600*
+    * Width in pixels the video container will be
 
-### Methods
+#### Methods for the `Vidz` instance
 
-**active**
+**add()**
+If the player has been previously removed from the `selector` passed originally, it re-appends the player to the `selector`.
 
-Checks to see whether a particular player is active, or returns an array of multiple players' active status. To use the method, you can pass in the following parameter:
-+ instance criteria (string / integer / array, optional)
+**canPlayType(format: string)**
+Returns the same format string if it supports the type `format`, else returns an empty string
 
-If no parameter is passed, an array of all player status is retrieved.
+**getCurrentTime()**
+Returns the `currentTime` of the player
 
-Example:
-```html
-console.log(vp.active());
-// logs an array of all players active status in the vp object
-console.log(vp.active(1));
-// logs the active status of player with index 1
-console.log(vp.active('player1');
-// logs the active status of player with id 'player1'
-console.log(vp.active(['player1',1]);
-// logs an array with the first value being the active status of player with id 'player1', and the second value being the active status of player with index 1
-```
+**getPlaybackRate()**
+Returns the `playbackRate` of the video player (standard `playbackRate` is 1, valid values are between 0.25 and 16)
 
-**add**
-Adds a new instantiation of a video element, replacing the node(s) passed into the VideoPlease object based on the selector. To use the method, you can pass in the following parameter:
-+ instance criteria (string / integer / array, optional)
+**getPlayer()**
+Returns the `<video>` element of the player
 
-If no parameter is passed, all players in the object will be instantiated.
+**getVideoDimensions**
+Returns an object of `{height: number, width: number}` which reflects the height and width of the video (not the `<video>` element
 
-Example:
-```html
-// original HTML
-<div class="Selector">Div 1</div>
-<div class="Selector">Div 2</div>
-<div class="Selector">Div 3</div>
+**getVolume()**
+Returns the `volume` of the player (standard `volume` is 1, valid values are between 0 and 1)
 
-// run add for the first div only
-vp.add(0);
+**load()**
+Triggers a `load` event on the player
 
-// run add for the last player only, assuming you assigned id of "player3" to it
-vp.add('player3');
+**mute()**
+Mutes the player
 
-// run add for all divs, just for the hell of it
-vp.add();
-```
+**pause()**
+If the player is playing, it pauses the player
 
-**element**
-Retrieves the original element that was replaced with a video object. To use the method, you can pass in the following parameter:
-+ instance criteria (string / integer / array, optional)
+**play()**
+If the player is paused, it plays the player
 
-If no parameter is passed, an array of all elements in the object will be retrieved.
+**remove()**
+Removes the player as a child from the `selector` passed originally.
 
-Example:
-```html
-// original HTML
-<div id="div1" class="Selector">Div 1</div>
-<div id="div2" class="Selector">Div 2</div>
-<div id-"div3" class="Selector">Div 3</div>
+**restart()**
+Sets the `currentTime` to 0
 
-// retrieve first div only
-vp.element(0);
+**setCurrentTime(value: number)**
+Jumps the `currentTime` to the value provided
 
-// retrieve last div only
-vp.element('div3');
+**setPlaybackRate(value: number)** *defaults to 1*
+Sets the `playbackRate` to the value provided
 
-// retrieve array of all divs in object
-vp.element();
-```
+**setSource(value: string)**
+Sets the players `src` attribute to the value provided
 
-**player**
-Retrieves the video object that replaced the elements in the selector. To use the method, you can pass in the following parameter:
-+ instance criteria (string / integer / array, optional)
+**setVolume(value: number)** *defaults to 1*
+Sets the player's volume to the value provided (standard `volume` is 1, valid values are between 0 and 1)
 
-If no parameter is passed, an array of all players in the object will be retrieved.
+**unmute()**
+If muted, it unmutes the player
 
-Example:
-```html
-// original HTML
-<div class="Selector">Div 1</div>
-<div class="Selector">Div 2</div>
-<div class="Selector">Div 3</div>
+#### Note
 
-// retrieve first div only
-vp.player(0);
+Most of the methods above
 
-// retrieve last player only, assuming you passed an ID of "player3"
-vp.player('player3');
+#### Development
 
-// retrieve array of all players in object
-vp.player();
-```
-
-**remove**
-Removes an existing instantiation of a video element, replacing the player(s) from the VideoPlease object with their original element nodes. To use the method, you can pass in the following parameter:
-+ instance criteria (string / integer / array, optional)
-
-If no parameter is passed, all players in the object will be reverted.
-
-Example:
-```html
-// original HTML
-<div class="Selector">Div 1</div>
-<div class="Selector">Div 2</div>
-<div class="Selector">Div 3</div>
-
-// run remove for the first div only
-vp.remove(0);
-
-// run remove for the last player only, assuming you assigned id of "player3" to it
-vp.remove('player3');
-
-// run remove for all divs, just for the hell of it
-vp.add();
-```
+Standard stuff, clone the repo and `npm i` to get the dependencies. npm scripts available:
+* `build` => builds the distributed JS with `NODE_ENV=development` and with sourcemaps
+* `build-minified` => builds the distributed JS with `NODE_ENV=production` and minified
+* `compile-for-publish` => runs the `lint`, `test`, `transpile`, and `dist` scripts
+* `dev` => runs the webpack dev server for the playground
+* `dist` => runs the `build` and `build-minified`
+* `lint` => runs ESLint against files in the `src` folder
+* `prepublish` => if in publish, runs `compile-for-publish`
+* `test` => runs AVA tests
+* `test:watch` => runs AVA tests with persistent watcher
+* `transpile` => runs Babel against files in `src` to files in `lib`
