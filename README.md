@@ -9,9 +9,9 @@ To introduce a simple, straightforward method to dynamically add well-formatted 
 
 #### Size
 
-+ Uncompressed: 57.4KB (mainly for the sourcemap)
-+ Minified: 8.53KB
-+ Minified and gzipped: 3.2KB
++ Uncompressed: 57.9KB (mainly for the sourcemap)
++ Minified: 8.61KB
++ Minified and gzipped: 3.1KB
 
 #### Installation
 
@@ -98,65 +98,88 @@ Available options in the config object:
 #### Methods for the `Vidz` instance
 
 **add()**
+
 If the player has been previously removed from the `selector` passed originally, it re-appends the player to the `selector`.
 
 **canPlayType(format: string)**
+
 Returns the same format string if it supports the type `format`, else returns an empty string
 
 **getCurrentTime()**
+
 Returns the `currentTime` of the player
 
+**getFlashObject()**
+
+Returns the `<object>` element nested in the player (useful for programmatic control of the Flash object)
+
 **getPlaybackRate()**
+
 Returns the `playbackRate` of the video player (standard `playbackRate` is 1, valid values are between 0.25 and 16)
 
 **getPlayer()**
+
 Returns the `<video>` element of the player
 
 **getSource()**
+
 Returns an object of `{mp4: string, ogg: string, webm: string}` with the source values for the player
 
 **getVideoDimensions**
+
 Returns an object of `{height: number, width: number}` which reflects the height and width of the video (not the `<video>` element
 
 **getVolume()**
+
 Returns the `volume` of the player (standard `volume` is 1, valid values are between 0 and 1)
 
 **load()**
+
 Triggers a `load` event on the player
 
 **mute()**
+
 Mutes the player
 
 **pause()**
+
 If the player is playing, it pauses the player
 
 **play()**
+
 If the player is paused, it plays the player
 
 **remove()**
+
 Removes the player as a child from the `selector` passed originally.
 
 **restart()**
+
 Sets the `currentTime` to 0
 
 **setCurrentTime(value: number)**
+
 Jumps the `currentTime` to the value provided
 
 **setPlaybackRate(value: number)** *defaults to 1*
+
 Sets the `playbackRate` to the value provided
 
 **setSource({mp4: string, ogg: string, web: string})**
+
 Sets the players `src` attribute to the value provided
 
 **setVolume(value: number)** *defaults to 1*
+
 Sets the player's volume to the value provided (standard `volume` is 1, valid values are between 0 and 1)
 
 **unmute()**
+
 If muted, it unmutes the player
 
 #### Note
 
-Most of the methods above
+All of the methods above save for `add` and `remove` are specific to the HTML5 video element. Unfortunately we cannot provide the same programmatic controls for the Flash instance, as it is dependent on the SWF file you use. There is a `getFlashObject` convenience function to get the flash object you can control.
 
 #### Development
 
