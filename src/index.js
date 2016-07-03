@@ -258,12 +258,12 @@ const setVideoEvents = (vidzInstance, events) => {
   }
 
   setElementEventListener(videoElement, 'durationchange', (e) => {
-    if (onDurationChange) {
-      onDurationChange.call(vidzInstance, e, vidzInstance);
-    }
-
     vidzInstance.duration = e.target.duration;
     vidzInstance.percentLoaded = getPercentLoaded(e.target);
+
+    if (onDurationChange) {
+      wrapSimpleVideoEvent(vidzInstance, onDurationChange)(e);
+    }
   });
 
   if (onEmptied) {
@@ -298,7 +298,8 @@ const setVideoEvents = (vidzInstance, events) => {
     setElementEventListener(videoElement, 'pause', (e) => {
       if (vidzInstance.playing) {
         vidzInstance.playing = false;
-        onPause.call(vidzInstance, e, vidzInstance);
+        
+        wrapSimpleVideoEvent(vidzInstance, onPause)(e);
       }
     });
   }
@@ -307,21 +308,29 @@ const setVideoEvents = (vidzInstance, events) => {
     setElementEventListener(videoElement, 'playing', (e) => {
       if (!vidzInstance.playing) {
         vidzInstance.playing = true;
-        onPlay.call(vidzInstance, e, vidzInstance);
+
+        wrapSimpleVideoEvent(vidzInstance, onPlay)(e);
       }
     });
   }
 
   setElementEventListener(videoElement, 'progress', (e) => {
-    if (onProgress) {
-      onProgress.call(vidzInstance, e, vidzInstance);
-    }
-
+    vidzInstance.currentTime = e.target.currentTime;
     vidzInstance.percentLoaded = getPercentLoaded(e.target);
+
+    if (onProgress) {
+      wrapSimpleVideoEvent(vidzInstance, onProgress)(e);
+    }
   });
 
   if (onRateChange) {
-    setElementEventListener(videoElement, 'ratechange', wrapSimpleVideoEvent(vidzInstance, onRateChange));
+    setElementEventListener(videoElement, 'ratechange', (e) => {
+      vidzInstance.playbackRate = e.target.playbackRate;
+
+      if (onRateChange) {
+        wrapSimpleVideoEvent(vidzInstance, onRateChange)(e);
+      }
+    });
   }
 
   if (onSeeked) {
@@ -490,12 +499,16 @@ class Vidz {
       width
     });
 
+    this.currentTime = 0;
     this.duration = null;
     this.element = element;
+    this.height = height;
     this.muted = muted;
     this.percentLoaded = 0;
     this.playing = autoplay;
+    this.playbackRate = 1;
     this.selector = selector;
+    this.width = width;
 
     let videoElement = getVideoElement({
       autoplay,
@@ -623,7 +636,7 @@ class Vidz {
    * @return {number}
    */
   getCurrentTime() {
-    return this.player.currentTime;
+    return this.currentTime;
   }
 
   /**
