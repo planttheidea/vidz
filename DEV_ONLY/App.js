@@ -29,41 +29,46 @@ const delayVolumeDown = (instance, shouldDecrease = false, hasRun = false) => {
 };
 
 class App extends Component {
+  vidzInstance = null;
+
   componentDidMount() {
     let interval = null;
 
     const $div = $(this.refs.videoContainer);
 
-    const video = vidz($div, {
+    this.vidzInstance = vidz($div, {
       mp4: 'http://www.html5rocks.com/en/tutorials/video/basics/devstories.mp4',
-      onPause() {
-        console.log(this);
-      },
-      onPlay() {
-        setTimeout(() => {
-          this.mute();
-
-          setTimeout(() => {
-            this.unmute();
-
-            delayVolumeDown(this, true);
-          }, 3000);
-        }, 3000);
+      muted: true,
+      onProgress() {
+        console.log(this.getPercentLoaded());
       },
       poster: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150',
       swf: 'test.swf',
       webm: 'http://www.html5rocks.com/en/tutorials/video/basics/devstories.webm'
     });
 
-    console.log(video);
-
-    setTimeout(() => {
-      video.setPlayerDimensions({
-        height: 320,
-        width: 600
-      });
-    }, 3000);
+    this.forceUpdate();
   }
+
+  state = {
+    isPlaying: false
+  };
+
+  onClickPlayPause = () => {
+    const {
+      isPlaying
+    } = this.state;
+
+    if (isPlaying) {
+      this.vidzInstance.pause();
+    } else {
+      this.vidzInstance.play();
+    }
+
+    this.setState({
+      isPlaying: !isPlaying
+    });
+  };
 
   render() {
     return (
@@ -74,6 +79,12 @@ class App extends Component {
           id="video-container"
           ref="videoContainer"
         />
+
+        <div
+          onClick={this.onClickPlayPause}
+        >
+          Toggle play / pause
+        </div>
       </div>
     );
   }
