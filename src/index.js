@@ -315,7 +315,6 @@ const setVideoEvents = (vidzInstance, events) => {
   }
 
   setElementEventListener(videoElement, 'progress', (e) => {
-    vidzInstance.currentTime = e.target.currentTime;
     vidzInstance.percentLoaded = getPercentLoaded(e.target);
 
     if (onProgress) {
@@ -349,9 +348,13 @@ const setVideoEvents = (vidzInstance, events) => {
     setElementEventListener(videoElement, 'suspend', wrapSimpleVideoEvent(vidzInstance, onSuspend));
   }
 
-  if (onTimeUpdate) {
-    setElementEventListener(videoElement, 'timeupdate', wrapSimpleVideoEvent(vidzInstance, onTimeUpdate));
-  }
+  setElementEventListener(videoElement, 'timeupdate', (e) => {
+    vidzInstance.currentTime = e.target.currentTime;
+
+    if (onTimeUpdate) {
+      wrapSimpleVideoEvent(vidzInstance, onTimeUpdate)(e);
+    }
+  });
 
 
   if (onVolumeChange) {
