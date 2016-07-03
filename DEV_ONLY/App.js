@@ -40,7 +40,8 @@ class App extends Component {
       mp4: 'http://www.html5rocks.com/en/tutorials/video/basics/devstories.mp4',
       muted: true,
       onProgress() {
-        console.log(this.getPercentLoaded());
+        console.log(this.currentTime);
+        console.log(this.duration);
       },
       poster: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150',
       swf: 'test.swf',
