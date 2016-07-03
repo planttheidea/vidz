@@ -42,6 +42,17 @@ const setElementAttribute = (element, attribute, value) => {
 };
 
 /**
+ * convenience function to add an event listener to an element
+ *
+ * @param {HTMLElement} element
+ * @param {string} event
+ * @param {function} handler
+ */
+const setElementEventListener = (element, event, handler) => {
+  element.addEventListener(event, handler);
+};
+
+/**
  * create a new source element based on the elementType
  * and type, assigning the src to it
  *
@@ -166,6 +177,39 @@ const getVideoElement = ({autoplay, controls, height, loop, muted, preload, widt
 };
 
 /**
+ * get the percent loaded if duration is available
+ *
+ * @param {HTMLElement} player
+ * @return {number}
+ */
+const getPercentLoaded = (player) => {
+  const duration = player.duration;
+
+  if (duration) {
+    const buffered = player.buffered;
+    const percentLoaded = buffered.end(0) / duration;
+
+    return Math.round(percentLoaded * 10000) / 100;
+  }
+
+  return 0;
+};
+
+/**
+ * convenience function to wrap even with explicit this
+ * as vidzInstance
+ *
+ * @param {Vidz} vidzInstance
+ * @param {function} method
+ * @return {function(e): void}
+ */
+const wrapSimpleVideoEvent = (vidzInstance, method) => {
+  return (e) => {
+    method.call(vidzInstance, e, vidzInstance);
+  };
+};
+
+/**
  *
  * @param {Vidz} vidzInstance
  * @param {object} events
@@ -180,61 +224,78 @@ const getVideoElement = ({autoplay, controls, height, loop, muted, preload, widt
  */
 const setVideoEvents = (vidzInstance, events) => {
   const {
+    onCanPlay,
     onCanPlayThrough,
+    onDurationChange,
+    onEmptied,
     onEnded,
     onError,
     onLoad,
+    onLoadedData,
     onLoadedMetadata,
+    onLoadStart,
     onPause,
     onPlay,
     onProgress,
+    onRateChange,
+    onSeeked,
+    onSeeking,
+    onStalled,
+    onSuspend,
+    onTimeUpdate,
+    onVolumeChange,
     onWaiting
   } = events;
 
   let videoElement = vidzInstance.player;
 
+  if (onCanPlay) {
+    setElementEventListener(videoElement, 'canplay', wrapSimpleVideoEvent(vidzInstance, onCanPlay));
+  }
+
   if (onCanPlayThrough) {
-    videoElement.addEventListener('canplaythrough', (e) => {
-      onCanPlayThrough.call(vidzInstance, e, vidzInstance);
-    });
+    setElementEventListener(videoElement, 'canplaythrough', wrapSimpleVideoEvent(vidzInstance, onCanPlayThrough));
+  }
+
+  setElementEventListener(videoElement, 'durationchange', (e) => {
+    if (onDurationChange) {
+      onDurationChange.call(vidzInstance, e, vidzInstance);
+    }
+
+    vidzInstance.duration = e.target.duration;
+    vidzInstance.percentLoaded = getPercentLoaded(e.target);
+  });
+
+  if (onEmptied) {
+    setElementEventListener(videoElement, 'emptied', wrapSimpleVideoEvent(vidzInstance, onEmptied));
   }
 
   if (onEnded) {
-    videoElement.addEventListener('ended', (e) => {
-      onEnded.call(vidzInstance, e, vidzInstance);
-    });
+    setElementEventListener(videoElement, 'ended', wrapSimpleVideoEvent(vidzInstance, onEnded));
   }
 
   if (onError) {
-    videoElement.addEventListener('error', (e) => {
-      onError.call(vidzInstance, e, vidzInstance);
-    });
+    setElementEventListener(videoElement, 'error', wrapSimpleVideoEvent(vidzInstance, onError));
   }
   
   if (onLoad) {
-    videoElement.addEventListener('load', (e) => {
-      onLoad.call(vidzInstance, e, vidzInstance);
-    });
+    setElementEventListener(videoElement, 'load', wrapSimpleVideoEvent(vidzInstance, onLoad));
+  }
+
+  if (onLoadedData) {
+    setElementEventListener(videoElement, 'loadeddata', wrapSimpleVideoEvent(vidzInstance, onLoadedData));
   }
 
   if (onLoadedMetadata) {
-    videoElement.addEventListener('loadedmetadata', (e) => {
-      onLoadedMetadata.call(vidzInstance, e, vidzInstance);
-    });
+    setElementEventListener(videoElement, 'loadedmetadata', wrapSimpleVideoEvent(vidzInstance, onLoadedMetadata));
   }
 
-  if (onPlay) {
-    videoElement.addEventListener('playing', (e) => {
-      if (!vidzInstance.playing) {
-        vidzInstance.playing = true;
-        onPlay.call(vidzInstance, e, vidzInstance);
-      }
-    });
-
+  if (onLoadStart) {
+    setElementEventListener(videoElement, 'loadstart', wrapSimpleVideoEvent(vidzInstance, onLoadStart));
   }
 
   if (onPause) {
-    videoElement.addEventListener('pause', (e) => {
+    setElementEventListener(videoElement, 'pause', (e) => {
       if (vidzInstance.playing) {
         vidzInstance.playing = false;
         onPause.call(vidzInstance, e, vidzInstance);
@@ -242,16 +303,54 @@ const setVideoEvents = (vidzInstance, events) => {
     });
   }
 
-  if (onProgress) {
-    videoElement.addEventListener('progress', (e) => {
-      onProgress.call(vidzInstance, e, vidzInstance);
+  if (onPlay) {
+    setElementEventListener(videoElement, 'playing', (e) => {
+      if (!vidzInstance.playing) {
+        vidzInstance.playing = true;
+        onPlay.call(vidzInstance, e, vidzInstance);
+      }
     });
   }
 
+  setElementEventListener(videoElement, 'progress', (e) => {
+    if (onProgress) {
+      onProgress.call(vidzInstance, e, vidzInstance);
+    }
+
+    vidzInstance.percentLoaded = getPercentLoaded(e.target);
+  });
+
+  if (onRateChange) {
+    setElementEventListener(videoElement, 'ratechange', wrapSimpleVideoEvent(vidzInstance, onRateChange));
+  }
+
+  if (onSeeked) {
+    setElementEventListener(videoElement, 'seeked', wrapSimpleVideoEvent(vidzInstance, onSeeked));
+  }
+
+  if (onSeeking) {
+    setElementEventListener(videoElement, 'seeking', wrapSimpleVideoEvent(vidzInstance, onSeeking));
+  }
+
+  if (onStalled) {
+    setElementEventListener(videoElement, 'stalled', wrapSimpleVideoEvent(vidzInstance, onStalled));
+  }
+
+  if (onSuspend) {
+    setElementEventListener(videoElement, 'suspend', wrapSimpleVideoEvent(vidzInstance, onSuspend));
+  }
+
+  if (onTimeUpdate) {
+    setElementEventListener(videoElement, 'timeupdate', wrapSimpleVideoEvent(vidzInstance, onTimeUpdate));
+  }
+
+
+  if (onVolumeChange) {
+    setElementEventListener(videoElement, 'volumechange', wrapSimpleVideoEvent(vidzInstance, onVolumeChange));
+  }
+
   if (onWaiting) {
-    videoElement.addEventListener('waiting', (e) => {
-      onWaiting.call(vidzInstance, e, vidzInstance);
-    });
+    setElementEventListener(videoElement, 'waiting', wrapSimpleVideoEvent(vidzInstance, onWaiting));
   }
 };
 
@@ -271,14 +370,26 @@ class Vidz {
    * @param {string} [config.mp4]
    * @param {boolean} [config.muted]
    * @param {string} [config.ogg]
+   * @param {function} [config.onCanPlay]
    * @param {function} [config.onCanPlayThrough]
+   * @param {function} [config.onDurationChange]
+   * @param {function} [config.onEmptied]
    * @param {function} [config.onEnded]
    * @param {function} [config.onError]
    * @param {function} [config.onLoad]
+   * @param {function} [config.onLoadedData]
    * @param {function} [config.onLoadedMetadata]
+   * @param {function} [config.onLoadStart]
    * @param {function} [config.onPause]
    * @param {function} [config.onPlay]
    * @param {function} [config.onProgress]
+   * @param {function} [config.onRateChange]
+   * @param {function} [config.onSeeked]
+   * @param {function} [config.onSeeking]
+   * @param {function} [config.onStalled]
+   * @param {function} [config.onSuspend]
+   * @param {function} [config.onTimeUpdate]
+   * @param {function} [config.onVolumeChange]
    * @param {function} [config.onWaiting]
    * @param {string} [config.poster]
    * @param {string} [config.preload]
@@ -315,14 +426,26 @@ class Vidz {
       mp4 = null,
       muted = DEFAULT_ATTRIBUTES.MUTED,
       ogg = null,
+      onCanPlay = null,
       onCanPlayThrough = null,
+      onDurationChange = null,
+      onEmptied = null,
       onEnded = null,
       onError = null,
       onLoad = null,
+      onLoadedData = null,
       onLoadedMetadata = null,
+      onLoadStart = null,
       onPause = null,
       onPlay = null,
       onProgress = null,
+      onRateChange = null,
+      onSeeked = null,
+      onSeeking = null,
+      onStalled = null,
+      onSuspend = null,
+      onTimeUpdate = null,
+      onVolumeChange = null,
       onWaiting = null,
       poster = null,
       preload = DEFAULT_ATTRIBUTES.PRELOAD,
@@ -340,14 +463,25 @@ class Vidz {
       mp4,
       muted,
       ogg,
+      onCanPlay,
       onCanPlayThrough,
+      onEmptied,
       onEnded,
       onError,
       onLoad,
+      onLoadedData,
       onLoadedMetadata,
+      onLoadStart,
       onPause,
       onPlay,
       onProgress,
+      onRateChange,
+      onSeeked,
+      onSeeking,
+      onStalled,
+      onSuspend,
+      onTimeUpdate,
+      onVolumeChange,
       onWaiting,
       poster,
       preload,
@@ -356,8 +490,10 @@ class Vidz {
       width
     });
 
+    this.duration = null;
     this.element = element;
     this.muted = muted;
+    this.percentLoaded = 0;
     this.playing = autoplay;
     this.selector = selector;
 
@@ -419,14 +555,26 @@ class Vidz {
     this.supportsHtml5Video = typeof createNewElement(ELEMENT_TYPES.VIDEO).canPlayType !== 'undefined';
 
     setVideoEvents(this, {
+      onCanPlay,
       onCanPlayThrough,
+      onDurationChange,
+      onEmptied,
       onEnded,
       onError,
       onLoad,
+      onLoadedData,
       onLoadedMetadata,
+      onLoadStart,
       onPause,
       onPlay,
       onProgress,
+      onRateChange,
+      onSeeked,
+      onSeeking,
+      onStalled,
+      onSuspend,
+      onTimeUpdate,
+      onVolumeChange,
       onWaiting
     });
 
@@ -462,6 +610,14 @@ class Vidz {
   }
 
   /**
+   *
+   * @return {*|TimeRanges}
+   */
+  getBuffered() {
+    return this.player.buffered;
+  }
+
+  /**
    * return the amount of time that has played in the video
    *
    * @return {number}
@@ -471,12 +627,30 @@ class Vidz {
   }
 
   /**
+   * return the length of the entire video
+   *
+   * @return {number}
+   */
+  getDuration() {
+    return this.duration;
+  }
+
+  /**
    * return the <object> flash fallback
    * 
    * @return {HTMLElement}
    */
   getFlashObject() {
     return this.player.querySelector(ELEMENT_TYPES.OBJECT);
+  }
+
+  /**
+   * return the % loaded (rounded to two decimals)
+   *
+   * @return {number}
+   */
+  getPercentLoaded() {
+    return this.percentLoaded;
   }
 
   /**

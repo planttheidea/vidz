@@ -7,12 +7,6 @@ Tiny library to provide a no-muss, no-fuss HTML5 video element
 
 To introduce a simple, straightforward method to dynamically add well-formatted HTML5 video to the DOM. `vidz` has no dependencies, and is based off of the native DOM elements and selectors, however if you are using jQuery it will also work with elements in jQuery objects.
 
-#### Size
-
-+ Uncompressed: 57.9KB (mainly for the sourcemap)
-+ Minified: 8.61KB
-+ Minified and gzipped: 3.1KB
-
 #### Installation
 
 ```
@@ -66,22 +60,42 @@ Available options in the config object:
     * Whether the video should be muted on load
 * ogg `{string}` *defaults to null*
     * The location of the ogg/ogv file on your server relative to the page
+* onCanPlay `{function}` *defaults to null*
+    * Function called when the `canplay` event is fired
 * onCanPlayThrough `{function}` *defaults to null*
-    * Function called when the `canPlayThrough` event is fired
+    * Function called when the `canplaythrough` event is fired
+* onEmptied `{function}` *defaults to null*
+    * Function fired when the `emptied` event is fired
 * onEnded `{function}` *defaults to null*
     * Function fired when the `ended` event is fired
 * onError `{function}` *defaults to null*
-    * Function fires when an error occurs with the video
+    * Function fires when the `error` event is fired
 * onLoad `{function}` *defaults to null*
-    * Function fires when the video finishes loading
+    * Function fires when the `load` event is fired
+* onLoaded `{function}` *defaults to null*
+    * Function fires when the `loadeddata` event is fired
 * onLoadedMetadata `{function}` *defaults to null*
     * Function fires when the `loadingmetadata` event is fired
+* onLoadStart `{function}` *defaults to null*
+    * Function fires when the `loadstart` event is fired
 * onPlay `{function}` *defaults to null*
     * Function fires when the `playing` event is fired
 * onPause `{function}` *defaults to null*
     * Function fires when the `pause` event is fired
 * onProgress `{function}` *defaults to null*
     * Function fires when the `progress` event is fired
+* onSeeked `{function}` *defaults to null*
+    * Function fires when the `seeked` event is fired
+* onSeeking `{function}` *defaults to null*
+    * Function fires when the `seeking` event is fired
+* onStalled `{function}` *defaults to null*
+    * Function fires when the `stalled` event is fired
+* onSuspend `{function}` *defaults to null*
+    * Function fires when the `suspend` event is fired
+* onTimeUpdate `{function}` *defaults to null*
+    * Function fires when the `timeupdate` event is fired
+* onVolumeChange `{function}` *defaults to null*
+    * Function fires when the `volumechange` event is fired
 * onWaiting `{function}` *defaults to null*
     * Function fires when the `waiting` event is fired
 * poster `{string}` *defaults to null*
@@ -105,13 +119,25 @@ If the player has been previously removed from the `selector` passed originally,
 
 Returns the same format string if it supports the type `format`, else returns an empty string
 
+**getBuffered()**
+
+Returns the value of the `buffered` property for the player
+
 **getCurrentTime()**
 
-Returns the `currentTime` of the player
+Returns the value of the `currentTime` property for the player
+
+**getDuration()**
+
+Returns the value of the `duration` property for the player
 
 **getFlashObject()**
 
 Returns the `<object>` element nested in the player (useful for programmatic control of the Flash object)
+
+**getPercentLoaded()**
+
+Returns the percent loaded the video is (rounded to two decimal places)
 
 **getPlaybackRate()**
 
