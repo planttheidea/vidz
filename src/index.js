@@ -356,10 +356,13 @@ const setVideoEvents = (vidzInstance, events) => {
     }
   });
 
+  setElementEventListener(videoElement, 'volumechange', (e) => {
+    vidzInstance.volume = e.target.volume;
 
-  if (onVolumeChange) {
-    setElementEventListener(videoElement, 'volumechange', wrapSimpleVideoEvent(vidzInstance, onVolumeChange));
-  }
+    if (onVolumeChange) {
+      wrapSimpleVideoEvent(vidzInstance, onVolumeChange)(e);
+    }
+  });
 
   if (onWaiting) {
     setElementEventListener(videoElement, 'waiting', wrapSimpleVideoEvent(vidzInstance, onWaiting));
@@ -511,6 +514,7 @@ class Vidz {
     this.playing = autoplay;
     this.playbackRate = 1;
     this.selector = selector;
+    this.volume = 1;
     this.width = width;
 
     let videoElement = getVideoElement({
@@ -814,6 +818,7 @@ class Vidz {
    */
   setCurrentTime(value) {
     this.player.currentTime = value;
+    this.currentTime = value;
 
     return this;
   }
@@ -883,6 +888,7 @@ class Vidz {
         case SOURCE_TYPES.MP4:
           if (mp4) {
             setElementAttribute(source, 'src', mp4);
+            this.mp4 = mp4;
           }
 
           break;
@@ -890,6 +896,7 @@ class Vidz {
         case SOURCE_TYPES.OGG:
           if (ogg) {
             setElementAttribute(source, 'src', ogg);
+            this.ogg = ogg;
           }
 
           break;
@@ -897,6 +904,7 @@ class Vidz {
         case SOURCE_TYPES.WEBM:
           if (webm) {
             setElementAttribute(source, 'src', webm);
+            this.webm = webm;
           }
 
           break;
@@ -929,13 +937,16 @@ class Vidz {
    * @return {Vidz}
    */
   setVolume(value = 1) {
+    let volume = value;
+
     if (value < 0) {
-      this.player.volume = 0;
+      volume = 0;
     } else if (value > 1) {
-      this.player.volume = 1;
-    } else {
-      this.player.volume = value;
+      volume = 1;
     }
+
+    this.player.volume = volume;
+    this.volume = volume;
 
     return this;
   }
