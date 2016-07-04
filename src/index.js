@@ -825,13 +825,16 @@ class Vidz {
    * @return {Vidz}
    */
   setPlaybackRate(value = 1) {
+    let validValue = value;
+
     if (value <= 0.25) {
-      this.player.playbackRate = 0.25;
+      validValue = 0.25;
     } else if (value >= 16) {
-      this.player.playbackRate = 16;
-    } else {
-      this.player.playbackRate = value;
+      validValue = 16;
     }
+
+    this.player.playbackRate = validValue;
+    this.playbackRate = validValue;
 
     return this;
   }
