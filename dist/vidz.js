@@ -1,64 +1,1318 @@
-var vidz =
-/******/ (function(modules) { // webpackBootstrap
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define("vidz", [], factory);
+	else if(typeof exports === 'object')
+		exports["vidz"] = factory();
+	else
+		root["vidz"] = factory();
+})(window, function() {
+return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
-
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-
+/******/
 /******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
+/******/ 		if(installedModules[moduleId]) {
 /******/ 			return installedModules[moduleId].exports;
-
+/******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
-/******/ 			exports: {},
-/******/ 			id: moduleId,
-/******/ 			loaded: false
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
 /******/ 		};
-
+/******/
 /******/ 		// Execute the module function
 /******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-
+/******/
 /******/ 		// Flag the module as loaded
-/******/ 		module.loaded = true;
-
+/******/ 		module.l = true;
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-
-
+/******/
+/******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
-
+/******/
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
-
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
-
+/******/
+/******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/******/ ({
 
-	module.exports = __webpack_require__(1);
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 
 
-/***/ },
-/* 1 */
-/***/ function(module, exports, __webpack_require__) {
+exports.__esModule = true;
+exports.Vidz = exports.setVideoEvents = exports.setElementAttribute = exports.getVideoElement = exports.getSourceElement = exports.getObjectElement = undefined;
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.Vidz = exports.setVideoEvents = exports.setElementAttribute = exports.getVideoElement = exports.getSourceElement = exports.getObjectElement = undefined;\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _utils = __webpack_require__(2);\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nvar ELEMENT_TYPES = {\n  IMAGE: 'img',\n  OBJECT: 'object',\n  PARAM: 'param',\n  SOURCE: 'source',\n  VIDEO: 'video'\n};\n\nvar SOURCE_TYPES = {\n  MP4: 'video/mp4',\n  OGG: 'video/ogg',\n  WEBM: 'video/webm'\n};\n\nvar DEFAULT_ATTRIBUTES = {\n  AUTOPLAY: false,\n  CONTROLS: true,\n  HEIGHT: 400,\n  LOOP: false,\n  MUTED: false,\n  PRELOAD: 'auto',\n  WIDTH: 600\n};\n\n/**\n * convenience function to set an attribute on an element to value\n *\n * @param {HTMLElement} element\n * @param {string} attribute\n * @param {any} value\n */\nvar setElementAttribute = function setElementAttribute(element, attribute, value) {\n  element.setAttribute(attribute, value);\n};\n\n/**\n * convenience function to add an event listener to an element\n *\n * @param {HTMLElement} element\n * @param {string} event\n * @param {function} handler\n */\nvar setElementEventListener = function setElementEventListener(element, event, handler) {\n  element.addEventListener(event, handler);\n};\n\n/**\n * create a new source element based on the elementType\n * and type, assigning the src to it\n *\n * @param {string} src\n * @param {string} type\n * @return {HTMLElement}\n */\nvar getSourceElement = function getSourceElement(src, type) {\n  var element = (0, _utils.createNewElement)(ELEMENT_TYPES.SOURCE);\n\n  element.src = src;\n  element.type = type;\n\n  return element;\n};\n\n/**\n * create a new object element and populate it with the\n * param elements that have the flash-specific values needed\n * for the fallback\n *\n * @param {boolean} autoplay\n * @param {boolean} controls\n * @param {number} height\n * @param {string} mp4\n * @param {string} poster\n * @param {string} swf\n * @param {number} width\n * @return {HTMLElement}\n */\nvar getObjectElement = function getObjectElement(_ref) {\n  var autoplay = _ref.autoplay;\n  var controls = _ref.controls;\n  var height = _ref.height;\n  var mp4 = _ref.mp4;\n  var poster = _ref.poster;\n  var swf = _ref.swf;\n  var width = _ref.width;\n\n  var objectElement = (0, _utils.createNewElement)(ELEMENT_TYPES.OBJECT),\n      movieParamElement = (0, _utils.createNewElement)(ELEMENT_TYPES.PARAM),\n      flashvarsParamElement = (0, _utils.createNewElement)(ELEMENT_TYPES.PARAM);\n\n  setElementAttribute(objectElement, 'data', swf);\n  setElementAttribute(objectElement, 'height', height);\n  setElementAttribute(objectElement, 'width', width);\n\n  setElementAttribute(movieParamElement, 'name', 'movie');\n  setElementAttribute(movieParamElement, 'value', swf);\n\n  setElementAttribute(flashvarsParamElement, 'name', 'flashvars');\n\n  var flashvarsObject = {\n    autostart: autoplay ? true : null,\n    controlbar: controls ? 'over' : null,\n    image: poster,\n    file: mp4\n  };\n\n  var flashvarsValue = '';\n\n  for (var key in flashvarsObject) {\n    var value = flashvarsObject[key];\n\n    if (value) {\n      if (flashvarsValue) {\n        flashvarsValue += '&';\n      }\n\n      flashvarsValue += key + '=' + value;\n    }\n  }\n\n  setElementAttribute(flashvarsParamElement, 'value', flashvarsValue);\n\n  objectElement.appendChild(movieParamElement);\n  objectElement.appendChild(flashvarsParamElement);\n\n  if (poster) {\n    var imageElement = (0, _utils.createNewElement)(ELEMENT_TYPES.IMAGE);\n\n    setElementAttribute(imageElement, 'alt', 'Video is unavailable.');\n    setElementAttribute(imageElement, 'height', height);\n    setElementAttribute(imageElement, 'src', poster);\n    setElementAttribute(imageElement, 'title', 'We cannot provide playback capabilities at this time.');\n    setElementAttribute(imageElement, 'width', width);\n\n    objectElement.appendChild(imageElement);\n  }\n\n  return objectElement;\n};\n\n/**\n * build the video element that will be injected onto the page\n *\n * @param {boolean} autoplay\n * @param {boolean} controls\n * @param {number} height\n * @param {boolean} loop\n * @param {boolean} muted\n * @param {string} preload\n * @param {number} width\n * @returns {HTMLElement}\n */\nvar getVideoElement = function getVideoElement(_ref2) {\n  var autoplay = _ref2.autoplay;\n  var controls = _ref2.controls;\n  var height = _ref2.height;\n  var loop = _ref2.loop;\n  var muted = _ref2.muted;\n  var preload = _ref2.preload;\n  var width = _ref2.width;\n\n  var videoElement = (0, _utils.createNewElement)(ELEMENT_TYPES.VIDEO);\n\n  if (autoplay) {\n    setElementAttribute(videoElement, 'autoplay', '');\n  }\n\n  if (controls) {\n    setElementAttribute(videoElement, 'controls', '');\n  }\n\n  if (loop) {\n    setElementAttribute(videoElement, 'loop', '');\n  }\n\n  if (muted) {\n    setElementAttribute(videoElement, 'muted', '');\n  }\n\n  setElementAttribute(videoElement, 'height', height);\n  setElementAttribute(videoElement, 'preload', preload);\n  setElementAttribute(videoElement, 'width', width);\n\n  return videoElement;\n};\n\n/**\n * get the percent loaded if duration is available\n *\n * @param {HTMLElement} player\n * @return {number}\n */\nvar getPercentLoaded = function getPercentLoaded(player) {\n  var duration = player.duration;\n\n  if (duration) {\n    var buffered = player.buffered;\n    var percentLoaded = buffered.end(0) / duration;\n\n    return Math.round(percentLoaded * 10000) / 100;\n  }\n\n  return 0;\n};\n\n/**\n * convenience function to wrap even with explicit this\n * as vidzInstance\n *\n * @param {Vidz} vidzInstance\n * @param {function} method\n * @return {function(e): void}\n */\nvar wrapSimpleVideoEvent = function wrapSimpleVideoEvent(vidzInstance, method) {\n  return function (e) {\n    method.call(vidzInstance, e, vidzInstance);\n  };\n};\n\n/**\n *\n * @param {Vidz} vidzInstance\n * @param {object} events\n * @param {function} [events.onCanPlayThrough]\n * @param {function} [events.onEnded]\n * @param {function} [events.onError]\n * @param {function} [events.onLoadedMetadata]\n * @param {function} [events.onPause]\n * @param {function} [events.onPlay]\n * @param {function} [events.onProgress]\n * @param {function} [events.onWaiting]\n */\nvar setVideoEvents = function setVideoEvents(vidzInstance, events) {\n  var onCanPlay = events.onCanPlay;\n  var onCanPlayThrough = events.onCanPlayThrough;\n  var onDurationChange = events.onDurationChange;\n  var onEmptied = events.onEmptied;\n  var onEnded = events.onEnded;\n  var onError = events.onError;\n  var onLoad = events.onLoad;\n  var onLoadedData = events.onLoadedData;\n  var onLoadedMetadata = events.onLoadedMetadata;\n  var onLoadStart = events.onLoadStart;\n  var onPause = events.onPause;\n  var onPlay = events.onPlay;\n  var onProgress = events.onProgress;\n  var onRateChange = events.onRateChange;\n  var onSeeked = events.onSeeked;\n  var onSeeking = events.onSeeking;\n  var onStalled = events.onStalled;\n  var onSuspend = events.onSuspend;\n  var onTimeUpdate = events.onTimeUpdate;\n  var onVolumeChange = events.onVolumeChange;\n  var onWaiting = events.onWaiting;\n\n\n  var videoElement = vidzInstance.player;\n\n  if (onCanPlay) {\n    setElementEventListener(videoElement, 'canplay', wrapSimpleVideoEvent(vidzInstance, onCanPlay));\n  }\n\n  if (onCanPlayThrough) {\n    setElementEventListener(videoElement, 'canplaythrough', wrapSimpleVideoEvent(vidzInstance, onCanPlayThrough));\n  }\n\n  setElementEventListener(videoElement, 'durationchange', function (e) {\n    vidzInstance.duration = e.target.duration;\n    vidzInstance.percentLoaded = getPercentLoaded(e.target);\n\n    if (onDurationChange) {\n      wrapSimpleVideoEvent(vidzInstance, onDurationChange)(e);\n    }\n  });\n\n  if (onEmptied) {\n    setElementEventListener(videoElement, 'emptied', wrapSimpleVideoEvent(vidzInstance, onEmptied));\n  }\n\n  if (onEnded) {\n    setElementEventListener(videoElement, 'ended', wrapSimpleVideoEvent(vidzInstance, onEnded));\n  }\n\n  if (onError) {\n    setElementEventListener(videoElement, 'error', wrapSimpleVideoEvent(vidzInstance, onError));\n  }\n\n  if (onLoad) {\n    setElementEventListener(videoElement, 'load', wrapSimpleVideoEvent(vidzInstance, onLoad));\n  }\n\n  if (onLoadedData) {\n    setElementEventListener(videoElement, 'loadeddata', wrapSimpleVideoEvent(vidzInstance, onLoadedData));\n  }\n\n  if (onLoadedMetadata) {\n    setElementEventListener(videoElement, 'loadedmetadata', wrapSimpleVideoEvent(vidzInstance, onLoadedMetadata));\n  }\n\n  if (onLoadStart) {\n    setElementEventListener(videoElement, 'loadstart', wrapSimpleVideoEvent(vidzInstance, onLoadStart));\n  }\n\n  if (onPause) {\n    setElementEventListener(videoElement, 'pause', function (e) {\n      if (vidzInstance.playing) {\n        vidzInstance.playing = false;\n\n        wrapSimpleVideoEvent(vidzInstance, onPause)(e);\n      }\n    });\n  }\n\n  if (onPlay) {\n    setElementEventListener(videoElement, 'playing', function (e) {\n      if (!vidzInstance.playing) {\n        vidzInstance.playing = true;\n\n        wrapSimpleVideoEvent(vidzInstance, onPlay)(e);\n      }\n    });\n  }\n\n  setElementEventListener(videoElement, 'progress', function (e) {\n    vidzInstance.percentLoaded = getPercentLoaded(e.target);\n\n    if (onProgress) {\n      wrapSimpleVideoEvent(vidzInstance, onProgress)(e);\n    }\n  });\n\n  if (onRateChange) {\n    setElementEventListener(videoElement, 'ratechange', function (e) {\n      vidzInstance.playbackRate = e.target.playbackRate;\n\n      if (onRateChange) {\n        wrapSimpleVideoEvent(vidzInstance, onRateChange)(e);\n      }\n    });\n  }\n\n  if (onSeeked) {\n    setElementEventListener(videoElement, 'seeked', wrapSimpleVideoEvent(vidzInstance, onSeeked));\n  }\n\n  if (onSeeking) {\n    setElementEventListener(videoElement, 'seeking', wrapSimpleVideoEvent(vidzInstance, onSeeking));\n  }\n\n  if (onStalled) {\n    setElementEventListener(videoElement, 'stalled', wrapSimpleVideoEvent(vidzInstance, onStalled));\n  }\n\n  if (onSuspend) {\n    setElementEventListener(videoElement, 'suspend', wrapSimpleVideoEvent(vidzInstance, onSuspend));\n  }\n\n  setElementEventListener(videoElement, 'timeupdate', function (e) {\n    vidzInstance.currentTime = e.target.currentTime;\n\n    if (onTimeUpdate) {\n      wrapSimpleVideoEvent(vidzInstance, onTimeUpdate)(e);\n    }\n  });\n\n  setElementEventListener(videoElement, 'volumechange', function (e) {\n    vidzInstance.volume = e.target.volume;\n\n    if (onVolumeChange) {\n      wrapSimpleVideoEvent(vidzInstance, onVolumeChange)(e);\n    }\n  });\n\n  if (onWaiting) {\n    setElementEventListener(videoElement, 'waiting', wrapSimpleVideoEvent(vidzInstance, onWaiting));\n  }\n};\n\nvar Vidz = function () {\n  /**\n   * build the vidz instance with the appropriate elements, append the\n   * elements to the parent provided by the selector, and then return\n   * the instance\n   *\n   * @param {string|HTMLElement} selector\n   * @param {object} config\n   * @param {object} [config.attributes]\n   * @param {boolean} [config.autoplay]\n   * @param {boolean} [config.controls]\n   * @param {number} [config.height]\n   * @param {boolean} [config.loop]\n   * @param {string} [config.mp4]\n   * @param {boolean} [config.muted]\n   * @param {string} [config.ogg]\n   * @param {function} [config.onCanPlay]\n   * @param {function} [config.onCanPlayThrough]\n   * @param {function} [config.onDurationChange]\n   * @param {function} [config.onEmptied]\n   * @param {function} [config.onEnded]\n   * @param {function} [config.onError]\n   * @param {function} [config.onLoad]\n   * @param {function} [config.onLoadedData]\n   * @param {function} [config.onLoadedMetadata]\n   * @param {function} [config.onLoadStart]\n   * @param {function} [config.onPause]\n   * @param {function} [config.onPlay]\n   * @param {function} [config.onProgress]\n   * @param {function} [config.onRateChange]\n   * @param {function} [config.onSeeked]\n   * @param {function} [config.onSeeking]\n   * @param {function} [config.onStalled]\n   * @param {function} [config.onSuspend]\n   * @param {function} [config.onTimeUpdate]\n   * @param {function} [config.onVolumeChange]\n   * @param {function} [config.onWaiting]\n   * @param {string} [config.poster]\n   * @param {string} [config.preload]\n   * @param {string} [config.webm]\n   * @param {number} [config.width]\n   * @return {Vidz}\n   */\n\n  function Vidz(selector) {\n    var config = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];\n\n    _classCallCheck(this, Vidz);\n\n    var element = void 0;\n\n    switch (true) {\n      case (0, _utils.isElement)(selector):\n        element = selector;\n        break;\n\n      case (0, _utils.isString)(selector):\n        element = document.querySelector(selector);\n        break;\n\n      case (0, _utils.isJqueryObject)(selector):\n        element = selector[0];\n        break;\n\n      default:\n        throw new Error('Selector passed must be either a DOM element, jQuery object, or string.');\n    }\n\n    var _config$attributes = config.attributes;\n    var attributes = _config$attributes === undefined ? {} : _config$attributes;\n    var _config$autoplay = config.autoplay;\n    var autoplay = _config$autoplay === undefined ? DEFAULT_ATTRIBUTES.AUTOPLAY : _config$autoplay;\n    var _config$controls = config.controls;\n    var controls = _config$controls === undefined ? DEFAULT_ATTRIBUTES.CONTROLS : _config$controls;\n    var _config$height = config.height;\n    var height = _config$height === undefined ? DEFAULT_ATTRIBUTES.HEIGHT : _config$height;\n    var _config$loop = config.loop;\n    var loop = _config$loop === undefined ? DEFAULT_ATTRIBUTES.LOOP : _config$loop;\n    var _config$mp = config.mp4;\n    var mp4 = _config$mp === undefined ? null : _config$mp;\n    var _config$muted = config.muted;\n    var muted = _config$muted === undefined ? DEFAULT_ATTRIBUTES.MUTED : _config$muted;\n    var _config$ogg = config.ogg;\n    var ogg = _config$ogg === undefined ? null : _config$ogg;\n    var _config$onCanPlay = config.onCanPlay;\n    var onCanPlay = _config$onCanPlay === undefined ? null : _config$onCanPlay;\n    var _config$onCanPlayThro = config.onCanPlayThrough;\n    var onCanPlayThrough = _config$onCanPlayThro === undefined ? null : _config$onCanPlayThro;\n    var _config$onDurationCha = config.onDurationChange;\n    var onDurationChange = _config$onDurationCha === undefined ? null : _config$onDurationCha;\n    var _config$onEmptied = config.onEmptied;\n    var onEmptied = _config$onEmptied === undefined ? null : _config$onEmptied;\n    var _config$onEnded = config.onEnded;\n    var onEnded = _config$onEnded === undefined ? null : _config$onEnded;\n    var _config$onError = config.onError;\n    var onError = _config$onError === undefined ? null : _config$onError;\n    var _config$onLoad = config.onLoad;\n    var onLoad = _config$onLoad === undefined ? null : _config$onLoad;\n    var _config$onLoadedData = config.onLoadedData;\n    var onLoadedData = _config$onLoadedData === undefined ? null : _config$onLoadedData;\n    var _config$onLoadedMetad = config.onLoadedMetadata;\n    var onLoadedMetadata = _config$onLoadedMetad === undefined ? null : _config$onLoadedMetad;\n    var _config$onLoadStart = config.onLoadStart;\n    var onLoadStart = _config$onLoadStart === undefined ? null : _config$onLoadStart;\n    var _config$onPause = config.onPause;\n    var onPause = _config$onPause === undefined ? null : _config$onPause;\n    var _config$onPlay = config.onPlay;\n    var onPlay = _config$onPlay === undefined ? null : _config$onPlay;\n    var _config$onProgress = config.onProgress;\n    var onProgress = _config$onProgress === undefined ? null : _config$onProgress;\n    var _config$onRateChange = config.onRateChange;\n    var onRateChange = _config$onRateChange === undefined ? null : _config$onRateChange;\n    var _config$onSeeked = config.onSeeked;\n    var onSeeked = _config$onSeeked === undefined ? null : _config$onSeeked;\n    var _config$onSeeking = config.onSeeking;\n    var onSeeking = _config$onSeeking === undefined ? null : _config$onSeeking;\n    var _config$onStalled = config.onStalled;\n    var onStalled = _config$onStalled === undefined ? null : _config$onStalled;\n    var _config$onSuspend = config.onSuspend;\n    var onSuspend = _config$onSuspend === undefined ? null : _config$onSuspend;\n    var _config$onTimeUpdate = config.onTimeUpdate;\n    var onTimeUpdate = _config$onTimeUpdate === undefined ? null : _config$onTimeUpdate;\n    var _config$onVolumeChang = config.onVolumeChange;\n    var onVolumeChange = _config$onVolumeChang === undefined ? null : _config$onVolumeChang;\n    var _config$onWaiting = config.onWaiting;\n    var onWaiting = _config$onWaiting === undefined ? null : _config$onWaiting;\n    var _config$poster = config.poster;\n    var poster = _config$poster === undefined ? null : _config$poster;\n    var _config$preload = config.preload;\n    var preload = _config$preload === undefined ? DEFAULT_ATTRIBUTES.PRELOAD : _config$preload;\n    var _config$swf = config.swf;\n    var swf = _config$swf === undefined ? null : _config$swf;\n    var _config$webm = config.webm;\n    var webm = _config$webm === undefined ? null : _config$webm;\n    var _config$width = config.width;\n    var width = _config$width === undefined ? DEFAULT_ATTRIBUTES.WIDTH : _config$width;\n\n\n    Object.assign(this, {\n      attributes: attributes,\n      autoplay: autoplay,\n      controls: controls,\n      height: height,\n      loop: loop,\n      mp4: mp4,\n      muted: muted,\n      ogg: ogg,\n      onCanPlay: onCanPlay,\n      onCanPlayThrough: onCanPlayThrough,\n      onEmptied: onEmptied,\n      onEnded: onEnded,\n      onError: onError,\n      onLoad: onLoad,\n      onLoadedData: onLoadedData,\n      onLoadedMetadata: onLoadedMetadata,\n      onLoadStart: onLoadStart,\n      onPause: onPause,\n      onPlay: onPlay,\n      onProgress: onProgress,\n      onRateChange: onRateChange,\n      onSeeked: onSeeked,\n      onSeeking: onSeeking,\n      onStalled: onStalled,\n      onSuspend: onSuspend,\n      onTimeUpdate: onTimeUpdate,\n      onVolumeChange: onVolumeChange,\n      onWaiting: onWaiting,\n      poster: poster,\n      preload: preload,\n      swf: swf,\n      webm: webm,\n      width: width\n    });\n\n    this.currentTime = 0;\n    this.duration = null;\n    this.element = element;\n    this.height = height;\n    this.muted = muted;\n    this.percentLoaded = 0;\n    this.playing = autoplay;\n    this.playbackRate = 1;\n    this.selector = selector;\n    this.volume = 1;\n    this.width = width;\n\n    var videoElement = getVideoElement({\n      autoplay: autoplay,\n      controls: controls,\n      height: height,\n      loop: loop,\n      muted: muted,\n      preload: preload,\n      width: width\n    });\n\n    for (var key in attributes) {\n      setElementAttribute(videoElement, key, attributes[key]);\n    }\n\n    if (poster) {\n      setElementAttribute(videoElement, 'poster', poster);\n    }\n\n    if (mp4) {\n      var mp4Element = getSourceElement(mp4, SOURCE_TYPES.MP4);\n\n      videoElement.appendChild(mp4Element);\n    }\n\n    if (webm) {\n      var webmElement = getSourceElement(webm, SOURCE_TYPES.WEBM);\n\n      videoElement.appendChild(webmElement);\n    }\n\n    if (ogg) {\n      var oggElement = getSourceElement(ogg, SOURCE_TYPES.OGG);\n\n      videoElement.appendChild(oggElement);\n    }\n\n    if (swf) {\n      if (!mp4) {\n        throw new Error('If you want a Flash fallback, you need to provide a video source in mp4 format.');\n      }\n\n      var flashFallbackElement = getObjectElement({\n        autoplay: autoplay,\n        controls: controls,\n        height: height,\n        mp4: mp4,\n        poster: poster,\n        swf: swf,\n        width: width\n      });\n\n      videoElement.appendChild(flashFallbackElement);\n    }\n\n    this.player = videoElement;\n    this.supportsHtml5Video = typeof (0, _utils.createNewElement)(ELEMENT_TYPES.VIDEO).canPlayType !== 'undefined';\n\n    setVideoEvents(this, {\n      onCanPlay: onCanPlay,\n      onCanPlayThrough: onCanPlayThrough,\n      onDurationChange: onDurationChange,\n      onEmptied: onEmptied,\n      onEnded: onEnded,\n      onError: onError,\n      onLoad: onLoad,\n      onLoadedData: onLoadedData,\n      onLoadedMetadata: onLoadedMetadata,\n      onLoadStart: onLoadStart,\n      onPause: onPause,\n      onPlay: onPlay,\n      onProgress: onProgress,\n      onRateChange: onRateChange,\n      onSeeked: onSeeked,\n      onSeeking: onSeeking,\n      onStalled: onStalled,\n      onSuspend: onSuspend,\n      onTimeUpdate: onTimeUpdate,\n      onVolumeChange: onVolumeChange,\n      onWaiting: onWaiting\n    });\n\n    if (element) {\n      element.appendChild(videoElement);\n    }\n\n    return this;\n  }\n\n  /**\n   * append the player as a child to the element\n   *\n   * @returns {Vidz}\n   */\n\n\n  _createClass(Vidz, [{\n    key: 'add',\n    value: function add() {\n      if (this.element) {\n        this.element.appendChild(this.player);\n      }\n\n      return this;\n    }\n\n    /**\n     * returns whether the player has the ability to play\n     * the format passed\n     *\n     * @param {string} format\n     * @return {boolean}\n     */\n\n  }, {\n    key: 'canPlayType',\n    value: function canPlayType(format) {\n      return this.player.canPlayType(format);\n    }\n\n    /**\n     *\n     * @return {*|TimeRanges}\n     */\n\n  }, {\n    key: 'getBuffered',\n    value: function getBuffered() {\n      return this.player.buffered;\n    }\n\n    /**\n     * return the amount of time that has played in the video\n     *\n     * @return {number}\n     */\n\n  }, {\n    key: 'getCurrentTime',\n    value: function getCurrentTime() {\n      return this.currentTime;\n    }\n\n    /**\n     * return the length of the entire video\n     *\n     * @return {number}\n     */\n\n  }, {\n    key: 'getDuration',\n    value: function getDuration() {\n      return this.duration;\n    }\n\n    /**\n     * return the <object> flash fallback\n     * \n     * @return {HTMLElement}\n     */\n\n  }, {\n    key: 'getFlashObject',\n    value: function getFlashObject() {\n      return this.player.querySelector(ELEMENT_TYPES.OBJECT);\n    }\n\n    /**\n     * return the % loaded (rounded to two decimals)\n     *\n     * @return {number}\n     */\n\n  }, {\n    key: 'getPercentLoaded',\n    value: function getPercentLoaded() {\n      return this.percentLoaded;\n    }\n\n    /**\n     * return the playback rate for the video (1 is standard speed)\n     *\n     * @return {number}\n     */\n\n  }, {\n    key: 'getPlaybackRate',\n    value: function getPlaybackRate() {\n      return this.player.playbackRate;\n    }\n\n    /**\n     * return the player element\n     *\n     * @return {HTMLElement}\n     */\n\n  }, {\n    key: 'getPlayer',\n    value: function getPlayer() {\n      return this.player;\n    }\n\n    /**\n     * return the dimensions of the <video> element\n     * \n     * @return {{height: number, width: number}}\n     */\n\n  }, {\n    key: 'getPlayerDimensions',\n    value: function getPlayerDimensions() {\n      return {\n        height: this.height,\n        width: this.width\n      };\n    }\n\n    /**\n     * get the source file locations for each type\n     * \n     * @return {{mp4: string, ogg: string, webm: string}}\n     */\n\n  }, {\n    key: 'getSource',\n    value: function getSource() {\n      return {\n        mp4: this.mp4,\n        ogg: this.ogg,\n        webm: this.webm\n      };\n    }\n\n    /**\n     * get the actual dimensions of the video (not the player)\n     *\n     * @return {{height: number, width: number}}\n     */\n\n  }, {\n    key: 'getVideoDimensions',\n    value: function getVideoDimensions() {\n      return {\n        height: this.player.videoHeight,\n        width: this.player.videoWidth\n      };\n    }\n\n    /**\n     * return the volume level of the video\n     *\n     * @return {number}\n     */\n\n  }, {\n    key: 'getVolume',\n    value: function getVolume() {\n      return this.player.volume;\n    }\n\n    /**\n     * load the player sources\n     *\n     * @returns {Vidz}\n     */\n\n  }, {\n    key: 'load',\n    value: function load() {\n      this.player.load();\n\n      if (this.onLoad) {\n        this.onLoad(this);\n      }\n\n      return this;\n    }\n\n    /**\n     * set the player to be muted\n     *\n     * @return {Vidz}\n     */\n\n  }, {\n    key: 'mute',\n    value: function mute() {\n      if (!this.muted) {\n        this.player.muted = true;\n        this.muted = true;\n      }\n\n      return this;\n    }\n\n    /**\n     * pause the player\n     *\n     * @returns {Vidz}\n     */\n\n  }, {\n    key: 'pause',\n    value: function pause() {\n      this.player.pause();\n\n      return this;\n    }\n\n    /**\n     * start the player\n     *\n     * @returns {Vidz}\n     */\n\n  }, {\n    key: 'play',\n    value: function play() {\n      this.player.play();\n\n      return this;\n    }\n\n    /**\n     * remove the player from the parent it was appended to\n     *\n     * @returns {Vidz}\n     */\n\n  }, {\n    key: 'remove',\n    value: function remove() {\n      if (this.player.parentNode) {\n        this.player.parentNode.removeChild(this.player);\n      }\n\n      return this;\n    }\n\n    /**\n     * restart the video from the beginning\n     *\n     * @return {Vidz}\n     */\n\n  }, {\n    key: 'restart',\n    value: function restart() {\n      return this.setCurrentTime(0);\n    }\n\n    /**\n     * set the place in the video to jump to\n     *\n     * @param {number} value\n     * @return {Vidz}\n     */\n\n  }, {\n    key: 'setCurrentTime',\n    value: function setCurrentTime(value) {\n      this.player.currentTime = value;\n      this.currentTime = value;\n\n      return this;\n    }\n\n    /**\n     * set the playback rate to a value, capping between 0.25 and 16\n     * \n     * @param {number} value=1\n     * @return {Vidz}\n     */\n\n  }, {\n    key: 'setPlaybackRate',\n    value: function setPlaybackRate() {\n      var value = arguments.length <= 0 || arguments[0] === undefined ? 1 : arguments[0];\n\n      var validValue = value;\n\n      if (value <= 0.25) {\n        validValue = 0.25;\n      } else if (value >= 16) {\n        validValue = 16;\n      }\n\n      this.player.playbackRate = validValue;\n      this.playbackRate = validValue;\n\n      return this;\n    }\n\n    /**\n     * set new height / width values for the player and instance\n     *\n     * @param {number} height\n     * @param {number} width\n     * @return {Vidz}\n     */\n\n  }, {\n    key: 'setPlayerDimensions',\n    value: function setPlayerDimensions(_ref3) {\n      var height = _ref3.height;\n      var width = _ref3.width;\n\n      if (!(0, _utils.isUndefined)(height)) {\n        setElementAttribute(this.player, 'height', height);\n\n        this.height = height;\n      }\n\n      if (!(0, _utils.isUndefined)(width)) {\n        setElementAttribute(this.player, 'width', width);\n\n        this.width = width;\n      }\n\n      return this;\n    }\n\n    /**\n     * set the source to the new value and reload it\n     * \n     * @param {string} mp4\n     * @param {string} ogg\n     * @param {string} webm\n     * @return {Vidz}\n     */\n\n  }, {\n    key: 'setSource',\n    value: function setSource(_ref4) {\n      var mp4 = _ref4.mp4;\n      var ogg = _ref4.ogg;\n      var webm = _ref4.webm;\n\n      var sources = this.player.querySelectorAll('source');\n      var length = sources.length;\n\n      var index = -1;\n\n      while (++index < length) {\n        var source = sources[index];\n\n        switch (source.type) {\n          case SOURCE_TYPES.MP4:\n            if (mp4) {\n              setElementAttribute(source, 'src', mp4);\n              this.mp4 = mp4;\n            }\n\n            break;\n\n          case SOURCE_TYPES.OGG:\n            if (ogg) {\n              setElementAttribute(source, 'src', ogg);\n              this.ogg = ogg;\n            }\n\n            break;\n\n          case SOURCE_TYPES.WEBM:\n            if (webm) {\n              setElementAttribute(source, 'src', webm);\n              this.webm = webm;\n            }\n\n            break;\n        }\n      }\n\n      if (mp4) {\n        var currentObjectElement = this.player.querySelector('object');\n        var newObjectElement = getObjectElement({\n          autoplay: this.autoplay,\n          controls: this.controls,\n          height: this.height,\n          mp4: mp4,\n          poster: this.poster,\n          swf: this.swf,\n          width: this.width\n        });\n\n        this.player.removeChild(currentObjectElement);\n        this.player.appendChild(newObjectElement);\n      }\n\n      return this.load();\n    }\n\n    /**\n     * set the volume to a number between 0 and 1\n     * \n     * @param {number} value=1\n     * @return {Vidz}\n     */\n\n  }, {\n    key: 'setVolume',\n    value: function setVolume() {\n      var value = arguments.length <= 0 || arguments[0] === undefined ? 1 : arguments[0];\n\n      var volume = value;\n\n      if (value < 0) {\n        volume = 0;\n      } else if (value > 1) {\n        volume = 1;\n      }\n\n      this.player.volume = volume;\n      this.volume = volume;\n\n      return this;\n    }\n\n    /**\n     * set the player to be unmuted\n     * \n     * @return {Vidz}\n     */\n\n  }, {\n    key: 'unmute',\n    value: function unmute() {\n      if (this.muted) {\n        this.player.muted = false;\n        this.muted = false;\n      }\n\n      return this;\n    }\n  }]);\n\n  return Vidz;\n}();\n\n/**\n * convenience function, so devs don't need to run new Vidz() every time\n *\n * @param {string} selector\n * @param {object} config\n * @return {Vidz}\n */\n\n\nvar vidz = function vidz(selector, config) {\n  return new Vidz(selector, config);\n};\n\nexports.getObjectElement = getObjectElement;\nexports.getSourceElement = getSourceElement;\nexports.getVideoElement = getVideoElement;\nexports.setElementAttribute = setElementAttribute;\nexports.setVideoEvents = setVideoEvents;\nexports.Vidz = Vidz;\nexports.default = vidz;\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMS5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy9zcmMvaW5kZXguanM/MWZkZiJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQge1xuICBjcmVhdGVOZXdFbGVtZW50LFxuICBpc0VsZW1lbnQsXG4gIGlzSnF1ZXJ5T2JqZWN0LFxuICBpc1N0cmluZyxcbiAgaXNVbmRlZmluZWRcbn0gZnJvbSAnLi91dGlscyc7XG5cbmNvbnN0IEVMRU1FTlRfVFlQRVMgPSB7XG4gIElNQUdFOiAnaW1nJyxcbiAgT0JKRUNUOiAnb2JqZWN0JyxcbiAgUEFSQU06ICdwYXJhbScsXG4gIFNPVVJDRTogJ3NvdXJjZScsXG4gIFZJREVPOiAndmlkZW8nXG59O1xuXG5jb25zdCBTT1VSQ0VfVFlQRVMgPSB7XG4gIE1QNDogJ3ZpZGVvL21wNCcsXG4gIE9HRzogJ3ZpZGVvL29nZycsXG4gIFdFQk06ICd2aWRlby93ZWJtJ1xufTtcblxuY29uc3QgREVGQVVMVF9BVFRSSUJVVEVTID0ge1xuICBBVVRPUExBWTogZmFsc2UsXG4gIENPTlRST0xTOiB0cnVlLFxuICBIRUlHSFQ6IDQwMCxcbiAgTE9PUDogZmFsc2UsXG4gIE1VVEVEOiBmYWxzZSxcbiAgUFJFTE9BRDogJ2F1dG8nLFxuICBXSURUSDogNjAwXG59O1xuXG4vKipcbiAqIGNvbnZlbmllbmNlIGZ1bmN0aW9uIHRvIHNldCBhbiBhdHRyaWJ1dGUgb24gYW4gZWxlbWVudCB0byB2YWx1ZVxuICpcbiAqIEBwYXJhbSB7SFRNTEVsZW1lbnR9IGVsZW1lbnRcbiAqIEBwYXJhbSB7c3RyaW5nfSBhdHRyaWJ1dGVcbiAqIEBwYXJhbSB7YW55fSB2YWx1ZVxuICovXG5jb25zdCBzZXRFbGVtZW50QXR0cmlidXRlID0gKGVsZW1lbnQsIGF0dHJpYnV0ZSwgdmFsdWUpID0+IHtcbiAgZWxlbWVudC5zZXRBdHRyaWJ1dGUoYXR0cmlidXRlLCB2YWx1ZSk7XG59O1xuXG4vKipcbiAqIGNvbnZlbmllbmNlIGZ1bmN0aW9uIHRvIGFkZCBhbiBldmVudCBsaXN0ZW5lciB0byBhbiBlbGVtZW50XG4gKlxuICogQHBhcmFtIHtIVE1MRWxlbWVudH0gZWxlbWVudFxuICogQHBhcmFtIHtzdHJpbmd9IGV2ZW50XG4gKiBAcGFyYW0ge2Z1bmN0aW9ufSBoYW5kbGVyXG4gKi9cbmNvbnN0IHNldEVsZW1lbnRFdmVudExpc3RlbmVyID0gKGVsZW1lbnQsIGV2ZW50LCBoYW5kbGVyKSA9PiB7XG4gIGVsZW1lbnQuYWRkRXZlbnRMaXN0ZW5lcihldmVudCwgaGFuZGxlcik7XG59O1xuXG4vKipcbiAqIGNyZWF0ZSBhIG5ldyBzb3VyY2UgZWxlbWVudCBiYXNlZCBvbiB0aGUgZWxlbWVudFR5cGVcbiAqIGFuZCB0eXBlLCBhc3NpZ25pbmcgdGhlIHNyYyB0byBpdFxuICpcbiAqIEBwYXJhbSB7c3RyaW5nfSBzcmNcbiAqIEBwYXJhbSB7c3RyaW5nfSB0eXBlXG4gKiBAcmV0dXJuIHtIVE1MRWxlbWVudH1cbiAqL1xuY29uc3QgZ2V0U291cmNlRWxlbWVudCA9IChzcmMsIHR5cGUpID0+IHtcbiAgbGV0IGVsZW1lbnQgPSBjcmVhdGVOZXdFbGVtZW50KEVMRU1FTlRfVFlQRVMuU09VUkNFKTtcblxuICBlbGVtZW50LnNyYyA9IHNyYztcbiAgZWxlbWVudC50eXBlID0gdHlwZTtcblxuICByZXR1cm4gZWxlbWVudDtcbn07XG5cbi8qKlxuICogY3JlYXRlIGEgbmV3IG9iamVjdCBlbGVtZW50IGFuZCBwb3B1bGF0ZSBpdCB3aXRoIHRoZVxuICogcGFyYW0gZWxlbWVudHMgdGhhdCBoYXZlIHRoZSBmbGFzaC1zcGVjaWZpYyB2YWx1ZXMgbmVlZGVkXG4gKiBmb3IgdGhlIGZhbGxiYWNrXG4gKlxuICogQHBhcmFtIHtib29sZWFufSBhdXRvcGxheVxuICogQHBhcmFtIHtib29sZWFufSBjb250cm9sc1xuICogQHBhcmFtIHtudW1iZXJ9IGhlaWdodFxuICogQHBhcmFtIHtzdHJpbmd9IG1wNFxuICogQHBhcmFtIHtzdHJpbmd9IHBvc3RlclxuICogQHBhcmFtIHtzdHJpbmd9IHN3ZlxuICogQHBhcmFtIHtudW1iZXJ9IHdpZHRoXG4gKiBAcmV0dXJuIHtIVE1MRWxlbWVudH1cbiAqL1xuY29uc3QgZ2V0T2JqZWN0RWxlbWVudCA9ICh7YXV0b3BsYXksIGNvbnRyb2xzLCBoZWlnaHQsIG1wNCwgcG9zdGVyLCBzd2YsIHdpZHRofSkgPT4ge1xuICBsZXQgb2JqZWN0RWxlbWVudCA9IGNyZWF0ZU5ld0VsZW1lbnQoRUxFTUVOVF9UWVBFUy5PQkpFQ1QpLFxuICAgICAgbW92aWVQYXJhbUVsZW1lbnQgPSBjcmVhdGVOZXdFbGVtZW50KEVMRU1FTlRfVFlQRVMuUEFSQU0pLFxuICAgICAgZmxhc2h2YXJzUGFyYW1FbGVtZW50ID0gY3JlYXRlTmV3RWxlbWVudChFTEVNRU5UX1RZUEVTLlBBUkFNKTtcblxuICBzZXRFbGVtZW50QXR0cmlidXRlKG9iamVjdEVsZW1lbnQsICdkYXRhJywgc3dmKTtcbiAgc2V0RWxlbWVudEF0dHJpYnV0ZShvYmplY3RFbGVtZW50LCAnaGVpZ2h0JywgaGVpZ2h0KTtcbiAgc2V0RWxlbWVudEF0dHJpYnV0ZShvYmplY3RFbGVtZW50LCAnd2lkdGgnLCB3aWR0aCk7XG5cbiAgc2V0RWxlbWVudEF0dHJpYnV0ZShtb3ZpZVBhcmFtRWxlbWVudCwgJ25hbWUnLCAnbW92aWUnKTtcbiAgc2V0RWxlbWVudEF0dHJpYnV0ZShtb3ZpZVBhcmFtRWxlbWVudCwgJ3ZhbHVlJywgc3dmKTtcblxuICBzZXRFbGVtZW50QXR0cmlidXRlKGZsYXNodmFyc1BhcmFtRWxlbWVudCwgJ25hbWUnLCAnZmxhc2h2YXJzJyk7XG5cbiAgY29uc3QgZmxhc2h2YXJzT2JqZWN0ID0ge1xuICAgIGF1dG9zdGFydDogYXV0b3BsYXkgPyB0cnVlIDogbnVsbCxcbiAgICBjb250cm9sYmFyOiBjb250cm9scyA/ICdvdmVyJyA6IG51bGwsXG4gICAgaW1hZ2U6IHBvc3RlcixcbiAgICBmaWxlOiBtcDRcbiAgfTtcblxuICBsZXQgZmxhc2h2YXJzVmFsdWUgPSAnJztcblxuICBmb3IgKGxldCBrZXkgaW4gZmxhc2h2YXJzT2JqZWN0KSB7XG4gICAgY29uc3QgdmFsdWUgPSBmbGFzaHZhcnNPYmplY3Rba2V5XTtcblxuICAgIGlmICh2YWx1ZSkge1xuICAgICAgaWYgKGZsYXNodmFyc1ZhbHVlKSB7XG4gICAgICAgIGZsYXNodmFyc1ZhbHVlICs9ICcmJztcbiAgICAgIH1cblxuICAgICAgZmxhc2h2YXJzVmFsdWUgKz0gYCR7a2V5fT0ke3ZhbHVlfWA7XG4gICAgfVxuICB9XG5cbiAgc2V0RWxlbWVudEF0dHJpYnV0ZShmbGFzaHZhcnNQYXJhbUVsZW1lbnQsICd2YWx1ZScsIGZsYXNodmFyc1ZhbHVlKTtcblxuICBvYmplY3RFbGVtZW50LmFwcGVuZENoaWxkKG1vdmllUGFyYW1FbGVtZW50KTtcbiAgb2JqZWN0RWxlbWVudC5hcHBlbmRDaGlsZChmbGFzaHZhcnNQYXJhbUVsZW1lbnQpO1xuXG4gIGlmIChwb3N0ZXIpIHtcbiAgICBsZXQgaW1hZ2VFbGVtZW50ID0gY3JlYXRlTmV3RWxlbWVudChFTEVNRU5UX1RZUEVTLklNQUdFKTtcblxuICAgIHNldEVsZW1lbnRBdHRyaWJ1dGUoaW1hZ2VFbGVtZW50LCAnYWx0JywgJ1ZpZGVvIGlzIHVuYXZhaWxhYmxlLicpO1xuICAgIHNldEVsZW1lbnRBdHRyaWJ1dGUoaW1hZ2VFbGVtZW50LCAnaGVpZ2h0JywgaGVpZ2h0KTtcbiAgICBzZXRFbGVtZW50QXR0cmlidXRlKGltYWdlRWxlbWVudCwgJ3NyYycsIHBvc3Rlcik7XG4gICAgc2V0RWxlbWVudEF0dHJpYnV0ZShpbWFnZUVsZW1lbnQsICd0aXRsZScsICdXZSBjYW5ub3QgcHJvdmlkZSBwbGF5YmFjayBjYXBhYmlsaXRpZXMgYXQgdGhpcyB0aW1lLicpO1xuICAgIHNldEVsZW1lbnRBdHRyaWJ1dGUoaW1hZ2VFbGVtZW50LCAnd2lkdGgnLCB3aWR0aCk7XG5cbiAgICBvYmplY3RFbGVtZW50LmFwcGVuZENoaWxkKGltYWdlRWxlbWVudCk7XG4gIH1cblxuICByZXR1cm4gb2JqZWN0RWxlbWVudDtcbn07XG5cbi8qKlxuICogYnVpbGQgdGhlIHZpZGVvIGVsZW1lbnQgdGhhdCB3aWxsIGJlIGluamVjdGVkIG9udG8gdGhlIHBhZ2VcbiAqXG4gKiBAcGFyYW0ge2Jvb2xlYW59IGF1dG9wbGF5XG4gKiBAcGFyYW0ge2Jvb2xlYW59IGNvbnRyb2xzXG4gKiBAcGFyYW0ge251bWJlcn0gaGVpZ2h0XG4gKiBAcGFyYW0ge2Jvb2xlYW59IGxvb3BcbiAqIEBwYXJhbSB7Ym9vbGVhbn0gbXV0ZWRcbiAqIEBwYXJhbSB7c3RyaW5nfSBwcmVsb2FkXG4gKiBAcGFyYW0ge251bWJlcn0gd2lkdGhcbiAqIEByZXR1cm5zIHtIVE1MRWxlbWVudH1cbiAqL1xuY29uc3QgZ2V0VmlkZW9FbGVtZW50ID0gKHthdXRvcGxheSwgY29udHJvbHMsIGhlaWdodCwgbG9vcCwgbXV0ZWQsIHByZWxvYWQsIHdpZHRofSkgPT4ge1xuICBsZXQgdmlkZW9FbGVtZW50ID0gY3JlYXRlTmV3RWxlbWVudChFTEVNRU5UX1RZUEVTLlZJREVPKTtcblxuICBpZiAoYXV0b3BsYXkpIHtcbiAgICBzZXRFbGVtZW50QXR0cmlidXRlKHZpZGVvRWxlbWVudCwgJ2F1dG9wbGF5JywgJycpO1xuICB9XG5cbiAgaWYgKGNvbnRyb2xzKSB7XG4gICAgc2V0RWxlbWVudEF0dHJpYnV0ZSh2aWRlb0VsZW1lbnQsICdjb250cm9scycsICcnKTtcbiAgfVxuXG4gIGlmIChsb29wKSB7XG4gICAgc2V0RWxlbWVudEF0dHJpYnV0ZSh2aWRlb0VsZW1lbnQsICdsb29wJywgJycpO1xuICB9XG5cbiAgaWYgKG11dGVkKSB7XG4gICAgc2V0RWxlbWVudEF0dHJpYnV0ZSh2aWRlb0VsZW1lbnQsICdtdXRlZCcsICcnKTtcbiAgfVxuXG4gIHNldEVsZW1lbnRBdHRyaWJ1dGUodmlkZW9FbGVtZW50LCAnaGVpZ2h0JywgaGVpZ2h0KTtcbiAgc2V0RWxlbWVudEF0dHJpYnV0ZSh2aWRlb0VsZW1lbnQsICdwcmVsb2FkJywgcHJlbG9hZCk7XG4gIHNldEVsZW1lbnRBdHRyaWJ1dGUodmlkZW9FbGVtZW50LCAnd2lkdGgnLCB3aWR0aCk7XG5cbiAgcmV0dXJuIHZpZGVvRWxlbWVudDtcbn07XG5cbi8qKlxuICogZ2V0IHRoZSBwZXJjZW50IGxvYWRlZCBpZiBkdXJhdGlvbiBpcyBhdmFpbGFibGVcbiAqXG4gKiBAcGFyYW0ge0hUTUxFbGVtZW50fSBwbGF5ZXJcbiAqIEByZXR1cm4ge251bWJlcn1cbiAqL1xuY29uc3QgZ2V0UGVyY2VudExvYWRlZCA9IChwbGF5ZXIpID0+IHtcbiAgY29uc3QgZHVyYXRpb24gPSBwbGF5ZXIuZHVyYXRpb247XG5cbiAgaWYgKGR1cmF0aW9uKSB7XG4gICAgY29uc3QgYnVmZmVyZWQgPSBwbGF5ZXIuYnVmZmVyZWQ7XG4gICAgY29uc3QgcGVyY2VudExvYWRlZCA9IGJ1ZmZlcmVkLmVuZCgwKSAvIGR1cmF0aW9uO1xuXG4gICAgcmV0dXJuIE1hdGgucm91bmQocGVyY2VudExvYWRlZCAqIDEwMDAwKSAvIDEwMDtcbiAgfVxuXG4gIHJldHVybiAwO1xufTtcblxuLyoqXG4gKiBjb252ZW5pZW5jZSBmdW5jdGlvbiB0byB3cmFwIGV2ZW4gd2l0aCBleHBsaWNpdCB0aGlzXG4gKiBhcyB2aWR6SW5zdGFuY2VcbiAqXG4gKiBAcGFyYW0ge1ZpZHp9IHZpZHpJbnN0YW5jZVxuICogQHBhcmFtIHtmdW5jdGlvbn0gbWV0aG9kXG4gKiBAcmV0dXJuIHtmdW5jdGlvbihlKTogdm9pZH1cbiAqL1xuY29uc3Qgd3JhcFNpbXBsZVZpZGVvRXZlbnQgPSAodmlkekluc3RhbmNlLCBtZXRob2QpID0+IHtcbiAgcmV0dXJuIChlKSA9PiB7XG4gICAgbWV0aG9kLmNhbGwodmlkekluc3RhbmNlLCBlLCB2aWR6SW5zdGFuY2UpO1xuICB9O1xufTtcblxuLyoqXG4gKlxuICogQHBhcmFtIHtWaWR6fSB2aWR6SW5zdGFuY2VcbiAqIEBwYXJhbSB7b2JqZWN0fSBldmVudHNcbiAqIEBwYXJhbSB7ZnVuY3Rpb259IFtldmVudHMub25DYW5QbGF5VGhyb3VnaF1cbiAqIEBwYXJhbSB7ZnVuY3Rpb259IFtldmVudHMub25FbmRlZF1cbiAqIEBwYXJhbSB7ZnVuY3Rpb259IFtldmVudHMub25FcnJvcl1cbiAqIEBwYXJhbSB7ZnVuY3Rpb259IFtldmVudHMub25Mb2FkZWRNZXRhZGF0YV1cbiAqIEBwYXJhbSB7ZnVuY3Rpb259IFtldmVudHMub25QYXVzZV1cbiAqIEBwYXJhbSB7ZnVuY3Rpb259IFtldmVudHMub25QbGF5XVxuICogQHBhcmFtIHtmdW5jdGlvbn0gW2V2ZW50cy5vblByb2dyZXNzXVxuICogQHBhcmFtIHtmdW5jdGlvbn0gW2V2ZW50cy5vbldhaXRpbmddXG4gKi9cbmNvbnN0IHNldFZpZGVvRXZlbnRzID0gKHZpZHpJbnN0YW5jZSwgZXZlbnRzKSA9PiB7XG4gIGNvbnN0IHtcbiAgICBvbkNhblBsYXksXG4gICAgb25DYW5QbGF5VGhyb3VnaCxcbiAgICBvbkR1cmF0aW9uQ2hhbmdlLFxuICAgIG9uRW1wdGllZCxcbiAgICBvbkVuZGVkLFxuICAgIG9uRXJyb3IsXG4gICAgb25Mb2FkLFxuICAgIG9uTG9hZGVkRGF0YSxcbiAgICBvbkxvYWRlZE1ldGFkYXRhLFxuICAgIG9uTG9hZFN0YXJ0LFxuICAgIG9uUGF1c2UsXG4gICAgb25QbGF5LFxuICAgIG9uUHJvZ3Jlc3MsXG4gICAgb25SYXRlQ2hhbmdlLFxuICAgIG9uU2Vla2VkLFxuICAgIG9uU2Vla2luZyxcbiAgICBvblN0YWxsZWQsXG4gICAgb25TdXNwZW5kLFxuICAgIG9uVGltZVVwZGF0ZSxcbiAgICBvblZvbHVtZUNoYW5nZSxcbiAgICBvbldhaXRpbmdcbiAgfSA9IGV2ZW50cztcblxuICBsZXQgdmlkZW9FbGVtZW50ID0gdmlkekluc3RhbmNlLnBsYXllcjtcblxuICBpZiAob25DYW5QbGF5KSB7XG4gICAgc2V0RWxlbWVudEV2ZW50TGlzdGVuZXIodmlkZW9FbGVtZW50LCAnY2FucGxheScsIHdyYXBTaW1wbGVWaWRlb0V2ZW50KHZpZHpJbnN0YW5jZSwgb25DYW5QbGF5KSk7XG4gIH1cblxuICBpZiAob25DYW5QbGF5VGhyb3VnaCkge1xuICAgIHNldEVsZW1lbnRFdmVudExpc3RlbmVyKHZpZGVvRWxlbWVudCwgJ2NhbnBsYXl0aHJvdWdoJywgd3JhcFNpbXBsZVZpZGVvRXZlbnQodmlkekluc3RhbmNlLCBvbkNhblBsYXlUaHJvdWdoKSk7XG4gIH1cblxuICBzZXRFbGVtZW50RXZlbnRMaXN0ZW5lcih2aWRlb0VsZW1lbnQsICdkdXJhdGlvbmNoYW5nZScsIChlKSA9PiB7XG4gICAgdmlkekluc3RhbmNlLmR1cmF0aW9uID0gZS50YXJnZXQuZHVyYXRpb247XG4gICAgdmlkekluc3RhbmNlLnBlcmNlbnRMb2FkZWQgPSBnZXRQZXJjZW50TG9hZGVkKGUudGFyZ2V0KTtcblxuICAgIGlmIChvbkR1cmF0aW9uQ2hhbmdlKSB7XG4gICAgICB3cmFwU2ltcGxlVmlkZW9FdmVudCh2aWR6SW5zdGFuY2UsIG9uRHVyYXRpb25DaGFuZ2UpKGUpO1xuICAgIH1cbiAgfSk7XG5cbiAgaWYgKG9uRW1wdGllZCkge1xuICAgIHNldEVsZW1lbnRFdmVudExpc3RlbmVyKHZpZGVvRWxlbWVudCwgJ2VtcHRpZWQnLCB3cmFwU2ltcGxlVmlkZW9FdmVudCh2aWR6SW5zdGFuY2UsIG9uRW1wdGllZCkpO1xuICB9XG5cbiAgaWYgKG9uRW5kZWQpIHtcbiAgICBzZXRFbGVtZW50RXZlbnRMaXN0ZW5lcih2aWRlb0VsZW1lbnQsICdlbmRlZCcsIHdyYXBTaW1wbGVWaWRlb0V2ZW50KHZpZHpJbnN0YW5jZSwgb25FbmRlZCkpO1xuICB9XG5cbiAgaWYgKG9uRXJyb3IpIHtcbiAgICBzZXRFbGVtZW50RXZlbnRMaXN0ZW5lcih2aWRlb0VsZW1lbnQsICdlcnJvcicsIHdyYXBTaW1wbGVWaWRlb0V2ZW50KHZpZHpJbnN0YW5jZSwgb25FcnJvcikpO1xuICB9XG4gIFxuICBpZiAob25Mb2FkKSB7XG4gICAgc2V0RWxlbWVudEV2ZW50TGlzdGVuZXIodmlkZW9FbGVtZW50LCAnbG9hZCcsIHdyYXBTaW1wbGVWaWRlb0V2ZW50KHZpZHpJbnN0YW5jZSwgb25Mb2FkKSk7XG4gIH1cblxuICBpZiAob25Mb2FkZWREYXRhKSB7XG4gICAgc2V0RWxlbWVudEV2ZW50TGlzdGVuZXIodmlkZW9FbGVtZW50LCAnbG9hZGVkZGF0YScsIHdyYXBTaW1wbGVWaWRlb0V2ZW50KHZpZHpJbnN0YW5jZSwgb25Mb2FkZWREYXRhKSk7XG4gIH1cblxuICBpZiAob25Mb2FkZWRNZXRhZGF0YSkge1xuICAgIHNldEVsZW1lbnRFdmVudExpc3RlbmVyKHZpZGVvRWxlbWVudCwgJ2xvYWRlZG1ldGFkYXRhJywgd3JhcFNpbXBsZVZpZGVvRXZlbnQodmlkekluc3RhbmNlLCBvbkxvYWRlZE1ldGFkYXRhKSk7XG4gIH1cblxuICBpZiAob25Mb2FkU3RhcnQpIHtcbiAgICBzZXRFbGVtZW50RXZlbnRMaXN0ZW5lcih2aWRlb0VsZW1lbnQsICdsb2Fkc3RhcnQnLCB3cmFwU2ltcGxlVmlkZW9FdmVudCh2aWR6SW5zdGFuY2UsIG9uTG9hZFN0YXJ0KSk7XG4gIH1cblxuICBpZiAob25QYXVzZSkge1xuICAgIHNldEVsZW1lbnRFdmVudExpc3RlbmVyKHZpZGVvRWxlbWVudCwgJ3BhdXNlJywgKGUpID0+IHtcbiAgICAgIGlmICh2aWR6SW5zdGFuY2UucGxheWluZykge1xuICAgICAgICB2aWR6SW5zdGFuY2UucGxheWluZyA9IGZhbHNlO1xuICAgICAgICBcbiAgICAgICAgd3JhcFNpbXBsZVZpZGVvRXZlbnQodmlkekluc3RhbmNlLCBvblBhdXNlKShlKTtcbiAgICAgIH1cbiAgICB9KTtcbiAgfVxuXG4gIGlmIChvblBsYXkpIHtcbiAgICBzZXRFbGVtZW50RXZlbnRMaXN0ZW5lcih2aWRlb0VsZW1lbnQsICdwbGF5aW5nJywgKGUpID0+IHtcbiAgICAgIGlmICghdmlkekluc3RhbmNlLnBsYXlpbmcpIHtcbiAgICAgICAgdmlkekluc3RhbmNlLnBsYXlpbmcgPSB0cnVlO1xuXG4gICAgICAgIHdyYXBTaW1wbGVWaWRlb0V2ZW50KHZpZHpJbnN0YW5jZSwgb25QbGF5KShlKTtcbiAgICAgIH1cbiAgICB9KTtcbiAgfVxuXG4gIHNldEVsZW1lbnRFdmVudExpc3RlbmVyKHZpZGVvRWxlbWVudCwgJ3Byb2dyZXNzJywgKGUpID0+IHtcbiAgICB2aWR6SW5zdGFuY2UucGVyY2VudExvYWRlZCA9IGdldFBlcmNlbnRMb2FkZWQoZS50YXJnZXQpO1xuXG4gICAgaWYgKG9uUHJvZ3Jlc3MpIHtcbiAgICAgIHdyYXBTaW1wbGVWaWRlb0V2ZW50KHZpZHpJbnN0YW5jZSwgb25Qcm9ncmVzcykoZSk7XG4gICAgfVxuICB9KTtcblxuICBpZiAob25SYXRlQ2hhbmdlKSB7XG4gICAgc2V0RWxlbWVudEV2ZW50TGlzdGVuZXIodmlkZW9FbGVtZW50LCAncmF0ZWNoYW5nZScsIChlKSA9PiB7XG4gICAgICB2aWR6SW5zdGFuY2UucGxheWJhY2tSYXRlID0gZS50YXJnZXQucGxheWJhY2tSYXRlO1xuXG4gICAgICBpZiAob25SYXRlQ2hhbmdlKSB7XG4gICAgICAgIHdyYXBTaW1wbGVWaWRlb0V2ZW50KHZpZHpJbnN0YW5jZSwgb25SYXRlQ2hhbmdlKShlKTtcbiAgICAgIH1cbiAgICB9KTtcbiAgfVxuXG4gIGlmIChvblNlZWtlZCkge1xuICAgIHNldEVsZW1lbnRFdmVudExpc3RlbmVyKHZpZGVvRWxlbWVudCwgJ3NlZWtlZCcsIHdyYXBTaW1wbGVWaWRlb0V2ZW50KHZpZHpJbnN0YW5jZSwgb25TZWVrZWQpKTtcbiAgfVxuXG4gIGlmIChvblNlZWtpbmcpIHtcbiAgICBzZXRFbGVtZW50RXZlbnRMaXN0ZW5lcih2aWRlb0VsZW1lbnQsICdzZWVraW5nJywgd3JhcFNpbXBsZVZpZGVvRXZlbnQodmlkekluc3RhbmNlLCBvblNlZWtpbmcpKTtcbiAgfVxuXG4gIGlmIChvblN0YWxsZWQpIHtcbiAgICBzZXRFbGVtZW50RXZlbnRMaXN0ZW5lcih2aWRlb0VsZW1lbnQsICdzdGFsbGVkJywgd3JhcFNpbXBsZVZpZGVvRXZlbnQodmlkekluc3RhbmNlLCBvblN0YWxsZWQpKTtcbiAgfVxuXG4gIGlmIChvblN1c3BlbmQpIHtcbiAgICBzZXRFbGVtZW50RXZlbnRMaXN0ZW5lcih2aWRlb0VsZW1lbnQsICdzdXNwZW5kJywgd3JhcFNpbXBsZVZpZGVvRXZlbnQodmlkekluc3RhbmNlLCBvblN1c3BlbmQpKTtcbiAgfVxuXG4gIHNldEVsZW1lbnRFdmVudExpc3RlbmVyKHZpZGVvRWxlbWVudCwgJ3RpbWV1cGRhdGUnLCAoZSkgPT4ge1xuICAgIHZpZHpJbnN0YW5jZS5jdXJyZW50VGltZSA9IGUudGFyZ2V0LmN1cnJlbnRUaW1lO1xuXG4gICAgaWYgKG9uVGltZVVwZGF0ZSkge1xuICAgICAgd3JhcFNpbXBsZVZpZGVvRXZlbnQodmlkekluc3RhbmNlLCBvblRpbWVVcGRhdGUpKGUpO1xuICAgIH1cbiAgfSk7XG5cbiAgc2V0RWxlbWVudEV2ZW50TGlzdGVuZXIodmlkZW9FbGVtZW50LCAndm9sdW1lY2hhbmdlJywgKGUpID0+IHtcbiAgICB2aWR6SW5zdGFuY2Uudm9sdW1lID0gZS50YXJnZXQudm9sdW1lO1xuXG4gICAgaWYgKG9uVm9sdW1lQ2hhbmdlKSB7XG4gICAgICB3cmFwU2ltcGxlVmlkZW9FdmVudCh2aWR6SW5zdGFuY2UsIG9uVm9sdW1lQ2hhbmdlKShlKTtcbiAgICB9XG4gIH0pO1xuXG4gIGlmIChvbldhaXRpbmcpIHtcbiAgICBzZXRFbGVtZW50RXZlbnRMaXN0ZW5lcih2aWRlb0VsZW1lbnQsICd3YWl0aW5nJywgd3JhcFNpbXBsZVZpZGVvRXZlbnQodmlkekluc3RhbmNlLCBvbldhaXRpbmcpKTtcbiAgfVxufTtcblxuY2xhc3MgVmlkeiB7XG4gIC8qKlxuICAgKiBidWlsZCB0aGUgdmlkeiBpbnN0YW5jZSB3aXRoIHRoZSBhcHByb3ByaWF0ZSBlbGVtZW50cywgYXBwZW5kIHRoZVxuICAgKiBlbGVtZW50cyB0byB0aGUgcGFyZW50IHByb3ZpZGVkIGJ5IHRoZSBzZWxlY3RvciwgYW5kIHRoZW4gcmV0dXJuXG4gICAqIHRoZSBpbnN0YW5jZVxuICAgKlxuICAgKiBAcGFyYW0ge3N0cmluZ3xIVE1MRWxlbWVudH0gc2VsZWN0b3JcbiAgICogQHBhcmFtIHtvYmplY3R9IGNvbmZpZ1xuICAgKiBAcGFyYW0ge29iamVjdH0gW2NvbmZpZy5hdHRyaWJ1dGVzXVxuICAgKiBAcGFyYW0ge2Jvb2xlYW59IFtjb25maWcuYXV0b3BsYXldXG4gICAqIEBwYXJhbSB7Ym9vbGVhbn0gW2NvbmZpZy5jb250cm9sc11cbiAgICogQHBhcmFtIHtudW1iZXJ9IFtjb25maWcuaGVpZ2h0XVxuICAgKiBAcGFyYW0ge2Jvb2xlYW59IFtjb25maWcubG9vcF1cbiAgICogQHBhcmFtIHtzdHJpbmd9IFtjb25maWcubXA0XVxuICAgKiBAcGFyYW0ge2Jvb2xlYW59IFtjb25maWcubXV0ZWRdXG4gICAqIEBwYXJhbSB7c3RyaW5nfSBbY29uZmlnLm9nZ11cbiAgICogQHBhcmFtIHtmdW5jdGlvbn0gW2NvbmZpZy5vbkNhblBsYXldXG4gICAqIEBwYXJhbSB7ZnVuY3Rpb259IFtjb25maWcub25DYW5QbGF5VGhyb3VnaF1cbiAgICogQHBhcmFtIHtmdW5jdGlvbn0gW2NvbmZpZy5vbkR1cmF0aW9uQ2hhbmdlXVxuICAgKiBAcGFyYW0ge2Z1bmN0aW9ufSBbY29uZmlnLm9uRW1wdGllZF1cbiAgICogQHBhcmFtIHtmdW5jdGlvbn0gW2NvbmZpZy5vbkVuZGVkXVxuICAgKiBAcGFyYW0ge2Z1bmN0aW9ufSBbY29uZmlnLm9uRXJyb3JdXG4gICAqIEBwYXJhbSB7ZnVuY3Rpb259IFtjb25maWcub25Mb2FkXVxuICAgKiBAcGFyYW0ge2Z1bmN0aW9ufSBbY29uZmlnLm9uTG9hZGVkRGF0YV1cbiAgICogQHBhcmFtIHtmdW5jdGlvbn0gW2NvbmZpZy5vbkxvYWRlZE1ldGFkYXRhXVxuICAgKiBAcGFyYW0ge2Z1bmN0aW9ufSBbY29uZmlnLm9uTG9hZFN0YXJ0XVxuICAgKiBAcGFyYW0ge2Z1bmN0aW9ufSBbY29uZmlnLm9uUGF1c2VdXG4gICAqIEBwYXJhbSB7ZnVuY3Rpb259IFtjb25maWcub25QbGF5XVxuICAgKiBAcGFyYW0ge2Z1bmN0aW9ufSBbY29uZmlnLm9uUHJvZ3Jlc3NdXG4gICAqIEBwYXJhbSB7ZnVuY3Rpb259IFtjb25maWcub25SYXRlQ2hhbmdlXVxuICAgKiBAcGFyYW0ge2Z1bmN0aW9ufSBbY29uZmlnLm9uU2Vla2VkXVxuICAgKiBAcGFyYW0ge2Z1bmN0aW9ufSBbY29uZmlnLm9uU2Vla2luZ11cbiAgICogQHBhcmFtIHtmdW5jdGlvbn0gW2NvbmZpZy5vblN0YWxsZWRdXG4gICAqIEBwYXJhbSB7ZnVuY3Rpb259IFtjb25maWcub25TdXNwZW5kXVxuICAgKiBAcGFyYW0ge2Z1bmN0aW9ufSBbY29uZmlnLm9uVGltZVVwZGF0ZV1cbiAgICogQHBhcmFtIHtmdW5jdGlvbn0gW2NvbmZpZy5vblZvbHVtZUNoYW5nZV1cbiAgICogQHBhcmFtIHtmdW5jdGlvbn0gW2NvbmZpZy5vbldhaXRpbmddXG4gICAqIEBwYXJhbSB7c3RyaW5nfSBbY29uZmlnLnBvc3Rlcl1cbiAgICogQHBhcmFtIHtzdHJpbmd9IFtjb25maWcucHJlbG9hZF1cbiAgICogQHBhcmFtIHtzdHJpbmd9IFtjb25maWcud2VibV1cbiAgICogQHBhcmFtIHtudW1iZXJ9IFtjb25maWcud2lkdGhdXG4gICAqIEByZXR1cm4ge1ZpZHp9XG4gICAqL1xuICBjb25zdHJ1Y3RvcihzZWxlY3RvciwgY29uZmlnID0ge30pIHtcbiAgICBsZXQgZWxlbWVudDtcbiAgICBcbiAgICBzd2l0Y2ggKHRydWUpIHtcbiAgICAgIGNhc2UgaXNFbGVtZW50KHNlbGVjdG9yKTpcbiAgICAgICAgZWxlbWVudCA9IHNlbGVjdG9yO1xuICAgICAgICBicmVhaztcblxuICAgICAgY2FzZSBpc1N0cmluZyhzZWxlY3Rvcik6XG4gICAgICAgIGVsZW1lbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKHNlbGVjdG9yKTtcbiAgICAgICAgYnJlYWs7XG5cbiAgICAgIGNhc2UgaXNKcXVlcnlPYmplY3Qoc2VsZWN0b3IpOlxuICAgICAgICBlbGVtZW50ID0gc2VsZWN0b3JbMF07XG4gICAgICAgIGJyZWFrO1xuXG4gICAgICBkZWZhdWx0OlxuICAgICAgICB0aHJvdyBuZXcgRXJyb3IoJ1NlbGVjdG9yIHBhc3NlZCBtdXN0IGJlIGVpdGhlciBhIERPTSBlbGVtZW50LCBqUXVlcnkgb2JqZWN0LCBvciBzdHJpbmcuJyk7XG4gICAgfVxuXG4gICAgY29uc3Qge1xuICAgICAgYXR0cmlidXRlcyA9IHt9LFxuICAgICAgYXV0b3BsYXkgPSBERUZBVUxUX0FUVFJJQlVURVMuQVVUT1BMQVksXG4gICAgICBjb250cm9scyA9IERFRkFVTFRfQVRUUklCVVRFUy5DT05UUk9MUyxcbiAgICAgIGhlaWdodCA9IERFRkFVTFRfQVRUUklCVVRFUy5IRUlHSFQsXG4gICAgICBsb29wID0gREVGQVVMVF9BVFRSSUJVVEVTLkxPT1AsXG4gICAgICBtcDQgPSBudWxsLFxuICAgICAgbXV0ZWQgPSBERUZBVUxUX0FUVFJJQlVURVMuTVVURUQsXG4gICAgICBvZ2cgPSBudWxsLFxuICAgICAgb25DYW5QbGF5ID0gbnVsbCxcbiAgICAgIG9uQ2FuUGxheVRocm91Z2ggPSBudWxsLFxuICAgICAgb25EdXJhdGlvbkNoYW5nZSA9IG51bGwsXG4gICAgICBvbkVtcHRpZWQgPSBudWxsLFxuICAgICAgb25FbmRlZCA9IG51bGwsXG4gICAgICBvbkVycm9yID0gbnVsbCxcbiAgICAgIG9uTG9hZCA9IG51bGwsXG4gICAgICBvbkxvYWRlZERhdGEgPSBudWxsLFxuICAgICAgb25Mb2FkZWRNZXRhZGF0YSA9IG51bGwsXG4gICAgICBvbkxvYWRTdGFydCA9IG51bGwsXG4gICAgICBvblBhdXNlID0gbnVsbCxcbiAgICAgIG9uUGxheSA9IG51bGwsXG4gICAgICBvblByb2dyZXNzID0gbnVsbCxcbiAgICAgIG9uUmF0ZUNoYW5nZSA9IG51bGwsXG4gICAgICBvblNlZWtlZCA9IG51bGwsXG4gICAgICBvblNlZWtpbmcgPSBudWxsLFxuICAgICAgb25TdGFsbGVkID0gbnVsbCxcbiAgICAgIG9uU3VzcGVuZCA9IG51bGwsXG4gICAgICBvblRpbWVVcGRhdGUgPSBudWxsLFxuICAgICAgb25Wb2x1bWVDaGFuZ2UgPSBudWxsLFxuICAgICAgb25XYWl0aW5nID0gbnVsbCxcbiAgICAgIHBvc3RlciA9IG51bGwsXG4gICAgICBwcmVsb2FkID0gREVGQVVMVF9BVFRSSUJVVEVTLlBSRUxPQUQsXG4gICAgICBzd2YgPSBudWxsLFxuICAgICAgd2VibSA9IG51bGwsXG4gICAgICB3aWR0aCA9IERFRkFVTFRfQVRUUklCVVRFUy5XSURUSFxuICAgIH0gPSBjb25maWc7XG5cbiAgICBPYmplY3QuYXNzaWduKHRoaXMsIHtcbiAgICAgIGF0dHJpYnV0ZXMsXG4gICAgICBhdXRvcGxheSxcbiAgICAgIGNvbnRyb2xzLFxuICAgICAgaGVpZ2h0LFxuICAgICAgbG9vcCxcbiAgICAgIG1wNCxcbiAgICAgIG11dGVkLFxuICAgICAgb2dnLFxuICAgICAgb25DYW5QbGF5LFxuICAgICAgb25DYW5QbGF5VGhyb3VnaCxcbiAgICAgIG9uRW1wdGllZCxcbiAgICAgIG9uRW5kZWQsXG4gICAgICBvbkVycm9yLFxuICAgICAgb25Mb2FkLFxuICAgICAgb25Mb2FkZWREYXRhLFxuICAgICAgb25Mb2FkZWRNZXRhZGF0YSxcbiAgICAgIG9uTG9hZFN0YXJ0LFxuICAgICAgb25QYXVzZSxcbiAgICAgIG9uUGxheSxcbiAgICAgIG9uUHJvZ3Jlc3MsXG4gICAgICBvblJhdGVDaGFuZ2UsXG4gICAgICBvblNlZWtlZCxcbiAgICAgIG9uU2Vla2luZyxcbiAgICAgIG9uU3RhbGxlZCxcbiAgICAgIG9uU3VzcGVuZCxcbiAgICAgIG9uVGltZVVwZGF0ZSxcbiAgICAgIG9uVm9sdW1lQ2hhbmdlLFxuICAgICAgb25XYWl0aW5nLFxuICAgICAgcG9zdGVyLFxuICAgICAgcHJlbG9hZCxcbiAgICAgIHN3ZixcbiAgICAgIHdlYm0sXG4gICAgICB3aWR0aFxuICAgIH0pO1xuXG4gICAgdGhpcy5jdXJyZW50VGltZSA9IDA7XG4gICAgdGhpcy5kdXJhdGlvbiA9IG51bGw7XG4gICAgdGhpcy5lbGVtZW50ID0gZWxlbWVudDtcbiAgICB0aGlzLmhlaWdodCA9IGhlaWdodDtcbiAgICB0aGlzLm11dGVkID0gbXV0ZWQ7XG4gICAgdGhpcy5wZXJjZW50TG9hZGVkID0gMDtcbiAgICB0aGlzLnBsYXlpbmcgPSBhdXRvcGxheTtcbiAgICB0aGlzLnBsYXliYWNrUmF0ZSA9IDE7XG4gICAgdGhpcy5zZWxlY3RvciA9IHNlbGVjdG9yO1xuICAgIHRoaXMudm9sdW1lID0gMTtcbiAgICB0aGlzLndpZHRoID0gd2lkdGg7XG5cbiAgICBsZXQgdmlkZW9FbGVtZW50ID0gZ2V0VmlkZW9FbGVtZW50KHtcbiAgICAgIGF1dG9wbGF5LFxuICAgICAgY29udHJvbHMsXG4gICAgICBoZWlnaHQsXG4gICAgICBsb29wLFxuICAgICAgbXV0ZWQsXG4gICAgICBwcmVsb2FkLFxuICAgICAgd2lkdGhcbiAgICB9KTtcblxuICAgIGZvciAobGV0IGtleSBpbiBhdHRyaWJ1dGVzKSB7XG4gICAgICBzZXRFbGVtZW50QXR0cmlidXRlKHZpZGVvRWxlbWVudCwga2V5LCBhdHRyaWJ1dGVzW2tleV0pO1xuICAgIH1cblxuICAgIGlmIChwb3N0ZXIpIHtcbiAgICAgIHNldEVsZW1lbnRBdHRyaWJ1dGUodmlkZW9FbGVtZW50LCAncG9zdGVyJywgcG9zdGVyKTtcbiAgICB9XG5cbiAgICBpZiAobXA0KSB7XG4gICAgICBjb25zdCBtcDRFbGVtZW50ID0gZ2V0U291cmNlRWxlbWVudChtcDQsIFNPVVJDRV9UWVBFUy5NUDQpO1xuXG4gICAgICB2aWRlb0VsZW1lbnQuYXBwZW5kQ2hpbGQobXA0RWxlbWVudCk7XG4gICAgfVxuXG4gICAgaWYgKHdlYm0pIHtcbiAgICAgIGNvbnN0IHdlYm1FbGVtZW50ID0gZ2V0U291cmNlRWxlbWVudCh3ZWJtLCBTT1VSQ0VfVFlQRVMuV0VCTSk7XG5cbiAgICAgIHZpZGVvRWxlbWVudC5hcHBlbmRDaGlsZCh3ZWJtRWxlbWVudCk7XG4gICAgfVxuXG4gICAgaWYgKG9nZykge1xuICAgICAgY29uc3Qgb2dnRWxlbWVudCA9IGdldFNvdXJjZUVsZW1lbnQob2dnLCBTT1VSQ0VfVFlQRVMuT0dHKTtcblxuICAgICAgdmlkZW9FbGVtZW50LmFwcGVuZENoaWxkKG9nZ0VsZW1lbnQpO1xuICAgIH1cblxuICAgIGlmIChzd2YpIHtcbiAgICAgIGlmICghbXA0KSB7XG4gICAgICAgIHRocm93IG5ldyBFcnJvcignSWYgeW91IHdhbnQgYSBGbGFzaCBmYWxsYmFjaywgeW91IG5lZWQgdG8gcHJvdmlkZSBhIHZpZGVvIHNvdXJjZSBpbiBtcDQgZm9ybWF0LicpO1xuICAgICAgfVxuXG4gICAgICBjb25zdCBmbGFzaEZhbGxiYWNrRWxlbWVudCA9IGdldE9iamVjdEVsZW1lbnQoe1xuICAgICAgICBhdXRvcGxheSxcbiAgICAgICAgY29udHJvbHMsXG4gICAgICAgIGhlaWdodCxcbiAgICAgICAgbXA0LFxuICAgICAgICBwb3N0ZXIsXG4gICAgICAgIHN3ZixcbiAgICAgICAgd2lkdGhcbiAgICAgIH0pO1xuXG4gICAgICB2aWRlb0VsZW1lbnQuYXBwZW5kQ2hpbGQoZmxhc2hGYWxsYmFja0VsZW1lbnQpO1xuICAgIH1cblxuICAgIHRoaXMucGxheWVyID0gdmlkZW9FbGVtZW50O1xuICAgIHRoaXMuc3VwcG9ydHNIdG1sNVZpZGVvID0gdHlwZW9mIGNyZWF0ZU5ld0VsZW1lbnQoRUxFTUVOVF9UWVBFUy5WSURFTykuY2FuUGxheVR5cGUgIT09ICd1bmRlZmluZWQnO1xuXG4gICAgc2V0VmlkZW9FdmVudHModGhpcywge1xuICAgICAgb25DYW5QbGF5LFxuICAgICAgb25DYW5QbGF5VGhyb3VnaCxcbiAgICAgIG9uRHVyYXRpb25DaGFuZ2UsXG4gICAgICBvbkVtcHRpZWQsXG4gICAgICBvbkVuZGVkLFxuICAgICAgb25FcnJvcixcbiAgICAgIG9uTG9hZCxcbiAgICAgIG9uTG9hZGVkRGF0YSxcbiAgICAgIG9uTG9hZGVkTWV0YWRhdGEsXG4gICAgICBvbkxvYWRTdGFydCxcbiAgICAgIG9uUGF1c2UsXG4gICAgICBvblBsYXksXG4gICAgICBvblByb2dyZXNzLFxuICAgICAgb25SYXRlQ2hhbmdlLFxuICAgICAgb25TZWVrZWQsXG4gICAgICBvblNlZWtpbmcsXG4gICAgICBvblN0YWxsZWQsXG4gICAgICBvblN1c3BlbmQsXG4gICAgICBvblRpbWVVcGRhdGUsXG4gICAgICBvblZvbHVtZUNoYW5nZSxcbiAgICAgIG9uV2FpdGluZ1xuICAgIH0pO1xuXG4gICAgaWYgKGVsZW1lbnQpIHtcbiAgICAgIGVsZW1lbnQuYXBwZW5kQ2hpbGQodmlkZW9FbGVtZW50KTtcbiAgICB9XG5cbiAgICByZXR1cm4gdGhpcztcbiAgfVxuXG4gIC8qKlxuICAgKiBhcHBlbmQgdGhlIHBsYXllciBhcyBhIGNoaWxkIHRvIHRoZSBlbGVtZW50XG4gICAqXG4gICAqIEByZXR1cm5zIHtWaWR6fVxuICAgKi9cbiAgYWRkKCkge1xuICAgIGlmICh0aGlzLmVsZW1lbnQpIHtcbiAgICAgIHRoaXMuZWxlbWVudC5hcHBlbmRDaGlsZCh0aGlzLnBsYXllcik7XG4gICAgfVxuXG4gICAgcmV0dXJuIHRoaXM7XG4gIH1cblxuICAvKipcbiAgICogcmV0dXJucyB3aGV0aGVyIHRoZSBwbGF5ZXIgaGFzIHRoZSBhYmlsaXR5IHRvIHBsYXlcbiAgICogdGhlIGZvcm1hdCBwYXNzZWRcbiAgICpcbiAgICogQHBhcmFtIHtzdHJpbmd9IGZvcm1hdFxuICAgKiBAcmV0dXJuIHtib29sZWFufVxuICAgKi9cbiAgY2FuUGxheVR5cGUoZm9ybWF0KSB7XG4gICAgcmV0dXJuIHRoaXMucGxheWVyLmNhblBsYXlUeXBlKGZvcm1hdCk7XG4gIH1cblxuICAvKipcbiAgICpcbiAgICogQHJldHVybiB7KnxUaW1lUmFuZ2VzfVxuICAgKi9cbiAgZ2V0QnVmZmVyZWQoKSB7XG4gICAgcmV0dXJuIHRoaXMucGxheWVyLmJ1ZmZlcmVkO1xuICB9XG5cbiAgLyoqXG4gICAqIHJldHVybiB0aGUgYW1vdW50IG9mIHRpbWUgdGhhdCBoYXMgcGxheWVkIGluIHRoZSB2aWRlb1xuICAgKlxuICAgKiBAcmV0dXJuIHtudW1iZXJ9XG4gICAqL1xuICBnZXRDdXJyZW50VGltZSgpIHtcbiAgICByZXR1cm4gdGhpcy5jdXJyZW50VGltZTtcbiAgfVxuXG4gIC8qKlxuICAgKiByZXR1cm4gdGhlIGxlbmd0aCBvZiB0aGUgZW50aXJlIHZpZGVvXG4gICAqXG4gICAqIEByZXR1cm4ge251bWJlcn1cbiAgICovXG4gIGdldER1cmF0aW9uKCkge1xuICAgIHJldHVybiB0aGlzLmR1cmF0aW9uO1xuICB9XG5cbiAgLyoqXG4gICAqIHJldHVybiB0aGUgPG9iamVjdD4gZmxhc2ggZmFsbGJhY2tcbiAgICogXG4gICAqIEByZXR1cm4ge0hUTUxFbGVtZW50fVxuICAgKi9cbiAgZ2V0Rmxhc2hPYmplY3QoKSB7XG4gICAgcmV0dXJuIHRoaXMucGxheWVyLnF1ZXJ5U2VsZWN0b3IoRUxFTUVOVF9UWVBFUy5PQkpFQ1QpO1xuICB9XG5cbiAgLyoqXG4gICAqIHJldHVybiB0aGUgJSBsb2FkZWQgKHJvdW5kZWQgdG8gdHdvIGRlY2ltYWxzKVxuICAgKlxuICAgKiBAcmV0dXJuIHtudW1iZXJ9XG4gICAqL1xuICBnZXRQZXJjZW50TG9hZGVkKCkge1xuICAgIHJldHVybiB0aGlzLnBlcmNlbnRMb2FkZWQ7XG4gIH1cblxuICAvKipcbiAgICogcmV0dXJuIHRoZSBwbGF5YmFjayByYXRlIGZvciB0aGUgdmlkZW8gKDEgaXMgc3RhbmRhcmQgc3BlZWQpXG4gICAqXG4gICAqIEByZXR1cm4ge251bWJlcn1cbiAgICovXG4gIGdldFBsYXliYWNrUmF0ZSgpIHtcbiAgICByZXR1cm4gdGhpcy5wbGF5ZXIucGxheWJhY2tSYXRlO1xuICB9XG5cbiAgLyoqXG4gICAqIHJldHVybiB0aGUgcGxheWVyIGVsZW1lbnRcbiAgICpcbiAgICogQHJldHVybiB7SFRNTEVsZW1lbnR9XG4gICAqL1xuICBnZXRQbGF5ZXIoKSB7XG4gICAgcmV0dXJuIHRoaXMucGxheWVyO1xuICB9XG5cbiAgLyoqXG4gICAqIHJldHVybiB0aGUgZGltZW5zaW9ucyBvZiB0aGUgPHZpZGVvPiBlbGVtZW50XG4gICAqIFxuICAgKiBAcmV0dXJuIHt7aGVpZ2h0OiBudW1iZXIsIHdpZHRoOiBudW1iZXJ9fVxuICAgKi9cbiAgZ2V0UGxheWVyRGltZW5zaW9ucygpIHtcbiAgICByZXR1cm4ge1xuICAgICAgaGVpZ2h0OiB0aGlzLmhlaWdodCxcbiAgICAgIHdpZHRoOiB0aGlzLndpZHRoXG4gICAgfTtcbiAgfVxuXG4gIC8qKlxuICAgKiBnZXQgdGhlIHNvdXJjZSBmaWxlIGxvY2F0aW9ucyBmb3IgZWFjaCB0eXBlXG4gICAqIFxuICAgKiBAcmV0dXJuIHt7bXA0OiBzdHJpbmcsIG9nZzogc3RyaW5nLCB3ZWJtOiBzdHJpbmd9fVxuICAgKi9cbiAgZ2V0U291cmNlKCkge1xuICAgIHJldHVybiB7XG4gICAgICBtcDQ6IHRoaXMubXA0LFxuICAgICAgb2dnOiB0aGlzLm9nZyxcbiAgICAgIHdlYm06IHRoaXMud2VibVxuICAgIH07XG4gIH1cblxuICAvKipcbiAgICogZ2V0IHRoZSBhY3R1YWwgZGltZW5zaW9ucyBvZiB0aGUgdmlkZW8gKG5vdCB0aGUgcGxheWVyKVxuICAgKlxuICAgKiBAcmV0dXJuIHt7aGVpZ2h0OiBudW1iZXIsIHdpZHRoOiBudW1iZXJ9fVxuICAgKi9cbiAgZ2V0VmlkZW9EaW1lbnNpb25zKCkge1xuICAgIHJldHVybiB7XG4gICAgICBoZWlnaHQ6IHRoaXMucGxheWVyLnZpZGVvSGVpZ2h0LFxuICAgICAgd2lkdGg6IHRoaXMucGxheWVyLnZpZGVvV2lkdGhcbiAgICB9O1xuICB9XG5cbiAgLyoqXG4gICAqIHJldHVybiB0aGUgdm9sdW1lIGxldmVsIG9mIHRoZSB2aWRlb1xuICAgKlxuICAgKiBAcmV0dXJuIHtudW1iZXJ9XG4gICAqL1xuICBnZXRWb2x1bWUoKSB7XG4gICAgcmV0dXJuIHRoaXMucGxheWVyLnZvbHVtZTtcbiAgfVxuXG4gIC8qKlxuICAgKiBsb2FkIHRoZSBwbGF5ZXIgc291cmNlc1xuICAgKlxuICAgKiBAcmV0dXJucyB7Vmlken1cbiAgICovXG4gIGxvYWQoKSB7XG4gICAgdGhpcy5wbGF5ZXIubG9hZCgpO1xuXG4gICAgaWYgKHRoaXMub25Mb2FkKSB7XG4gICAgICB0aGlzLm9uTG9hZCh0aGlzKTtcbiAgICB9XG5cbiAgICByZXR1cm4gdGhpcztcbiAgfVxuXG4gIC8qKlxuICAgKiBzZXQgdGhlIHBsYXllciB0byBiZSBtdXRlZFxuICAgKlxuICAgKiBAcmV0dXJuIHtWaWR6fVxuICAgKi9cbiAgbXV0ZSgpIHtcbiAgICBpZiAoIXRoaXMubXV0ZWQpIHtcbiAgICAgIHRoaXMucGxheWVyLm11dGVkID0gdHJ1ZTtcbiAgICAgIHRoaXMubXV0ZWQgPSB0cnVlO1xuICAgIH1cblxuICAgIHJldHVybiB0aGlzO1xuICB9XG5cbiAgLyoqXG4gICAqIHBhdXNlIHRoZSBwbGF5ZXJcbiAgICpcbiAgICogQHJldHVybnMge1ZpZHp9XG4gICAqL1xuICBwYXVzZSgpIHtcbiAgICB0aGlzLnBsYXllci5wYXVzZSgpO1xuXG4gICAgcmV0dXJuIHRoaXM7XG4gIH1cblxuICAvKipcbiAgICogc3RhcnQgdGhlIHBsYXllclxuICAgKlxuICAgKiBAcmV0dXJucyB7Vmlken1cbiAgICovXG4gIHBsYXkoKSB7XG4gICAgdGhpcy5wbGF5ZXIucGxheSgpO1xuXG4gICAgcmV0dXJuIHRoaXM7XG4gIH1cblxuICAvKipcbiAgICogcmVtb3ZlIHRoZSBwbGF5ZXIgZnJvbSB0aGUgcGFyZW50IGl0IHdhcyBhcHBlbmRlZCB0b1xuICAgKlxuICAgKiBAcmV0dXJucyB7Vmlken1cbiAgICovXG4gIHJlbW92ZSgpIHtcbiAgICBpZiAodGhpcy5wbGF5ZXIucGFyZW50Tm9kZSkge1xuICAgICAgdGhpcy5wbGF5ZXIucGFyZW50Tm9kZS5yZW1vdmVDaGlsZCh0aGlzLnBsYXllcik7XG4gICAgfVxuXG4gICAgcmV0dXJuIHRoaXM7XG4gIH1cblxuICAvKipcbiAgICogcmVzdGFydCB0aGUgdmlkZW8gZnJvbSB0aGUgYmVnaW5uaW5nXG4gICAqXG4gICAqIEByZXR1cm4ge1ZpZHp9XG4gICAqL1xuICByZXN0YXJ0KCkge1xuICAgIHJldHVybiB0aGlzLnNldEN1cnJlbnRUaW1lKDApO1xuICB9XG5cbiAgLyoqXG4gICAqIHNldCB0aGUgcGxhY2UgaW4gdGhlIHZpZGVvIHRvIGp1bXAgdG9cbiAgICpcbiAgICogQHBhcmFtIHtudW1iZXJ9IHZhbHVlXG4gICAqIEByZXR1cm4ge1ZpZHp9XG4gICAqL1xuICBzZXRDdXJyZW50VGltZSh2YWx1ZSkge1xuICAgIHRoaXMucGxheWVyLmN1cnJlbnRUaW1lID0gdmFsdWU7XG4gICAgdGhpcy5jdXJyZW50VGltZSA9IHZhbHVlO1xuXG4gICAgcmV0dXJuIHRoaXM7XG4gIH1cblxuICAvKipcbiAgICogc2V0IHRoZSBwbGF5YmFjayByYXRlIHRvIGEgdmFsdWUsIGNhcHBpbmcgYmV0d2VlbiAwLjI1IGFuZCAxNlxuICAgKiBcbiAgICogQHBhcmFtIHtudW1iZXJ9IHZhbHVlPTFcbiAgICogQHJldHVybiB7Vmlken1cbiAgICovXG4gIHNldFBsYXliYWNrUmF0ZSh2YWx1ZSA9IDEpIHtcbiAgICBsZXQgdmFsaWRWYWx1ZSA9IHZhbHVlO1xuXG4gICAgaWYgKHZhbHVlIDw9IDAuMjUpIHtcbiAgICAgIHZhbGlkVmFsdWUgPSAwLjI1O1xuICAgIH0gZWxzZSBpZiAodmFsdWUgPj0gMTYpIHtcbiAgICAgIHZhbGlkVmFsdWUgPSAxNjtcbiAgICB9XG5cbiAgICB0aGlzLnBsYXllci5wbGF5YmFja1JhdGUgPSB2YWxpZFZhbHVlO1xuICAgIHRoaXMucGxheWJhY2tSYXRlID0gdmFsaWRWYWx1ZTtcblxuICAgIHJldHVybiB0aGlzO1xuICB9XG5cbiAgLyoqXG4gICAqIHNldCBuZXcgaGVpZ2h0IC8gd2lkdGggdmFsdWVzIGZvciB0aGUgcGxheWVyIGFuZCBpbnN0YW5jZVxuICAgKlxuICAgKiBAcGFyYW0ge251bWJlcn0gaGVpZ2h0XG4gICAqIEBwYXJhbSB7bnVtYmVyfSB3aWR0aFxuICAgKiBAcmV0dXJuIHtWaWR6fVxuICAgKi9cbiAgc2V0UGxheWVyRGltZW5zaW9ucyh7aGVpZ2h0LCB3aWR0aH0pIHtcbiAgICBpZiAoIWlzVW5kZWZpbmVkKGhlaWdodCkpIHtcbiAgICAgIHNldEVsZW1lbnRBdHRyaWJ1dGUodGhpcy5wbGF5ZXIsICdoZWlnaHQnLCBoZWlnaHQpO1xuXG4gICAgICB0aGlzLmhlaWdodCA9IGhlaWdodDtcbiAgICB9XG5cbiAgICBpZiAoIWlzVW5kZWZpbmVkKHdpZHRoKSkge1xuICAgICAgc2V0RWxlbWVudEF0dHJpYnV0ZSh0aGlzLnBsYXllciwgJ3dpZHRoJywgd2lkdGgpO1xuXG4gICAgICB0aGlzLndpZHRoID0gd2lkdGg7XG4gICAgfVxuXG4gICAgcmV0dXJuIHRoaXM7XG4gIH1cblxuICAvKipcbiAgICogc2V0IHRoZSBzb3VyY2UgdG8gdGhlIG5ldyB2YWx1ZSBhbmQgcmVsb2FkIGl0XG4gICAqIFxuICAgKiBAcGFyYW0ge3N0cmluZ30gbXA0XG4gICAqIEBwYXJhbSB7c3RyaW5nfSBvZ2dcbiAgICogQHBhcmFtIHtzdHJpbmd9IHdlYm1cbiAgICogQHJldHVybiB7Vmlken1cbiAgICovXG4gIHNldFNvdXJjZSh7bXA0LCBvZ2csIHdlYm19KSB7XG4gICAgY29uc3Qgc291cmNlcyA9IHRoaXMucGxheWVyLnF1ZXJ5U2VsZWN0b3JBbGwoJ3NvdXJjZScpO1xuICAgIGNvbnN0IGxlbmd0aCA9IHNvdXJjZXMubGVuZ3RoO1xuXG4gICAgbGV0IGluZGV4ID0gLTE7XG5cbiAgICB3aGlsZSAoKytpbmRleCA8IGxlbmd0aCkge1xuICAgICAgbGV0IHNvdXJjZSA9IHNvdXJjZXNbaW5kZXhdO1xuXG4gICAgICBzd2l0Y2ggKHNvdXJjZS50eXBlKSB7XG4gICAgICAgIGNhc2UgU09VUkNFX1RZUEVTLk1QNDpcbiAgICAgICAgICBpZiAobXA0KSB7XG4gICAgICAgICAgICBzZXRFbGVtZW50QXR0cmlidXRlKHNvdXJjZSwgJ3NyYycsIG1wNCk7XG4gICAgICAgICAgICB0aGlzLm1wNCA9IG1wNDtcbiAgICAgICAgICB9XG5cbiAgICAgICAgICBicmVhaztcblxuICAgICAgICBjYXNlIFNPVVJDRV9UWVBFUy5PR0c6XG4gICAgICAgICAgaWYgKG9nZykge1xuICAgICAgICAgICAgc2V0RWxlbWVudEF0dHJpYnV0ZShzb3VyY2UsICdzcmMnLCBvZ2cpO1xuICAgICAgICAgICAgdGhpcy5vZ2cgPSBvZ2c7XG4gICAgICAgICAgfVxuXG4gICAgICAgICAgYnJlYWs7XG5cbiAgICAgICAgY2FzZSBTT1VSQ0VfVFlQRVMuV0VCTTpcbiAgICAgICAgICBpZiAod2VibSkge1xuICAgICAgICAgICAgc2V0RWxlbWVudEF0dHJpYnV0ZShzb3VyY2UsICdzcmMnLCB3ZWJtKTtcbiAgICAgICAgICAgIHRoaXMud2VibSA9IHdlYm07XG4gICAgICAgICAgfVxuXG4gICAgICAgICAgYnJlYWs7XG4gICAgICB9XG4gICAgfVxuXG4gICAgaWYgKG1wNCkge1xuICAgICAgY29uc3QgY3VycmVudE9iamVjdEVsZW1lbnQgPSB0aGlzLnBsYXllci5xdWVyeVNlbGVjdG9yKCdvYmplY3QnKTtcbiAgICAgIGNvbnN0IG5ld09iamVjdEVsZW1lbnQgPSBnZXRPYmplY3RFbGVtZW50KHtcbiAgICAgICAgYXV0b3BsYXk6IHRoaXMuYXV0b3BsYXksXG4gICAgICAgIGNvbnRyb2xzOiB0aGlzLmNvbnRyb2xzLFxuICAgICAgICBoZWlnaHQ6IHRoaXMuaGVpZ2h0LFxuICAgICAgICBtcDQsXG4gICAgICAgIHBvc3RlcjogdGhpcy5wb3N0ZXIsXG4gICAgICAgIHN3ZjogdGhpcy5zd2YsXG4gICAgICAgIHdpZHRoOiB0aGlzLndpZHRoXG4gICAgICB9KTtcblxuICAgICAgdGhpcy5wbGF5ZXIucmVtb3ZlQ2hpbGQoY3VycmVudE9iamVjdEVsZW1lbnQpO1xuICAgICAgdGhpcy5wbGF5ZXIuYXBwZW5kQ2hpbGQobmV3T2JqZWN0RWxlbWVudCk7XG4gICAgfVxuXG4gICAgcmV0dXJuIHRoaXMubG9hZCgpO1xuICB9XG5cbiAgLyoqXG4gICAqIHNldCB0aGUgdm9sdW1lIHRvIGEgbnVtYmVyIGJldHdlZW4gMCBhbmQgMVxuICAgKiBcbiAgICogQHBhcmFtIHtudW1iZXJ9IHZhbHVlPTFcbiAgICogQHJldHVybiB7Vmlken1cbiAgICovXG4gIHNldFZvbHVtZSh2YWx1ZSA9IDEpIHtcbiAgICBsZXQgdm9sdW1lID0gdmFsdWU7XG5cbiAgICBpZiAodmFsdWUgPCAwKSB7XG4gICAgICB2b2x1bWUgPSAwO1xuICAgIH0gZWxzZSBpZiAodmFsdWUgPiAxKSB7XG4gICAgICB2b2x1bWUgPSAxO1xuICAgIH1cblxuICAgIHRoaXMucGxheWVyLnZvbHVtZSA9IHZvbHVtZTtcbiAgICB0aGlzLnZvbHVtZSA9IHZvbHVtZTtcblxuICAgIHJldHVybiB0aGlzO1xuICB9XG5cbiAgLyoqXG4gICAqIHNldCB0aGUgcGxheWVyIHRvIGJlIHVubXV0ZWRcbiAgICogXG4gICAqIEByZXR1cm4ge1ZpZHp9XG4gICAqL1xuICB1bm11dGUoKSB7XG4gICAgaWYgKHRoaXMubXV0ZWQpIHtcbiAgICAgIHRoaXMucGxheWVyLm11dGVkID0gZmFsc2U7XG4gICAgICB0aGlzLm11dGVkID0gZmFsc2U7XG4gICAgfVxuXG4gICAgcmV0dXJuIHRoaXM7XG4gIH1cbn1cblxuLyoqXG4gKiBjb252ZW5pZW5jZSBmdW5jdGlvbiwgc28gZGV2cyBkb24ndCBuZWVkIHRvIHJ1biBuZXcgVmlkeigpIGV2ZXJ5IHRpbWVcbiAqXG4gKiBAcGFyYW0ge3N0cmluZ30gc2VsZWN0b3JcbiAqIEBwYXJhbSB7b2JqZWN0fSBjb25maWdcbiAqIEByZXR1cm4ge1ZpZHp9XG4gKi9cbmNvbnN0IHZpZHogPSAoc2VsZWN0b3IsIGNvbmZpZykgPT4ge1xuICByZXR1cm4gbmV3IFZpZHooc2VsZWN0b3IsIGNvbmZpZyk7XG59O1xuXG5leHBvcnQge2dldE9iamVjdEVsZW1lbnR9O1xuZXhwb3J0IHtnZXRTb3VyY2VFbGVtZW50fTtcbmV4cG9ydCB7Z2V0VmlkZW9FbGVtZW50fTtcbmV4cG9ydCB7c2V0RWxlbWVudEF0dHJpYnV0ZX07XG5leHBvcnQge3NldFZpZGVvRXZlbnRzfTtcbmV4cG9ydCB7Vmlken07XG5cbmV4cG9ydCBkZWZhdWx0IHZpZHo7XG5cblxuXG4vKiogV0VCUEFDSyBGT09URVIgKipcbiAqKiBzcmMvaW5kZXguanNcbiAqKi8iXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBO0FBQ0E7OztBQU9BO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUxBO0FBQ0E7QUFPQTtBQUNBO0FBQ0E7QUFDQTtBQUhBO0FBQ0E7QUFLQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBUEE7QUFDQTs7Ozs7Ozs7QUFnQkE7QUFDQTtBQUNBO0FBQ0E7Ozs7Ozs7O0FBUUE7QUFDQTtBQUNBO0FBQ0E7Ozs7Ozs7OztBQVNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7Ozs7Ozs7Ozs7Ozs7O0FBZUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUNBO0FBQUE7QUFBQTtBQUFBO0FBQ0E7QUFHQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBSkE7QUFDQTtBQU1BO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOzs7Ozs7Ozs7Ozs7O0FBYUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUNBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7Ozs7Ozs7QUFPQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7Ozs7Ozs7O0FBU0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOzs7Ozs7Ozs7Ozs7OztBQWNBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQ0E7QUFDQTtBQXVCQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBMkNBO0FBQUE7QUFDQTtBQURBO0FBQ0E7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBZEE7QUFDQTtBQUpBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFDQTtBQUNBO0FBdURBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBakNBO0FBQ0E7QUFtQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQVBBO0FBQ0E7QUFTQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFQQTtBQUNBO0FBU0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFyQkE7QUFDQTtBQXVCQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7Ozs7Ozs7OztBQU1BO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7Ozs7Ozs7Ozs7O0FBUUE7QUFDQTtBQUNBO0FBQ0E7Ozs7Ozs7O0FBS0E7QUFDQTtBQUNBO0FBQ0E7Ozs7Ozs7OztBQU1BO0FBQ0E7QUFDQTtBQUNBOzs7Ozs7Ozs7QUFNQTtBQUNBO0FBQ0E7QUFDQTs7Ozs7Ozs7O0FBTUE7QUFDQTtBQUNBO0FBQ0E7Ozs7Ozs7OztBQU1BO0FBQ0E7QUFDQTtBQUNBOzs7Ozs7Ozs7QUFNQTtBQUNBO0FBQ0E7QUFDQTs7Ozs7Ozs7O0FBTUE7QUFDQTtBQUNBO0FBQ0E7Ozs7Ozs7OztBQU1BO0FBQ0E7QUFDQTtBQUNBO0FBRkE7QUFJQTtBQUNBOzs7Ozs7Ozs7QUFNQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBSEE7QUFLQTtBQUNBOzs7Ozs7Ozs7QUFNQTtBQUNBO0FBQ0E7QUFDQTtBQUZBO0FBSUE7QUFDQTs7Ozs7Ozs7O0FBTUE7QUFDQTtBQUNBO0FBQ0E7Ozs7Ozs7OztBQU1BO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOzs7Ozs7Ozs7QUFNQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7Ozs7Ozs7OztBQU1BO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7Ozs7Ozs7O0FBTUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOzs7Ozs7Ozs7QUFNQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOzs7Ozs7Ozs7QUFNQTtBQUNBO0FBQ0E7QUFDQTs7Ozs7Ozs7OztBQU9BO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOzs7Ozs7Ozs7O0FBT0E7QUFBQTtBQUNBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7Ozs7Ozs7Ozs7QUFRQTtBQUFBO0FBQUE7QUFDQTtBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7Ozs7Ozs7Ozs7O0FBU0E7QUFBQTtBQUFBO0FBQUE7QUFDQTtBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUF2QkE7QUF5QkE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBUEE7QUFDQTtBQVNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOzs7Ozs7Ozs7O0FBT0E7QUFBQTtBQUNBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7Ozs7Ozs7O0FBTUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7Ozs7Ozs7Ozs7Ozs7O0FBVUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFFQSIsInNvdXJjZVJvb3QiOiIifQ==");
+var _utils = __webpack_require__(/*! ./utils */ "./src/utils.js");
 
-/***/ },
-/* 2 */
-/***/ function(module, exports) {
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _typeof = typeof Symbol === \"function\" && typeof Symbol.iterator === \"symbol\" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === \"function\" && obj.constructor === Symbol ? \"symbol\" : typeof obj; };\n\n/**\n * return string form of object type\n * \n * @param {any} object\n * @return {string}\n */\nvar toString = function toString(object) {\n  return Object.prototype.toString.call(object);\n};\n\n/**\n * create a new element and return it\n * \n * @param {string} element\n * @return {HTMLElement}\n */\nvar createNewElement = function createNewElement(element) {\n  return document.createElement(element);\n};\n\n/**\n * determine if the object is an HTMLElement\n * \n * @param {any} object\n * @return {boolean}\n */\nvar isElement = function isElement(object) {\n  return (typeof HTMLElement === 'undefined' ? 'undefined' : _typeof(HTMLElement)) === 'object' ? object instanceof HTMLElement : !!object && (typeof object === 'undefined' ? 'undefined' : _typeof(object)) === 'object' && object !== null && object.nodeType === 1 && typeof object.nodeName === 'string';\n};\n\n/**\n * determine if the object is a jQuery object\n * \n * @param {any} object\n * @return {boolean}\n */\nvar isJqueryObject = function isJqueryObject(object) {\n  return 'jquery' in Object(object);\n};\n\n/**\n * determine if object is a string\n * \n * @param {any} object\n * @return {boolean}\n */\nvar isString = function isString(object) {\n  return toString(object) === '[object String]';\n};\n\n/**\n * determine if object is undefined\n * \n * @param {any} object\n * @return {boolean}\n */\nvar isUndefined = function isUndefined(object) {\n  return object === void 0;\n};\n\nexports.createNewElement = createNewElement;\nexports.isElement = isElement;\nexports.isJqueryObject = isJqueryObject;\nexports.isString = isString;\nexports.isUndefined = isUndefined;\nexports.toString = toString;\nexports.default = {\n  createNewElement: createNewElement,\n  isElement: isElement,\n  isString: isString,\n  isUndefined: isUndefined,\n  toString: toString\n};\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMi5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy9zcmMvdXRpbHMuanM/MmI0YyJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIHJldHVybiBzdHJpbmcgZm9ybSBvZiBvYmplY3QgdHlwZVxuICogXG4gKiBAcGFyYW0ge2FueX0gb2JqZWN0XG4gKiBAcmV0dXJuIHtzdHJpbmd9XG4gKi9cbmNvbnN0IHRvU3RyaW5nID0gKG9iamVjdCkgPT4ge1xuICByZXR1cm4gT2JqZWN0LnByb3RvdHlwZS50b1N0cmluZy5jYWxsKG9iamVjdCk7XG59O1xuXG4vKipcbiAqIGNyZWF0ZSBhIG5ldyBlbGVtZW50IGFuZCByZXR1cm4gaXRcbiAqIFxuICogQHBhcmFtIHtzdHJpbmd9IGVsZW1lbnRcbiAqIEByZXR1cm4ge0hUTUxFbGVtZW50fVxuICovXG5jb25zdCBjcmVhdGVOZXdFbGVtZW50ID0gKGVsZW1lbnQpID0+IHtcbiAgcmV0dXJuIGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoZWxlbWVudCk7XG59O1xuXG4vKipcbiAqIGRldGVybWluZSBpZiB0aGUgb2JqZWN0IGlzIGFuIEhUTUxFbGVtZW50XG4gKiBcbiAqIEBwYXJhbSB7YW55fSBvYmplY3RcbiAqIEByZXR1cm4ge2Jvb2xlYW59XG4gKi9cbmNvbnN0IGlzRWxlbWVudCA9IChvYmplY3QpID0+IHtcbiAgcmV0dXJuIHR5cGVvZiBIVE1MRWxlbWVudCA9PT0gJ29iamVjdCcgPyBvYmplY3QgaW5zdGFuY2VvZiBIVE1MRWxlbWVudCA6XG4gICAgISFvYmplY3QgJiYgdHlwZW9mIG9iamVjdCA9PT0gJ29iamVjdCcgJiYgb2JqZWN0ICE9PSBudWxsXG4gICAgICAmJiBvYmplY3Qubm9kZVR5cGUgPT09IDEgJiYgdHlwZW9mIG9iamVjdC5ub2RlTmFtZSA9PT0gJ3N0cmluZyc7XG59O1xuXG4vKipcbiAqIGRldGVybWluZSBpZiB0aGUgb2JqZWN0IGlzIGEgalF1ZXJ5IG9iamVjdFxuICogXG4gKiBAcGFyYW0ge2FueX0gb2JqZWN0XG4gKiBAcmV0dXJuIHtib29sZWFufVxuICovXG5jb25zdCBpc0pxdWVyeU9iamVjdCA9IChvYmplY3QpID0+IHtcbiAgcmV0dXJuICdqcXVlcnknIGluIE9iamVjdChvYmplY3QpOyBcbn07XG5cbi8qKlxuICogZGV0ZXJtaW5lIGlmIG9iamVjdCBpcyBhIHN0cmluZ1xuICogXG4gKiBAcGFyYW0ge2FueX0gb2JqZWN0XG4gKiBAcmV0dXJuIHtib29sZWFufVxuICovXG5jb25zdCBpc1N0cmluZyA9IChvYmplY3QpID0+IHtcbiAgcmV0dXJuIHRvU3RyaW5nKG9iamVjdCkgPT09ICdbb2JqZWN0IFN0cmluZ10nO1xufTtcblxuLyoqXG4gKiBkZXRlcm1pbmUgaWYgb2JqZWN0IGlzIHVuZGVmaW5lZFxuICogXG4gKiBAcGFyYW0ge2FueX0gb2JqZWN0XG4gKiBAcmV0dXJuIHtib29sZWFufVxuICovXG5jb25zdCBpc1VuZGVmaW5lZCA9IChvYmplY3QpID0+IHtcbiAgcmV0dXJuIG9iamVjdCA9PT0gdm9pZCAwO1xufTtcblxuZXhwb3J0IHtjcmVhdGVOZXdFbGVtZW50fTtcbmV4cG9ydCB7aXNFbGVtZW50fTtcbmV4cG9ydCB7aXNKcXVlcnlPYmplY3R9O1xuZXhwb3J0IHtpc1N0cmluZ307XG5leHBvcnQge2lzVW5kZWZpbmVkfTtcbmV4cG9ydCB7dG9TdHJpbmd9O1xuXG5leHBvcnQgZGVmYXVsdCB7XG4gIGNyZWF0ZU5ld0VsZW1lbnQsXG4gIGlzRWxlbWVudCxcbiAgaXNTdHJpbmcsXG4gIGlzVW5kZWZpbmVkLFxuICB0b1N0cmluZ1xufTtcblxuXG5cbi8qKiBXRUJQQUNLIEZPT1RFUiAqKlxuICoqIHNyYy91dGlscy5qc1xuICoqLyJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7QUFNQTtBQUNBO0FBQ0E7QUFDQTs7Ozs7OztBQU9BO0FBQ0E7QUFDQTtBQUNBOzs7Ozs7O0FBT0E7QUFDQTtBQUdBO0FBQ0E7Ozs7Ozs7QUFPQTtBQUNBO0FBQ0E7QUFDQTs7Ozs7OztBQU9BO0FBQ0E7QUFDQTtBQUNBOzs7Ozs7O0FBT0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFMQSIsInNvdXJjZVJvb3QiOiIifQ==");
+var ELEMENT_TYPES = {
+  IMAGE: 'img',
+  OBJECT: 'object',
+  PARAM: 'param',
+  SOURCE: 'source',
+  VIDEO: 'video'
+};
 
-/***/ }
-/******/ ]);
+var SOURCE_TYPES = {
+  MP4: 'video/mp4',
+  OGG: 'video/ogg',
+  WEBM: 'video/webm'
+};
+
+var DEFAULT_ATTRIBUTES = {
+  AUTOPLAY: false,
+  CONTROLS: true,
+  HEIGHT: 400,
+  LOOP: false,
+  MUTED: false,
+  PRELOAD: 'auto',
+  WIDTH: 600
+};
+
+/**
+ * convenience function to set an attribute on an element to value
+ *
+ * @param {HTMLElement} element
+ * @param {string} attribute
+ * @param {any} value
+ */
+var setElementAttribute = function setElementAttribute(element, attribute, value) {
+  element.setAttribute(attribute, value);
+};
+
+/**
+ * convenience function to add an event listener to an element
+ *
+ * @param {HTMLElement} element
+ * @param {string} event
+ * @param {function} handler
+ */
+var setElementEventListener = function setElementEventListener(element, event, handler) {
+  element.addEventListener(event, handler);
+};
+
+/**
+ * create a new source element based on the elementType
+ * and type, assigning the src to it
+ *
+ * @param {string} src
+ * @param {string} type
+ * @return {HTMLElement}
+ */
+var getSourceElement = function getSourceElement(src, type) {
+  var element = (0, _utils.createNewElement)(ELEMENT_TYPES.SOURCE);
+
+  element.src = src;
+  element.type = type;
+
+  return element;
+};
+
+/**
+ * create a new object element and populate it with the
+ * param elements that have the flash-specific values needed
+ * for the fallback
+ *
+ * @param {boolean} autoplay
+ * @param {boolean} controls
+ * @param {number} height
+ * @param {string} mp4
+ * @param {string} poster
+ * @param {string} swf
+ * @param {number} width
+ * @return {HTMLElement}
+ */
+var getObjectElement = function getObjectElement(_ref) {
+  var autoplay = _ref.autoplay,
+      controls = _ref.controls,
+      height = _ref.height,
+      mp4 = _ref.mp4,
+      poster = _ref.poster,
+      swf = _ref.swf,
+      width = _ref.width;
+
+  var objectElement = (0, _utils.createNewElement)(ELEMENT_TYPES.OBJECT),
+      movieParamElement = (0, _utils.createNewElement)(ELEMENT_TYPES.PARAM),
+      flashvarsParamElement = (0, _utils.createNewElement)(ELEMENT_TYPES.PARAM);
+
+  setElementAttribute(objectElement, 'data', swf);
+  setElementAttribute(objectElement, 'height', height);
+  setElementAttribute(objectElement, 'width', width);
+
+  setElementAttribute(movieParamElement, 'name', 'movie');
+  setElementAttribute(movieParamElement, 'value', swf);
+
+  setElementAttribute(flashvarsParamElement, 'name', 'flashvars');
+
+  var flashvarsObject = {
+    autostart: autoplay ? true : null,
+    controlbar: controls ? 'over' : null,
+    file: mp4,
+    image: poster
+  };
+
+  var flashvarsValue = '';
+
+  for (var key in flashvarsObject) {
+    var value = flashvarsObject[key];
+
+    if (value) {
+      if (flashvarsValue) {
+        flashvarsValue += '&';
+      }
+
+      flashvarsValue += key + '=' + value;
+    }
+  }
+
+  setElementAttribute(flashvarsParamElement, 'value', flashvarsValue);
+
+  objectElement.appendChild(movieParamElement);
+  objectElement.appendChild(flashvarsParamElement);
+
+  if (poster) {
+    var imageElement = (0, _utils.createNewElement)(ELEMENT_TYPES.IMAGE);
+
+    setElementAttribute(imageElement, 'alt', 'Video is unavailable.');
+    setElementAttribute(imageElement, 'height', height);
+    setElementAttribute(imageElement, 'src', poster);
+    setElementAttribute(imageElement, 'title', 'We cannot provide playback capabilities at this time.');
+    setElementAttribute(imageElement, 'width', width);
+
+    objectElement.appendChild(imageElement);
+  }
+
+  return objectElement;
+};
+
+/**
+ * build the video element that will be injected onto the page
+ *
+ * @param {boolean} autoplay
+ * @param {boolean} controls
+ * @param {number} height
+ * @param {boolean} loop
+ * @param {boolean} muted
+ * @param {string} preload
+ * @param {number} width
+ * @returns {HTMLElement}
+ */
+var getVideoElement = function getVideoElement(_ref2) {
+  var autoplay = _ref2.autoplay,
+      controls = _ref2.controls,
+      height = _ref2.height,
+      loop = _ref2.loop,
+      muted = _ref2.muted,
+      preload = _ref2.preload,
+      width = _ref2.width;
+
+  var videoElement = (0, _utils.createNewElement)(ELEMENT_TYPES.VIDEO);
+
+  if (autoplay) {
+    setElementAttribute(videoElement, 'autoplay', '');
+  }
+
+  if (controls) {
+    setElementAttribute(videoElement, 'controls', '');
+  }
+
+  if (loop) {
+    setElementAttribute(videoElement, 'loop', '');
+  }
+
+  if (muted) {
+    setElementAttribute(videoElement, 'muted', '');
+  }
+
+  setElementAttribute(videoElement, 'height', height);
+  setElementAttribute(videoElement, 'preload', preload);
+  setElementAttribute(videoElement, 'width', width);
+
+  return videoElement;
+};
+
+/**
+ * get the percent loaded if duration is available
+ *
+ * @param {HTMLElement} player
+ * @return {number}
+ */
+var getPercentLoaded = function getPercentLoaded(player) {
+  var duration = player.duration;
+
+  if (duration) {
+    var buffered = player.buffered;
+    var percentLoaded = buffered.end(0) / duration;
+
+    return Math.round(percentLoaded * 10000) / 100;
+  }
+
+  return 0;
+};
+
+/**
+ * convenience function to wrap even with explicit this
+ * as vidzInstance
+ *
+ * @param {Vidz} vidzInstance
+ * @param {function} method
+ * @return {function(e): void}
+ */
+var wrapSimpleVideoEvent = function wrapSimpleVideoEvent(vidzInstance, method) {
+  return function (e) {
+    method.call(vidzInstance, e, vidzInstance);
+  };
+};
+
+/**
+ *
+ * @param {Vidz} vidzInstance
+ * @param {object} events
+ * @param {function} [events.onCanPlayThrough]
+ * @param {function} [events.onEnded]
+ * @param {function} [events.onError]
+ * @param {function} [events.onLoadedMetadata]
+ * @param {function} [events.onPause]
+ * @param {function} [events.onPlay]
+ * @param {function} [events.onProgress]
+ * @param {function} [events.onWaiting]
+ */
+var setVideoEvents = function setVideoEvents(vidzInstance, events) {
+  var onCanPlay = events.onCanPlay,
+      onCanPlayThrough = events.onCanPlayThrough,
+      onDurationChange = events.onDurationChange,
+      onEmptied = events.onEmptied,
+      onEnded = events.onEnded,
+      onError = events.onError,
+      onLoad = events.onLoad,
+      onLoadedData = events.onLoadedData,
+      onLoadedMetadata = events.onLoadedMetadata,
+      onLoadStart = events.onLoadStart,
+      onPause = events.onPause,
+      onPlay = events.onPlay,
+      onProgress = events.onProgress,
+      onRateChange = events.onRateChange,
+      onSeeked = events.onSeeked,
+      onSeeking = events.onSeeking,
+      onStalled = events.onStalled,
+      onSuspend = events.onSuspend,
+      onTimeUpdate = events.onTimeUpdate,
+      onVolumeChange = events.onVolumeChange,
+      onWaiting = events.onWaiting;
+
+
+  var videoElement = vidzInstance.player;
+
+  if (onCanPlay) {
+    setElementEventListener(videoElement, 'canplay', wrapSimpleVideoEvent(vidzInstance, onCanPlay));
+  }
+
+  if (onCanPlayThrough) {
+    setElementEventListener(videoElement, 'canplaythrough', wrapSimpleVideoEvent(vidzInstance, onCanPlayThrough));
+  }
+
+  setElementEventListener(videoElement, 'durationchange', function (e) {
+    vidzInstance.duration = e.target.duration;
+    vidzInstance.percentLoaded = getPercentLoaded(e.target);
+
+    if (onDurationChange) {
+      wrapSimpleVideoEvent(vidzInstance, onDurationChange)(e);
+    }
+  });
+
+  if (onEmptied) {
+    setElementEventListener(videoElement, 'emptied', wrapSimpleVideoEvent(vidzInstance, onEmptied));
+  }
+
+  if (onEnded) {
+    setElementEventListener(videoElement, 'ended', wrapSimpleVideoEvent(vidzInstance, onEnded));
+  }
+
+  if (onError) {
+    setElementEventListener(videoElement, 'error', wrapSimpleVideoEvent(vidzInstance, onError));
+  }
+
+  if (onLoad) {
+    setElementEventListener(videoElement, 'load', wrapSimpleVideoEvent(vidzInstance, onLoad));
+  }
+
+  if (onLoadedData) {
+    setElementEventListener(videoElement, 'loadeddata', wrapSimpleVideoEvent(vidzInstance, onLoadedData));
+  }
+
+  if (onLoadedMetadata) {
+    setElementEventListener(videoElement, 'loadedmetadata', wrapSimpleVideoEvent(vidzInstance, onLoadedMetadata));
+  }
+
+  if (onLoadStart) {
+    setElementEventListener(videoElement, 'loadstart', wrapSimpleVideoEvent(vidzInstance, onLoadStart));
+  }
+
+  if (onPause) {
+    setElementEventListener(videoElement, 'pause', function (e) {
+      if (vidzInstance.playing) {
+        vidzInstance.playing = false;
+
+        wrapSimpleVideoEvent(vidzInstance, onPause)(e);
+      }
+    });
+  }
+
+  if (onPlay) {
+    setElementEventListener(videoElement, 'playing', function (e) {
+      if (!vidzInstance.playing) {
+        vidzInstance.playing = true;
+
+        wrapSimpleVideoEvent(vidzInstance, onPlay)(e);
+      }
+    });
+  }
+
+  setElementEventListener(videoElement, 'progress', function (e) {
+    vidzInstance.percentLoaded = getPercentLoaded(e.target);
+
+    if (onProgress) {
+      wrapSimpleVideoEvent(vidzInstance, onProgress)(e);
+    }
+  });
+
+  if (onRateChange) {
+    setElementEventListener(videoElement, 'ratechange', function (e) {
+      vidzInstance.playbackRate = e.target.playbackRate;
+
+      if (onRateChange) {
+        wrapSimpleVideoEvent(vidzInstance, onRateChange)(e);
+      }
+    });
+  }
+
+  if (onSeeked) {
+    setElementEventListener(videoElement, 'seeked', wrapSimpleVideoEvent(vidzInstance, onSeeked));
+  }
+
+  if (onSeeking) {
+    setElementEventListener(videoElement, 'seeking', wrapSimpleVideoEvent(vidzInstance, onSeeking));
+  }
+
+  if (onStalled) {
+    setElementEventListener(videoElement, 'stalled', wrapSimpleVideoEvent(vidzInstance, onStalled));
+  }
+
+  if (onSuspend) {
+    setElementEventListener(videoElement, 'suspend', wrapSimpleVideoEvent(vidzInstance, onSuspend));
+  }
+
+  setElementEventListener(videoElement, 'timeupdate', function (e) {
+    vidzInstance.currentTime = e.target.currentTime;
+
+    if (onTimeUpdate) {
+      wrapSimpleVideoEvent(vidzInstance, onTimeUpdate)(e);
+    }
+  });
+
+  setElementEventListener(videoElement, 'volumechange', function (e) {
+    vidzInstance.volume = e.target.volume;
+
+    if (onVolumeChange) {
+      wrapSimpleVideoEvent(vidzInstance, onVolumeChange)(e);
+    }
+  });
+
+  if (onWaiting) {
+    setElementEventListener(videoElement, 'waiting', wrapSimpleVideoEvent(vidzInstance, onWaiting));
+  }
+};
+
+var Vidz = function () {
+  /**
+   * build the vidz instance with the appropriate elements, append the
+   * elements to the parent provided by the selector, and then return
+   * the instance
+   *
+   * @param {string|HTMLElement} selector
+   * @param {object} config
+   * @param {object} [config.attributes]
+   * @param {boolean} [config.autoplay]
+   * @param {boolean} [config.controls]
+   * @param {number} [config.height]
+   * @param {boolean} [config.loop]
+   * @param {string} [config.mp4]
+   * @param {boolean} [config.muted]
+   * @param {string} [config.ogg]
+   * @param {function} [config.onCanPlay]
+   * @param {function} [config.onCanPlayThrough]
+   * @param {function} [config.onDurationChange]
+   * @param {function} [config.onEmptied]
+   * @param {function} [config.onEnded]
+   * @param {function} [config.onError]
+   * @param {function} [config.onLoad]
+   * @param {function} [config.onLoadedData]
+   * @param {function} [config.onLoadedMetadata]
+   * @param {function} [config.onLoadStart]
+   * @param {function} [config.onPause]
+   * @param {function} [config.onPlay]
+   * @param {function} [config.onProgress]
+   * @param {function} [config.onRateChange]
+   * @param {function} [config.onSeeked]
+   * @param {function} [config.onSeeking]
+   * @param {function} [config.onStalled]
+   * @param {function} [config.onSuspend]
+   * @param {function} [config.onTimeUpdate]
+   * @param {function} [config.onVolumeChange]
+   * @param {function} [config.onWaiting]
+   * @param {string} [config.poster]
+   * @param {string} [config.preload]
+   * @param {string} [config.webm]
+   * @param {number} [config.width]
+   * @return {Vidz}
+   */
+  function Vidz(selector) {
+    var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+    _classCallCheck(this, Vidz);
+
+    var element = void 0;
+
+    switch (true) {
+      case (0, _utils.isElement)(selector):
+        element = selector;
+        break;
+
+      case (0, _utils.isString)(selector):
+        element = document.querySelector(selector);
+        break;
+
+      case (0, _utils.isJqueryObject)(selector):
+        element = selector[0];
+        break;
+
+      default:
+        throw new Error('Selector passed must be either a DOM element, jQuery object, or string.');
+    }
+
+    var _config$attributes = config.attributes,
+        attributes = _config$attributes === undefined ? {} : _config$attributes,
+        _config$autoplay = config.autoplay,
+        autoplay = _config$autoplay === undefined ? DEFAULT_ATTRIBUTES.AUTOPLAY : _config$autoplay,
+        _config$controls = config.controls,
+        controls = _config$controls === undefined ? DEFAULT_ATTRIBUTES.CONTROLS : _config$controls,
+        _config$height = config.height,
+        height = _config$height === undefined ? DEFAULT_ATTRIBUTES.HEIGHT : _config$height,
+        _config$loop = config.loop,
+        loop = _config$loop === undefined ? DEFAULT_ATTRIBUTES.LOOP : _config$loop,
+        _config$mp = config.mp4,
+        mp4 = _config$mp === undefined ? null : _config$mp,
+        _config$muted = config.muted,
+        muted = _config$muted === undefined ? DEFAULT_ATTRIBUTES.MUTED : _config$muted,
+        _config$ogg = config.ogg,
+        ogg = _config$ogg === undefined ? null : _config$ogg,
+        _config$onCanPlay = config.onCanPlay,
+        onCanPlay = _config$onCanPlay === undefined ? null : _config$onCanPlay,
+        _config$onCanPlayThro = config.onCanPlayThrough,
+        onCanPlayThrough = _config$onCanPlayThro === undefined ? null : _config$onCanPlayThro,
+        _config$onDurationCha = config.onDurationChange,
+        onDurationChange = _config$onDurationCha === undefined ? null : _config$onDurationCha,
+        _config$onEmptied = config.onEmptied,
+        onEmptied = _config$onEmptied === undefined ? null : _config$onEmptied,
+        _config$onEnded = config.onEnded,
+        onEnded = _config$onEnded === undefined ? null : _config$onEnded,
+        _config$onError = config.onError,
+        onError = _config$onError === undefined ? null : _config$onError,
+        _config$onLoad = config.onLoad,
+        onLoad = _config$onLoad === undefined ? null : _config$onLoad,
+        _config$onLoadedData = config.onLoadedData,
+        onLoadedData = _config$onLoadedData === undefined ? null : _config$onLoadedData,
+        _config$onLoadedMetad = config.onLoadedMetadata,
+        onLoadedMetadata = _config$onLoadedMetad === undefined ? null : _config$onLoadedMetad,
+        _config$onLoadStart = config.onLoadStart,
+        onLoadStart = _config$onLoadStart === undefined ? null : _config$onLoadStart,
+        _config$onPause = config.onPause,
+        onPause = _config$onPause === undefined ? null : _config$onPause,
+        _config$onPlay = config.onPlay,
+        onPlay = _config$onPlay === undefined ? null : _config$onPlay,
+        _config$onProgress = config.onProgress,
+        onProgress = _config$onProgress === undefined ? null : _config$onProgress,
+        _config$onRateChange = config.onRateChange,
+        onRateChange = _config$onRateChange === undefined ? null : _config$onRateChange,
+        _config$onSeeked = config.onSeeked,
+        onSeeked = _config$onSeeked === undefined ? null : _config$onSeeked,
+        _config$onSeeking = config.onSeeking,
+        onSeeking = _config$onSeeking === undefined ? null : _config$onSeeking,
+        _config$onStalled = config.onStalled,
+        onStalled = _config$onStalled === undefined ? null : _config$onStalled,
+        _config$onSuspend = config.onSuspend,
+        onSuspend = _config$onSuspend === undefined ? null : _config$onSuspend,
+        _config$onTimeUpdate = config.onTimeUpdate,
+        onTimeUpdate = _config$onTimeUpdate === undefined ? null : _config$onTimeUpdate,
+        _config$onVolumeChang = config.onVolumeChange,
+        onVolumeChange = _config$onVolumeChang === undefined ? null : _config$onVolumeChang,
+        _config$onWaiting = config.onWaiting,
+        onWaiting = _config$onWaiting === undefined ? null : _config$onWaiting,
+        _config$poster = config.poster,
+        poster = _config$poster === undefined ? null : _config$poster,
+        _config$preload = config.preload,
+        preload = _config$preload === undefined ? DEFAULT_ATTRIBUTES.PRELOAD : _config$preload,
+        _config$swf = config.swf,
+        swf = _config$swf === undefined ? null : _config$swf,
+        _config$webm = config.webm,
+        webm = _config$webm === undefined ? null : _config$webm,
+        _config$width = config.width,
+        width = _config$width === undefined ? DEFAULT_ATTRIBUTES.WIDTH : _config$width;
+
+
+    Object.assign(this, {
+      attributes: attributes,
+      autoplay: autoplay,
+      controls: controls,
+      height: height,
+      loop: loop,
+      mp4: mp4,
+      muted: muted,
+      ogg: ogg,
+      onCanPlay: onCanPlay,
+      onCanPlayThrough: onCanPlayThrough,
+      onEmptied: onEmptied,
+      onEnded: onEnded,
+      onError: onError,
+      onLoad: onLoad,
+      onLoadStart: onLoadStart,
+      onLoadedData: onLoadedData,
+      onLoadedMetadata: onLoadedMetadata,
+      onPause: onPause,
+      onPlay: onPlay,
+      onProgress: onProgress,
+      onRateChange: onRateChange,
+      onSeeked: onSeeked,
+      onSeeking: onSeeking,
+      onStalled: onStalled,
+      onSuspend: onSuspend,
+      onTimeUpdate: onTimeUpdate,
+      onVolumeChange: onVolumeChange,
+      onWaiting: onWaiting,
+      poster: poster,
+      preload: preload,
+      swf: swf,
+      webm: webm,
+      width: width
+    });
+
+    this.currentTime = 0;
+    this.duration = null;
+    this.element = element;
+    this.height = height;
+    this.muted = muted;
+    this.percentLoaded = 0;
+    this.playing = autoplay;
+    this.playbackRate = 1;
+    this.selector = selector;
+    this.volume = 1;
+    this.width = width;
+
+    var videoElement = getVideoElement({
+      autoplay: autoplay,
+      controls: controls,
+      height: height,
+      loop: loop,
+      muted: muted,
+      preload: preload,
+      width: width
+    });
+
+    for (var key in attributes) {
+      setElementAttribute(videoElement, key, attributes[key]);
+    }
+
+    if (poster) {
+      setElementAttribute(videoElement, 'poster', poster);
+    }
+
+    if (mp4) {
+      var mp4Element = getSourceElement(mp4, SOURCE_TYPES.MP4);
+
+      videoElement.appendChild(mp4Element);
+    }
+
+    if (webm) {
+      var webmElement = getSourceElement(webm, SOURCE_TYPES.WEBM);
+
+      videoElement.appendChild(webmElement);
+    }
+
+    if (ogg) {
+      var oggElement = getSourceElement(ogg, SOURCE_TYPES.OGG);
+
+      videoElement.appendChild(oggElement);
+    }
+
+    if (swf) {
+      if (!mp4) {
+        throw new Error('If you want a Flash fallback, you need to provide a video source in mp4 format.');
+      }
+
+      var flashFallbackElement = getObjectElement({
+        autoplay: autoplay,
+        controls: controls,
+        height: height,
+        mp4: mp4,
+        poster: poster,
+        swf: swf,
+        width: width
+      });
+
+      videoElement.appendChild(flashFallbackElement);
+    }
+
+    this.player = videoElement;
+    this.supportsHtml5Video = typeof (0, _utils.createNewElement)(ELEMENT_TYPES.VIDEO).canPlayType !== 'undefined';
+
+    setVideoEvents(this, {
+      onCanPlay: onCanPlay,
+      onCanPlayThrough: onCanPlayThrough,
+      onDurationChange: onDurationChange,
+      onEmptied: onEmptied,
+      onEnded: onEnded,
+      onError: onError,
+      onLoad: onLoad,
+      onLoadStart: onLoadStart,
+      onLoadedData: onLoadedData,
+      onLoadedMetadata: onLoadedMetadata,
+      onPause: onPause,
+      onPlay: onPlay,
+      onProgress: onProgress,
+      onRateChange: onRateChange,
+      onSeeked: onSeeked,
+      onSeeking: onSeeking,
+      onStalled: onStalled,
+      onSuspend: onSuspend,
+      onTimeUpdate: onTimeUpdate,
+      onVolumeChange: onVolumeChange,
+      onWaiting: onWaiting
+    });
+
+    if (element) {
+      element.appendChild(videoElement);
+    }
+
+    return this;
+  }
+
+  /**
+   * append the player as a child to the element
+   *
+   * @returns {Vidz}
+   */
+
+
+  Vidz.prototype.add = function add() {
+    if (this.element) {
+      this.element.appendChild(this.player);
+    }
+
+    return this;
+  };
+
+  /**
+   * returns whether the player has the ability to play
+   * the format passed
+   *
+   * @param {string} format
+   * @return {boolean}
+   */
+
+
+  Vidz.prototype.canPlayType = function canPlayType(format) {
+    return this.player.canPlayType(format);
+  };
+
+  /**
+   *
+   * @return {*|TimeRanges}
+   */
+
+
+  Vidz.prototype.getBuffered = function getBuffered() {
+    return this.player.buffered;
+  };
+
+  /**
+   * return the amount of time that has played in the video
+   *
+   * @return {number}
+   */
+
+
+  Vidz.prototype.getCurrentTime = function getCurrentTime() {
+    return this.currentTime;
+  };
+
+  /**
+   * return the length of the entire video
+   *
+   * @return {number}
+   */
+
+
+  Vidz.prototype.getDuration = function getDuration() {
+    return this.duration;
+  };
+
+  /**
+   * return the <object> flash fallback
+   *
+   * @return {HTMLElement}
+   */
+
+
+  Vidz.prototype.getFlashObject = function getFlashObject() {
+    return this.player.querySelector(ELEMENT_TYPES.OBJECT);
+  };
+
+  /**
+   * return the % loaded (rounded to two decimals)
+   *
+   * @return {number}
+   */
+
+
+  Vidz.prototype.getPercentLoaded = function getPercentLoaded() {
+    return this.percentLoaded;
+  };
+
+  /**
+   * return the playback rate for the video (1 is standard speed)
+   *
+   * @return {number}
+   */
+
+
+  Vidz.prototype.getPlaybackRate = function getPlaybackRate() {
+    return this.player.playbackRate;
+  };
+
+  /**
+   * return the player element
+   *
+   * @return {HTMLElement}
+   */
+
+
+  Vidz.prototype.getPlayer = function getPlayer() {
+    return this.player;
+  };
+
+  /**
+   * return the dimensions of the <video> element
+   *
+   * @return {{height: number, width: number}}
+   */
+
+
+  Vidz.prototype.getPlayerDimensions = function getPlayerDimensions() {
+    return {
+      height: this.height,
+      width: this.width
+    };
+  };
+
+  /**
+   * get the source file locations for each type
+   *
+   * @return {{mp4: string, ogg: string, webm: string}}
+   */
+
+
+  Vidz.prototype.getSource = function getSource() {
+    return {
+      mp4: this.mp4,
+      ogg: this.ogg,
+      webm: this.webm
+    };
+  };
+
+  /**
+   * get the actual dimensions of the video (not the player)
+   *
+   * @return {{height: number, width: number}}
+   */
+
+
+  Vidz.prototype.getVideoDimensions = function getVideoDimensions() {
+    return {
+      height: this.player.videoHeight,
+      width: this.player.videoWidth
+    };
+  };
+
+  /**
+   * return the volume level of the video
+   *
+   * @return {number}
+   */
+
+
+  Vidz.prototype.getVolume = function getVolume() {
+    return this.player.volume;
+  };
+
+  /**
+   * load the player sources
+   *
+   * @returns {Vidz}
+   */
+
+
+  Vidz.prototype.load = function load() {
+    this.player.load();
+
+    if (this.onLoad) {
+      this.onLoad(this);
+    }
+
+    return this;
+  };
+
+  /**
+   * set the player to be muted
+   *
+   * @return {Vidz}
+   */
+
+
+  Vidz.prototype.mute = function mute() {
+    if (!this.muted) {
+      this.player.muted = true;
+      this.muted = true;
+    }
+
+    return this;
+  };
+
+  /**
+   * pause the player
+   *
+   * @returns {Vidz}
+   */
+
+
+  Vidz.prototype.pause = function pause() {
+    this.player.pause();
+
+    return this;
+  };
+
+  /**
+   * start the player
+   *
+   * @returns {Vidz}
+   */
+
+
+  Vidz.prototype.play = function play() {
+    this.player.play();
+
+    return this;
+  };
+
+  /**
+   * remove the player from the parent it was appended to
+   *
+   * @returns {Vidz}
+   */
+
+
+  Vidz.prototype.remove = function remove() {
+    if (this.player.parentNode) {
+      this.player.parentNode.removeChild(this.player);
+    }
+
+    return this;
+  };
+
+  /**
+   * restart the video from the beginning
+   *
+   * @return {Vidz}
+   */
+
+
+  Vidz.prototype.restart = function restart() {
+    return this.setCurrentTime(0);
+  };
+
+  /**
+   * set the place in the video to jump to
+   *
+   * @param {number} value
+   * @return {Vidz}
+   */
+
+
+  Vidz.prototype.setCurrentTime = function setCurrentTime(value) {
+    this.player.currentTime = value;
+    this.currentTime = value;
+
+    return this;
+  };
+
+  /**
+   * set the playback rate to a value, capping between 0.25 and 16
+   *
+   * @param {number} value=1
+   * @return {Vidz}
+   */
+
+
+  Vidz.prototype.setPlaybackRate = function setPlaybackRate() {
+    var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+    var validValue = value;
+
+    if (value <= 0.25) {
+      validValue = 0.25;
+    } else if (value >= 16) {
+      validValue = 16;
+    }
+
+    this.player.playbackRate = validValue;
+    this.playbackRate = validValue;
+
+    return this;
+  };
+
+  /**
+   * set new height / width values for the player and instance
+   *
+   * @param {number} height
+   * @param {number} width
+   * @return {Vidz}
+   */
+
+
+  Vidz.prototype.setPlayerDimensions = function setPlayerDimensions(_ref3) {
+    var height = _ref3.height,
+        width = _ref3.width;
+
+    if (!(0, _utils.isUndefined)(height)) {
+      setElementAttribute(this.player, 'height', height);
+
+      this.height = height;
+    }
+
+    if (!(0, _utils.isUndefined)(width)) {
+      setElementAttribute(this.player, 'width', width);
+
+      this.width = width;
+    }
+
+    return this;
+  };
+
+  /**
+   * set the source to the new value and reload it
+   *
+   * @param {string} mp4
+   * @param {string} ogg
+   * @param {string} webm
+   * @return {Vidz}
+   */
+
+
+  Vidz.prototype.setSource = function setSource(_ref4) {
+    var mp4 = _ref4.mp4,
+        ogg = _ref4.ogg,
+        webm = _ref4.webm;
+
+    var sources = this.player.querySelectorAll('source');
+    var length = sources.length;
+
+    var index = -1;
+
+    while (++index < length) {
+      var source = sources[index];
+
+      switch (source.type) {
+        case SOURCE_TYPES.MP4:
+          if (mp4) {
+            setElementAttribute(source, 'src', mp4);
+            this.mp4 = mp4;
+          }
+
+          break;
+
+        case SOURCE_TYPES.OGG:
+          if (ogg) {
+            setElementAttribute(source, 'src', ogg);
+            this.ogg = ogg;
+          }
+
+          break;
+
+        case SOURCE_TYPES.WEBM:
+          if (webm) {
+            setElementAttribute(source, 'src', webm);
+            this.webm = webm;
+          }
+
+          break;
+      }
+    }
+
+    if (mp4) {
+      var currentObjectElement = this.player.querySelector('object');
+      var newObjectElement = getObjectElement({
+        autoplay: this.autoplay,
+        controls: this.controls,
+        height: this.height,
+        mp4: mp4,
+        poster: this.poster,
+        swf: this.swf,
+        width: this.width
+      });
+
+      this.player.removeChild(currentObjectElement);
+      this.player.appendChild(newObjectElement);
+    }
+
+    return this.load();
+  };
+
+  /**
+   * set the volume to a number between 0 and 1
+   *
+   * @param {number} value=1
+   * @return {Vidz}
+   */
+
+
+  Vidz.prototype.setVolume = function setVolume() {
+    var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+    var volume = value;
+
+    if (value < 0) {
+      volume = 0;
+    } else if (value > 1) {
+      volume = 1;
+    }
+
+    this.player.volume = volume;
+    this.volume = volume;
+
+    return this;
+  };
+
+  /**
+   * set the player to be unmuted
+   *
+   * @return {Vidz}
+   */
+
+
+  Vidz.prototype.unmute = function unmute() {
+    if (this.muted) {
+      this.player.muted = false;
+      this.muted = false;
+    }
+
+    return this;
+  };
+
+  return Vidz;
+}();
+
+/**
+ * convenience function, so devs don't need to run new Vidz() every time
+ *
+ * @param {string} selector
+ * @param {object} config
+ * @return {Vidz}
+ */
+
+
+var vidz = function vidz(selector, config) {
+  return new Vidz(selector, config);
+};
+
+exports.getObjectElement = getObjectElement;
+exports.getSourceElement = getSourceElement;
+exports.getVideoElement = getVideoElement;
+exports.setElementAttribute = setElementAttribute;
+exports.setVideoEvents = setVideoEvents;
+exports.Vidz = Vidz;
+exports.default = vidz;
+
+/***/ }),
+
+/***/ "./src/utils.js":
+/*!**********************!*\
+  !*** ./src/utils.js ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * return string form of object type
+ *
+ * @param {any} object
+ * @return {string}
+ */
+var toString = function toString(object) {
+  return Object.prototype.toString.call(object);
+};
+
+/**
+ * create a new element and return it
+ *
+ * @param {string} element
+ * @return {HTMLElement}
+ */
+var createNewElement = function createNewElement(element) {
+  return document.createElement(element);
+};
+
+/**
+ * determine if the object is an HTMLElement
+ *
+ * @param {any} object
+ * @return {boolean}
+ */
+var isElement = function isElement(object) {
+  return (typeof HTMLElement === 'undefined' ? 'undefined' : _typeof(HTMLElement)) === 'object' ? object instanceof HTMLElement : !!object && (typeof object === 'undefined' ? 'undefined' : _typeof(object)) === 'object' && object !== null && object.nodeType === 1 && typeof object.nodeName === 'string';
+};
+
+/**
+ * determine if the object is a jQuery object
+ *
+ * @param {any} object
+ * @return {boolean}
+ */
+var isJqueryObject = function isJqueryObject(object) {
+  return 'jquery' in Object(object);
+};
+
+/**
+ * determine if object is a string
+ *
+ * @param {any} object
+ * @return {boolean}
+ */
+var isString = function isString(object) {
+  return toString(object) === '[object String]';
+};
+
+/**
+ * determine if object is undefined
+ *
+ * @param {any} object
+ * @return {boolean}
+ */
+var isUndefined = function isUndefined(object) {
+  return object === void 0;
+};
+
+exports.createNewElement = createNewElement;
+exports.isElement = isElement;
+exports.isJqueryObject = isJqueryObject;
+exports.isString = isString;
+exports.isUndefined = isUndefined;
+exports.toString = toString;
+exports.default = {
+  createNewElement: createNewElement,
+  isElement: isElement,
+  isString: isString,
+  isUndefined: isUndefined,
+  toString: toString
+};
+
+/***/ }),
+
+/***/ 0:
+/*!****************************!*\
+  !*** multi ./src/index.js ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! /home/tquetano/git/vidz/src/index.js */"./src/index.js");
+
+
+/***/ })
+
+/******/ });
+});
+//# sourceMappingURL=vidz.js.map

@@ -3,7 +3,7 @@ import {
   isElement,
   isJqueryObject,
   isString,
-  isUndefined
+  isUndefined,
 } from './utils';
 
 const ELEMENT_TYPES = {
@@ -11,13 +11,13 @@ const ELEMENT_TYPES = {
   OBJECT: 'object',
   PARAM: 'param',
   SOURCE: 'source',
-  VIDEO: 'video'
+  VIDEO: 'video',
 };
 
 const SOURCE_TYPES = {
   MP4: 'video/mp4',
   OGG: 'video/ogg',
-  WEBM: 'video/webm'
+  WEBM: 'video/webm',
 };
 
 const DEFAULT_ATTRIBUTES = {
@@ -27,7 +27,7 @@ const DEFAULT_ATTRIBUTES = {
   LOOP: false,
   MUTED: false,
   PRELOAD: 'auto',
-  WIDTH: 600
+  WIDTH: 600,
 };
 
 /**
@@ -100,8 +100,8 @@ const getObjectElement = ({autoplay, controls, height, mp4, poster, swf, width})
   const flashvarsObject = {
     autostart: autoplay ? true : null,
     controlbar: controls ? 'over' : null,
+    file: mp4,
     image: poster,
-    file: mp4
   };
 
   let flashvarsValue = '';
@@ -203,10 +203,8 @@ const getPercentLoaded = (player) => {
  * @param {function} method
  * @return {function(e): void}
  */
-const wrapSimpleVideoEvent = (vidzInstance, method) => {
-  return (e) => {
-    method.call(vidzInstance, e, vidzInstance);
-  };
+const wrapSimpleVideoEvent = (vidzInstance, method) => (e) => {
+  method.call(vidzInstance, e, vidzInstance);
 };
 
 /**
@@ -244,7 +242,7 @@ const setVideoEvents = (vidzInstance, events) => {
     onSuspend,
     onTimeUpdate,
     onVolumeChange,
-    onWaiting
+    onWaiting,
   } = events;
 
   let videoElement = vidzInstance.player;
@@ -277,7 +275,7 @@ const setVideoEvents = (vidzInstance, events) => {
   if (onError) {
     setElementEventListener(videoElement, 'error', wrapSimpleVideoEvent(vidzInstance, onError));
   }
-  
+
   if (onLoad) {
     setElementEventListener(videoElement, 'load', wrapSimpleVideoEvent(vidzInstance, onLoad));
   }
@@ -298,7 +296,7 @@ const setVideoEvents = (vidzInstance, events) => {
     setElementEventListener(videoElement, 'pause', (e) => {
       if (vidzInstance.playing) {
         vidzInstance.playing = false;
-        
+
         wrapSimpleVideoEvent(vidzInstance, onPause)(e);
       }
     });
@@ -414,7 +412,7 @@ class Vidz {
    */
   constructor(selector, config = {}) {
     let element;
-    
+
     switch (true) {
       case isElement(selector):
         element = selector;
@@ -466,7 +464,7 @@ class Vidz {
       preload = DEFAULT_ATTRIBUTES.PRELOAD,
       swf = null,
       webm = null,
-      width = DEFAULT_ATTRIBUTES.WIDTH
+      width = DEFAULT_ATTRIBUTES.WIDTH,
     } = config;
 
     Object.assign(this, {
@@ -484,9 +482,9 @@ class Vidz {
       onEnded,
       onError,
       onLoad,
+      onLoadStart,
       onLoadedData,
       onLoadedMetadata,
-      onLoadStart,
       onPause,
       onPlay,
       onProgress,
@@ -502,7 +500,7 @@ class Vidz {
       preload,
       swf,
       webm,
-      width
+      width,
     });
 
     this.currentTime = 0;
@@ -524,7 +522,7 @@ class Vidz {
       loop,
       muted,
       preload,
-      width
+      width,
     });
 
     for (let key in attributes) {
@@ -565,7 +563,7 @@ class Vidz {
         mp4,
         poster,
         swf,
-        width
+        width,
       });
 
       videoElement.appendChild(flashFallbackElement);
@@ -582,9 +580,9 @@ class Vidz {
       onEnded,
       onError,
       onLoad,
+      onLoadStart,
       onLoadedData,
       onLoadedMetadata,
-      onLoadStart,
       onPause,
       onPlay,
       onProgress,
@@ -595,7 +593,7 @@ class Vidz {
       onSuspend,
       onTimeUpdate,
       onVolumeChange,
-      onWaiting
+      onWaiting,
     });
 
     if (element) {
@@ -657,7 +655,7 @@ class Vidz {
 
   /**
    * return the <object> flash fallback
-   * 
+   *
    * @return {HTMLElement}
    */
   getFlashObject() {
@@ -693,26 +691,26 @@ class Vidz {
 
   /**
    * return the dimensions of the <video> element
-   * 
+   *
    * @return {{height: number, width: number}}
    */
   getPlayerDimensions() {
     return {
       height: this.height,
-      width: this.width
+      width: this.width,
     };
   }
 
   /**
    * get the source file locations for each type
-   * 
+   *
    * @return {{mp4: string, ogg: string, webm: string}}
    */
   getSource() {
     return {
       mp4: this.mp4,
       ogg: this.ogg,
-      webm: this.webm
+      webm: this.webm,
     };
   }
 
@@ -724,7 +722,7 @@ class Vidz {
   getVideoDimensions() {
     return {
       height: this.player.videoHeight,
-      width: this.player.videoWidth
+      width: this.player.videoWidth,
     };
   }
 
@@ -825,7 +823,7 @@ class Vidz {
 
   /**
    * set the playback rate to a value, capping between 0.25 and 16
-   * 
+   *
    * @param {number} value=1
    * @return {Vidz}
    */
@@ -869,7 +867,7 @@ class Vidz {
 
   /**
    * set the source to the new value and reload it
-   * 
+   *
    * @param {string} mp4
    * @param {string} ogg
    * @param {string} webm
@@ -920,7 +918,7 @@ class Vidz {
         mp4,
         poster: this.poster,
         swf: this.swf,
-        width: this.width
+        width: this.width,
       });
 
       this.player.removeChild(currentObjectElement);
@@ -932,7 +930,7 @@ class Vidz {
 
   /**
    * set the volume to a number between 0 and 1
-   * 
+   *
    * @param {number} value=1
    * @return {Vidz}
    */
@@ -953,7 +951,7 @@ class Vidz {
 
   /**
    * set the player to be unmuted
-   * 
+   *
    * @return {Vidz}
    */
   unmute() {
@@ -973,9 +971,7 @@ class Vidz {
  * @param {object} config
  * @return {Vidz}
  */
-const vidz = (selector, config) => {
-  return new Vidz(selector, config);
-};
+const vidz = (selector, config) => new Vidz(selector, config);
 
 export {getObjectElement};
 export {getSourceElement};

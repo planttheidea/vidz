@@ -1,93 +1,40 @@
 'use strict';
 
 const path = require('path');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const eslintFriendlyFormatter = require('eslint-friendly-formatter');
+
+const defaultConfig = require('./webpack.config');
 
 const PORT = 3000;
+const ROOT = path.join(__dirname, '..');
 
-module.exports = {
-    cache: true,
+module.exports = Object.assign({}, defaultConfig, {
+  devServer: {
+    compress: true,
+    contentBase: './dist',
+    host: 'localhost',
+    port: PORT
+  },
 
-    debug: true,
+  entry: [path.join(ROOT, 'DEV_ONLY', 'App.js')],
 
-    devServer : {
-        contentBase: './dist',
-        host: 'localhost',
-        inline: true,
-        lazy: false,
-        noInfo: false,
-        quiet: false,
-        port: PORT,
-        stats: {
-            colors: true,
-            progress: true
-        }
-    },
+  externals: undefined,
 
-    devtool: 'eval-cheap-module-source-map',
+  module: Object.assign({}, defaultConfig.module, {
+    rules: defaultConfig.module.rules.map((rule) => {
+      if (rule.loader !== 'babel-loader') {
+        return rule;
+      }
 
-    entry: [
-        path.resolve (__dirname, 'DEV_ONLY', 'App.js')
-    ],
+      return Object.assign({}, rule, {
+        include: rule.include.concat([path.join(ROOT, 'DEV_ONLY')])
+      });
+    })
+  }),
 
-    eslint: {
-        configFile: '.eslintrc',
-        emitError: true,
-        failOnError: true,
-        failOnWarning: false,
-        formatter: eslintFriendlyFormatter
-    },
+  output: Object.assign({}, defaultConfig.output, {
+    publicPath: `http://localhost:${PORT}/`
+  }),
 
-    module: {
-        preLoaders: [
-            {
-                include: [
-                    path.resolve(__dirname, 'src')
-                ],
-                loader: 'eslint-loader',
-                test: /\.js$/
-            }
-        ],
-
-        loaders: [
-            {
-                include: [
-                    path.resolve(__dirname, 'src'),
-                    path.resolve(__dirname, 'DEV_ONLY')
-                ],
-                loader: 'babel',
-                test: /\.js$/
-            }
-        ]
-    },
-
-    output: {
-        filename: 'vidz.js',
-        library: 'vidz',
-        path: path.resolve(__dirname, 'dist'),
-        publicPath: `http://localhost:${PORT}/`,
-        umdNamedDefine: true
-    },
-
-    plugins: [
-        new webpack.EnvironmentPlugin([
-            'NODE_ENV'
-        ]),
-        new HtmlWebpackPlugin()
-    ],
-
-    resolve: {
-        extensions: [
-            '',
-            '.js'
-        ],
-
-        fallback: [
-            path.join (__dirname, 'src')
-        ],
-
-        root: __dirname
-    }
-};
+  plugins: defaultConfig.plugins.concat([new HtmlWebpackPlugin()])
+});

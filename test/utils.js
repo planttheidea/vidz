@@ -8,7 +8,7 @@ import {
   isJqueryObject,
   isString,
   isUndefined,
-  toString
+  toString,
 } from '../src/utils';
 
 const ARRAY_TOSTRING_VALUE = '[object Array]';
