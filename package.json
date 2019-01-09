@@ -64,7 +64,7 @@
     "dev": "NODE_ENV=development webpack-dev-server --progress --config=webpack.config.dev.js",
     "dist": "npm run build && npm run build-minified",
     "lint": "NODE_ENV=test eslint src",
-    "prepublish": "if in-publish; then npm run prepublish:compile; fi",
+    "prepublish": "if in-publish; then npm run compile-for-publish; fi",
     "test": "NODE_ENV=test ava --no-cache",
     "test:watch": "NODE_ENV=test ava --no-cache --watch",
     "transpile": "./node_modules/babel-cli/bin/babel.js -d lib/ src/"
